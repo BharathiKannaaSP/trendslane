@@ -17,6 +17,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { ArrowRight, LogOut, Moon, Settings, Sun, User } from 'lucide-react'
+import { SignedIn, SignedOut, SignIn, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
 	const { setTheme } = useTheme()
@@ -67,54 +68,6 @@ const Navbar = () => {
 							<NavLink href='/search/women' label='Search' />
 						</li>
 
-						{/* Popover Login */}
-						<li>
-							<Popover open={open} onOpenChange={setOpen}>
-								<PopoverTrigger asChild>
-									<Button
-										variant='link'
-										className='font-semibold hover:text-muted-foreground'>
-										LOG IN
-									</Button>
-								</PopoverTrigger>
-								<PopoverContent
-									onFocusOutside={() => setOpen(false)}
-									className='w-100 mt-2'>
-									<div className='flex gap-4 flex-col'>
-										<Button className='w-full font-semibold'>Sign in</Button>
-										<div className='flex items-center justify-center gap-2'>
-											<Typography className='capitalize font-normal text-muted-foreground'>
-												Don &apos;t have an account?
-											</Typography>
-											<Button asChild className='p-0 underline' variant='link'>
-												<NavLink
-													className='font-normal normal-case'
-													href='/register'
-													label='Register'
-												/>
-											</Button>
-										</div>
-										<div className='w-full'>
-											<ul className='flex flex-col gap-2'>
-												<li className='flex items-center justify-between'>
-													<Button asChild variant='link'>
-														<NavLink href='/my-purchase' label='My purchase' />
-													</Button>
-													<ArrowRight size={12} />
-												</li>
-												<li className='flex items-center justify-between'>
-													<Button asChild variant='link'>
-														<NavLink href='/help' label='Help' />
-													</Button>
-													<ArrowRight size={12} />
-												</li>
-											</ul>
-										</div>
-									</div>
-								</PopoverContent>
-							</Popover>
-						</li>
-
 						<li>
 							<NavLink href='/wishlist' label='Wishlist' />
 						</li>
@@ -130,10 +83,75 @@ const Navbar = () => {
 								</Button>
 							</Link>
 						</li>
+						{/* Popover Login */}
+						<li>
+							<SignedOut>
+								<Popover open={open} onOpenChange={setOpen}>
+									<PopoverTrigger asChild>
+										<Button
+											variant='link'
+											className='font-semibold hover:text-muted-foreground'>
+											LOG IN
+										</Button>
+									</PopoverTrigger>
+									<PopoverContent
+										onFocusOutside={() => setOpen(false)}
+										className='w-100 mt-2'>
+										<div className='flex gap-4 flex-col'>
+											<Button asChild className='w-full font-semibold'>
+												<NavLink
+													className='font-normal normal-case'
+													href='/sign-in'
+													label='Sign in'
+												/>
+											</Button>
+											<div className='flex items-center justify-center gap-2'>
+												<Typography className='capitalize font-normal text-muted-foreground'>
+													Don &apos;t have an account?
+												</Typography>
+												<Button
+													asChild
+													className='p-0 underline'
+													variant='link'>
+													<NavLink
+														className='font-normal normal-case'
+														href='/sign-up'
+														label='Register'
+													/>
+												</Button>
+											</div>
+											<div className='w-full'>
+												<ul className='flex flex-col gap-2'>
+													<li className='flex items-center justify-between'>
+														<Button asChild variant='link'>
+															<NavLink
+																href='/my-purchase'
+																label='My purchase'
+															/>
+														</Button>
+														<ArrowRight size={12} />
+													</li>
+													<li className='flex items-center justify-between'>
+														<Button asChild variant='link'>
+															<NavLink href='/help' label='Help' />
+														</Button>
+														<ArrowRight size={12} />
+													</li>
+												</ul>
+											</div>
+										</div>
+									</PopoverContent>
+								</Popover>
+							</SignedOut>
+
+							<SignedIn>
+								<UserButton />
+							</SignedIn>
+						</li>
 					</ul>
 
 					{/* User Menu */}
-					<DropdownMenu>
+					{/* <DropdownMenu>
 						<DropdownMenuTrigger>
 							<Avatar>
 								<AvatarImage
@@ -159,7 +177,7 @@ const Navbar = () => {
 								Logout
 							</DropdownMenuItem>
 						</DropdownMenuContent>
-					</DropdownMenu>
+					</DropdownMenu> */}
 
 					{/* Theme Menu */}
 					<DropdownMenu>
