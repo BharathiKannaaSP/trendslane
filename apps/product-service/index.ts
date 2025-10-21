@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { clerkMiddleware, getAuth } from '@clerk/express'
-import { shouldBeUser } from './middleware/authMiddleware'
+import { shouldBeUser } from './middleware/authMiddleware.js'
 
 const app = express()
 app.use(
