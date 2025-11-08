@@ -11,9 +11,12 @@ app.use(
 )
 
 app.get('/health', (req: Request, res: Response) => {
-	res
-		.status(200)
-		.json({ status: 'ok', uptime: process.uptime(), timestamp: Date.now() })
+	res.status(200).json({
+		status: 'ok',
+		uptime: process.uptime(),
+		timestamp: Date.now(),
+		serviceName: 'Order service works!'
+	})
 })
 
 app.listen(process.env.ORDER_SERVICE_PORT, () => {

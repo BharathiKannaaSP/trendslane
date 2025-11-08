@@ -1,0 +1,110 @@
+name: Trendslane Test & Deploy to vercel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout Code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      #2️⃣ Setup Node.js + PNPM
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup PNPM
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      # 3️⃣ Turbo Cache Setup
+      - name: Cache Turbo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      # 4️⃣ Install Dependencies
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5️⃣ Detect Changed App Folders
+      - name: Detect changed app folders
+        id: changes
+        run: |
+          echo "Checking for changed apps..."
+          CHANGED=${git diff --name-only HEAD~1 HEAD | grep '^apps/' | cut -d'/' -f2 | sort -u | xargs}
+          echo "Changed apps: $CHANGED"
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
+
+      # 6️⃣ Run Tests (Client + Admin only)
+      - name: Run Jest tests (Client + Admin only)
+        if: |
+          contains(steps.changes.outputs.changed, 'client') ||
+          contains(steps.changes.outputs.changed, 'admin')
+        run: |
+          if echo "${{ steps.changes.outputs.changed }}" | grep -q 'client'; then
+            echo "🧪 Running tests in client..."
+            pnpm turbo run test --filter=client || exit 1
+          fi
+
+          if echo "${{ steps.changes.outputs.changed }}" | grep -q 'admin'; then
+            echo "🧪 Running tests in admin..."
+            pnpm turbo run test --filter=admin || exit 1
+          fi
+
+      # 7️⃣ Deploy Client (only if changed)
+      - name: Deploy Client App
+        if: contains(steps.changes.outputs.changed, 'client')
+        run: |
+          echo "🚀 Deploying Client App..."
+          curl -X POST "$VERCEL_HOOK_CLIENT"
+        env:
+          VERCEL_HOOK_CLIENT: ${{ secrets.VERCEL_HOOK_CLIENT }}
+
+      # 8️⃣ Deploy Admin (only if changed)
+      - name: Deploy Admin App
+        if: contains(steps.changes.outputs.changed, 'admin')
+        run: |
+          echo "🚀 Deploying Admin App..."
+          curl -X POST "$VERCEL_HOOK_ADMIN"
+        env:
+          VERCEL_HOOK_ADMIN: ${{ secrets.VERCEL_HOOK_ADMIN }}
+
+      # 9️⃣ Deploy Product Service (only if changed)
+      - name: Deploy Product Service
+        if: contains(steps.changes.outputs.changed, 'product-service')
+        run: |
+          echo "🚀 Deploying Product Service..."
+          curl -X POST "$VERCEL_HOOK_PRODUCT_SERVICE"
+        env:
+          VERCEL_HOOK_PRODUCT_SERVICE: ${{ secrets.VERCEL_HOOK_PRODUCT_SERVICE }}
+
+      # 🔟 Deploy Order Service (only if changed)
+      - name: Deploy Order Service
+        if: contains(steps.changes.outputs.changed, 'order-service')
+        run: |
+          echo "🚀 Deploying Order Service..."
+          curl -X POST "$VERCEL_HOOK_ORDER_SERVICE"
+        env:
+          VERCEL_HOOK_ORDER_SERVICE: ${{ secrets.VERCEL_HOOK_ORDER_SERVICE }}
+
+      # ------------------------------
+      # 1️⃣1️⃣ Deploy Payment Service (only if changed)
+      # ------------------------------
+      - name: Deploy Payment Service
+        if: contains(steps.changes.outputs.changed, 'payment-service')
+        run: |
+          echo "🚀 Deploying Payment Service..."
+          curl -X POST "$VERCEL_HOOK_PAYMENT_SERVICE"
+        env:
+          VERCEL_HOOK_PAYMENT_SERVICE: ${{ secrets.VERCEL_HOOK_PAYMENT_SERVICE }}
