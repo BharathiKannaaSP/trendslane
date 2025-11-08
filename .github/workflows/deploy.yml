@@ -47,7 +47,7 @@ jobs:
           # Ensure full history is available
           git fetch --unshallow || true
           git fetch origin main
-          
+
           if [ $(git rev-list --count HEAD) -eq 1 ]; then
             CHANGED=$(ls apps | xargs)
           else
@@ -58,14 +58,14 @@ jobs:
             echo "⚠️ No app changes detected, skipping deploys."
             CHANGED="none"
           fi
-          
+
           echo "Changed apps: $CHANGED"
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
       # 6️⃣ Run Tests (Client + Admin only)
       - name: Run Jest tests (Client + Admin only)
         if: |
-          contains(steps.changes.outputs.changed, 'client') ||
+
           contains(steps.changes.outputs.changed, 'admin')
         run: |
           if echo "${{ steps.changes.outputs.changed }}" | grep -q 'client'; then
@@ -78,16 +78,7 @@ jobs:
             pnpm turbo run test --filter=admin || exit 1
           fi
 
-      # 7️⃣ Deploy Client (only if changed)
-      - name: Deploy Client App
-        if: contains(steps.changes.outputs.changed, 'client')
-        run: |
-          echo "🚀 Deploying Client App..."
-          curl -X POST "$VERCEL_HOOK_CLIENT"
-        env:
-          VERCEL_HOOK_CLIENT: ${{ secrets.VERCEL_HOOK_CLIENT }}
-
-      # 8️⃣ Deploy Admin (only if changed)
+      # 7 Deploy Admin (only if changed)
       - name: Deploy Admin App
         if: contains(steps.changes.outputs.changed, 'admin')
         run: |
@@ -95,32 +86,3 @@ jobs:
           curl -X POST "$VERCEL_HOOK_ADMIN"
         env:
           VERCEL_HOOK_ADMIN: ${{ secrets.VERCEL_HOOK_ADMIN }}
-
-      # 9️⃣ Deploy Product Service (only if changed)
-      - name: Deploy Product Service
-        if: contains(steps.changes.outputs.changed, 'product-service')
-        run: |
-          echo "🚀 Deploying Product Service..."
-          curl -X POST "$VERCEL_HOOK_PRODUCT_SERVICE"
-        env:
-          VERCEL_HOOK_PRODUCT_SERVICE: ${{ secrets.VERCEL_HOOK_PRODUCT_SERVICE }}
-
-      # 🔟 Deploy Order Service (only if changed)
-      - name: Deploy Order Service
-        if: contains(steps.changes.outputs.changed, 'order-service')
-        run: |
-          echo "🚀 Deploying Order Service..."
-          curl -X POST "$VERCEL_HOOK_ORDER_SERVICE"
-        env:
-          VERCEL_HOOK_ORDER_SERVICE: ${{ secrets.VERCEL_HOOK_ORDER_SERVICE }}
-
-      # ------------------------------
-      # 1️⃣1️⃣ Deploy Payment Service (only if changed)
-      # ------------------------------
-      - name: Deploy Payment Service
-        if: contains(steps.changes.outputs.changed, 'payment-service')
-        run: |
-          echo "🚀 Deploying Payment Service..."
-          curl -X POST "$VERCEL_HOOK_PAYMENT_SERVICE"
-        env:
-          VERCEL_HOOK_PAYMENT_SERVICE: ${{ secrets.VERCEL_HOOK_PAYMENT_SERVICE }}
