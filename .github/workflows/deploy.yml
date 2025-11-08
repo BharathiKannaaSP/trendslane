@@ -159,14 +159,26 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID_ADMIN: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+          VERCEL_PROJECT_ID_CLIENT: ${{ secrets.VERCEL_PROJECT_ID_CLIENT }}
 
         run: |
           for app in ${{ needs.build.outputs.changed }}; do
             echo "🚀 Deploying $app..."
             
             if [ "$app" = "admin" ]; then
+              echo "Deploying Admin app..."
               VERCEL_ORG_ID=$VERCEL_ORG_ID \
               VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID_ADMIN \
               npx vercel deploy --yes --prod --token=$VERCEL_TOKEN
             fi
+
+            if [ "$app" = "client" ]; then
+              echo "Deploying Client app..."
+              VERCEL_ORG_ID=$VERCEL_ORG_ID \
+              VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID_CLIENT \
+              npx vercel deploy --yes --prod --token=$VERCEL_TOKEN
+              cd ../..
+            fi
+
+
           done
