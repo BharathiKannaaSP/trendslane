@@ -165,11 +165,7 @@ jobs:
             echo "🚀 Deploying $app..."
             
             if [ "$app" = "admin" ]; then
-              npx vercel deploy --yes --prod \
-                --token=$VERCEL_TOKEN \
-                --scope=$VERCEL_ORG_ID \
-                --project-id=$VERCEL_PROJECT_ID_ADMIN \
-                --env NODE_ENV=production
+              npx vercel deploy --yes --prod --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID
               cd ../..
             fi
           done
