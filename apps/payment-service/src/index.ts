@@ -13,7 +13,12 @@ app.use(
 app.get('/health', (req: Request, res: Response) => {
 	res
 		.status(200)
-		.json({ status: 'ok', uptime: process.uptime(), timestamp: Date.now() })
+		.json({
+			status: 'ok',
+			uptime: process.uptime(),
+			timestamp: Date.now(),
+			serviceName: 'Payment service works!'
+		})
 })
 
 app.listen(process.env.PAYMENT_SERVICE_PORT, () => {
