@@ -5,7 +5,7 @@ const HomePage = () => {
 	console.log(hello)
 	return (
 		<h1>
-			Admin test 3
+			Admin test 4
 		</h1>
 	)
 }
