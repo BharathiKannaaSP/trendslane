@@ -5,7 +5,7 @@ const HomePage = () => {
 	console.log(hello)
 	return (
 		<h1>
-			Admin test Hello Final check 3
+			Admin test Hello Final check 4
 		</h1>
 	)
 }
