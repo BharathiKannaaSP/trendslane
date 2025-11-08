@@ -8,6 +8,9 @@ on:
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       # 1️⃣ Checkout Code
       - name: Checkout repository
@@ -76,18 +79,16 @@ jobs:
             pnpm turbo run test --filter=admin || exit 1
           fi
 
-      # ✅ Notify Vercel: Tests completed
-      - name: Notify Vercel (test)
-        if: always()
-        uses: vercel/repository-dispatch/actions/status@v1
-        with:
-          name: "Vercel - trendslane-admin: test"
-
       # 7 Deploy Admin (only if changed)
       - name: Deploy Admin App
         if: contains(steps.changes.outputs.changed, 'admin')
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
         run: |
           echo "🚀 Deploying Admin App..."
-          curl -X POST "$VERCEL_HOOK_ADMIN"
-        env:
-          VERCEL_HOOK_ADMIN: ${{ secrets.VERCEL_HOOK_ADMIN }}
+          cd apps/admin
+          npx vercel --prod --token=$VERCEL_TOKEN --confirm --yes \
+            --scope $VERCEL_ORG_ID \
+            --env NODE_ENV=production
