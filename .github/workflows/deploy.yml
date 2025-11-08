@@ -64,9 +64,7 @@ jobs:
 
       # 6️⃣ Run Tests (Client + Admin only)
       - name: Run Jest tests (Client + Admin only)
-        if: |
-
-          contains(steps.changes.outputs.changed, 'admin')
+        if: contains(steps.changes.outputs.changed, 'admin')
         run: |
           if echo "${{ steps.changes.outputs.changed }}" | grep -q 'client'; then
             echo "🧪 Running tests in client..."
@@ -77,6 +75,13 @@ jobs:
             echo "🧪 Running tests in admin..."
             pnpm turbo run test --filter=admin || exit 1
           fi
+
+      # ✅ Notify Vercel: Tests completed
+      - name: Notify Vercel (test)
+        if: always()
+        uses: vercel/repository-dispatch/actions/status@v1
+        with:
+          name: "Vercel - trendslane-admin: test"
 
       # 7 Deploy Admin (only if changed)
       - name: Deploy Admin App
