@@ -165,10 +165,8 @@ jobs:
             echo "🚀 Deploying $app..."
             
             if [ "$app" = "admin" ]; then
-              cd apps/admin
               VERCEL_ORG_ID=$VERCEL_ORG_ID \
               VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID_ADMIN \
               npx vercel deploy --yes --prod --token=$VERCEL_TOKEN
-              cd ../..
             fi
           done
