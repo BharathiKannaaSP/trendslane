@@ -12,8 +12,10 @@ jobs:
       # 1️⃣ Checkout Code
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch full history so git diff works properly
 
-      #2️⃣ Setup Node.js + PNPM
+      # 2️⃣ Setup Node.js + PNPM
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -42,11 +44,21 @@ jobs:
         id: changes
         run: |
           echo "Checking for changed apps..."
+          # Ensure full history is available
+          git fetch --unshallow || true
+          git fetch origin main
+          
           if [ $(git rev-list --count HEAD) -eq 1 ]; then
             CHANGED=$(ls apps | xargs)
           else
             CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^apps/' | cut -d'/' -f2 | sort -u | xargs)
           fi 
+             
+          if [ -z "$CHANGED" ]; then
+            echo "⚠️ No app changes detected, skipping deploys."
+            CHANGED="none"
+          fi
+          
           echo "Changed apps: $CHANGED"
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
