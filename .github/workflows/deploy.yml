@@ -1,4 +1,4 @@
-name: Trendslane Test & Deploy to vercel
+name: Trendslane Deploy
 
 on:
   push:
@@ -6,48 +6,34 @@ on:
       - main
 
 jobs:
-  test-and-deploy:
+  # 🧹 1️⃣ Lint Stage
+  lint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
+    outputs:
+      changed: ${{ steps.changes.outputs.changed }}
     steps:
-      # 1️⃣ Checkout Code
-      - name: Checkout repository
+      - name: 🛎️ Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch full history so git diff works properly
+          fetch-depth: 0
 
-      # 2️⃣ Setup Node.js + PNPM
-      - name: Setup Node.js
+      - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Setup PNPM
+      - name: 🧩 Setup PNPM
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
 
-      # 3️⃣ Turbo Cache Setup
-      - name: Cache Turbo
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
-      # 4️⃣ Install Dependencies
-      - name: Install Dependencies
+      - name: 📦 Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      # 5️⃣ Detect Changed App Folders
-      - name: Detect changed app folders
+      - name: 🔍 Detect changed apps
         id: changes
         run: |
           echo "Checking for changed apps..."
-          # Ensure full history is available
           git fetch --unshallow || true
           git fetch origin main
 
@@ -55,40 +41,127 @@ jobs:
             CHANGED=$(ls apps | xargs)
           else
             CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^apps/' | cut -d'/' -f2 | sort -u | xargs)
-          fi 
-             
+          fi
+
           if [ -z "$CHANGED" ]; then
-            echo "⚠️ No app changes detected, skipping deploys."
             CHANGED="none"
           fi
 
           echo "Changed apps: $CHANGED"
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
-      # 6️⃣ Run Tests (Client + Admin only)
-      - name: Run Jest tests (Client + Admin only)
-        if: contains(steps.changes.outputs.changed, 'admin')
+      - name: 🧹 Run Lint on Changed Apps
+        if: steps.changes.outputs.changed != 'none'
         run: |
-          if echo "${{ steps.changes.outputs.changed }}" | grep -q 'client'; then
-            echo "🧪 Running tests in client..."
-            pnpm turbo run test --filter=client || exit 1
-          fi
+          for app in ${{ steps.changes.outputs.changed }}; do
+            echo "🧹 Linting $app..."
+            pnpm turbo run lint --filter=$app
+          done
 
-          if echo "${{ steps.changes.outputs.changed }}" | grep -q 'admin'; then
-            echo "🧪 Running tests in admin..."
-            pnpm turbo run test --filter=admin || exit 1
-          fi
+  # 🧪 2️⃣ Test Stage
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    outputs:
+      changed: ${{ needs.lint.outputs.changed }}
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
 
-      # 7 Deploy Admin (only if changed)
-      - name: Deploy Admin App
-        if: contains(steps.changes.outputs.changed, 'admin')
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🧩 Setup PNPM
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: 📦 Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🧪 Run Tests on Changed Apps
+        if: needs.lint.outputs.changed != 'none'
+        run: |
+          for app in ${{ needs.lint.outputs.changed }}; do
+            echo "🧪 Testing $app..."
+            pnpm turbo run test --filter=$app
+          done
+
+  # 🏗️ 3️⃣ Build Stage
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    outputs:
+      changed: ${{ needs.test.outputs.changed }}
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🧩 Setup PNPM
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: 📦 Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🏗️ Build Changed Apps
+        if: needs.test.outputs.changed != 'none'
+        run: |
+          for app in ${{ needs.test.outputs.changed }}; do
+            echo "🏗️ Building $app..."
+            pnpm turbo run build --filter=$app
+          done
+
+  # 🚀 4️⃣ Deploy Stage
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🧩 Setup PNPM
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: 📦 Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🚀 Deploy Changed Apps to Vercel
+        if: needs.build.outputs.changed != 'none'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+          VERCEL_PROJECT_ID_ADMIN: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+
         run: |
-          echo "🚀 Deploying Admin App..."
-          npx vercel deploy --prod --yes \
-          --token=$VERCEL_TOKEN \
-          --scope=$VERCEL_ORG_ID \
-          --env NODE_ENV=production
+          for app in ${{ needs.build.outputs.changed }}; do
+            echo "🚀 Deploying $app..."
+            
+            if [ "$app" = "admin" ]; then
+              cd apps/admin
+              npx vercel deploy --yes --prod \
+                --token=$VERCEL_TOKEN \
+                --scope=$VERCEL_ORG_ID \
+                --project=$VERCEL_PROJECT_ID_ADMIN \
+                --env NODE_ENV=production
+              cd ../..
+            fi
+          done
