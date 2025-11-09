@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/sheet'
 import { customToast } from '@/components/ui/sonner'
 import { Typography } from '@/components/ui/typography'
-import { ChevronDown, Heart, Mail, X } from 'lucide-react'
+import { ChevronDown, Heart, Mail } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
