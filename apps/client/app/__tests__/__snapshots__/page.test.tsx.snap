@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`HomePage matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="banner-image"
+  >
+    Mock Banner Image
+  </div>
+</DocumentFragment>
+`;
