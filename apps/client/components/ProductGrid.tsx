@@ -22,7 +22,6 @@ const ProductGrid = () => {
 					<form
 						onSubmit={(e) => {
 							e.preventDefault()
-							console.log('Add to cart')
 						}}
 						className='relative flex justify-between flex-col'>
 						<div>

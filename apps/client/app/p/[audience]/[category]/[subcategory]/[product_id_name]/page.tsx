@@ -318,12 +318,10 @@ const SingleProductDetailsPage = () => {
 			  }
 	) => {
 		if (size.available) {
-			console.log('Add to cart')
 			setSelectedSize(size.size)
 		}
 	}
 
-	console.log(zoomImage, 'ZoomImage')
 	return (
 		<>
 			<div className='grid grid-cols-1 lg:grid-cols-[60%_40%]  gap-4 pb-10 items-start'>
