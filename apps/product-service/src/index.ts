@@ -1,7 +1,11 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
+import { clerkMiddleware, getAuth } from '@clerk/express'
+import { shouldBeUser } from './middleware/authMiddleware.js'
 
 const app = express()
+
+app.use(clerkMiddleware())
 
 app.use(
 	cors({
@@ -17,6 +21,10 @@ app.get('/health', (req: Request, res: Response) => {
 		timestamp: Date.now(),
 		serviceName: 'Product service works!'
 	})
+})
+
+app.get('/test', shouldBeUser, (req: Request, res: Response) => {
+	res.json({ message: 'Product service is authenticated!', userId: req.userId })
 })
 
 app.listen(process.env.PRODUCT_SERVICE_PORT, () => {
