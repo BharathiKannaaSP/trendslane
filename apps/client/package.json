@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "check-types": "next typegen && tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -61,5 +63,6 @@
     "public",
     "next.config.mjs",
     "package.json"
-  ]
+  ],
+  "type": "module"
 }

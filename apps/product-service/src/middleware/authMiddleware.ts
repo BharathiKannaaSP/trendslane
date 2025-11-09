@@ -1,27 +1,22 @@
-import { getAuth } from '@clerk/express'
-import { NextFunction, Request, Response } from 'express'
+import { getAuth } from '@clerk/express';
+import { NextFunction, Request, Response } from 'express';
 
-declare global {
-	namespace Express {
-		interface Request {
-			userId?: string
-		}
-	}
+declare module 'express' {
+  export interface Request {
+    userId?: string;
+  }
 }
 
-export const shouldBeUser = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	const auth = getAuth(req)
-	const userId = auth.userId
+export const shouldBeUser = (req: Request, res: Response, next: NextFunction) => {
+  const auth = getAuth(req);
 
-	if (!userId) {
-		return res.status(401).json({ message: 'You are not logged in!' })
-	}
+  const userId = auth.userId;
 
-	req.userId = auth.userId
+  if (!userId) {
+    return res.status(401).json({ message: 'You are not logged in!' });
+  }
 
-	return next()
-}
+  req.userId = auth.userId;
+
+  return next();
+};

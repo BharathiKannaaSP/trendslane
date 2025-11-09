@@ -12,21 +12,49 @@
       "outputs": [
         ".next/**",
         "!.next/cache/**"
+      ],
+      "env": [
+        "PRODUCT_SERVICE_PORT"
       ]
     },
     "lint": {
       "dependsOn": [
         "^lint"
+      ],
+      "env": [
+        "PRODUCT_SERVICE_PORT"
       ]
     },
     "check-types": {
       "dependsOn": [
         "^check-types"
+      ],
+      "env": [
+        "PRODUCT_SERVICE_PORT"
       ]
     },
     "test": {
       "dependsOn": [
         "^build"
+      ],
+      "env": [
+        "PRODUCT_SERVICE_PORT"
+      ]
+    },
+    "format": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "PRODUCT_SERVICE_PORT"
+      ]
+    },
+    "format:check": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "PRODUCT_SERVICE_PORT"
       ]
     },
     "dev": {
