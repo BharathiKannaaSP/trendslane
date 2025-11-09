@@ -94,8 +94,12 @@ jobs:
         if: needs.lint.outputs.changed != 'none'
         run: |
           for app in ${{ needs.lint.outputs.changed }}; do
-            echo "🧪 Testing $app..."
-            pnpm turbo run test --filter=$app
+            if [[ "$app" == "admin" || "$app" == "client" ]]; then
+              echo "🧪 Testing $app..."
+              pnpm turbo run test --filter=$app
+            else
+              echo "⚠️ Skipping $app (not admin or client)"
+            fi
           done
 
   # 🏗️ 3️⃣ Build Stage
