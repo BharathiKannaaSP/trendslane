@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography } from './ui/typography';
 import Image from 'next/image';
-import NavLink from './ui/nav-link';
 import Link from 'next/link';
 import {
   Carousel,
@@ -38,9 +37,9 @@ const ProductRecommendations = ({ title }: { title: string }) => {
                   <div className='flex flex-col justify-between'>
                     <form action='' className='flex justify-between flex-col'>
                       <div>
-                        <fieldset className='relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+                        <fieldset className='relative group overflow-hidden border-0 p-0 m-0 aspect-[calc(5/7)]'>
                           <Link href='/'>
-                            <div className='[aspect-ratio:calc(5/7)]'>
+                            <div className='aspect-[calc(5/7)]'>
                               <Image
                                 className='absolute inset-0 w-full h-full'
                                 src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1'
@@ -122,7 +121,7 @@ const ProductRecommendations = ({ title }: { title: string }) => {
                               />
                             </div>
                           </div>
-                          <Heart size={16} className='mr-4 -mt-0' />
+                          <Heart size={16} className='mr-4 mt-0' />
                         </div>
                       </div>
                     </form>

@@ -1,17 +1,17 @@
-// lint-staged.config.cjs  (CommonJS version)
+// lint-staged.config.cjs
 module.exports = {
   'apps/client/**/*.{js,jsx,ts,tsx}': (files) => [
-    `cd apps/client && pnpm exec eslint --fix ${files.join(' ')}`,
-    `cd apps/client && pnpm exec prettier --write ${files.join(' ')}`
+    `pnpm -C apps/client exec eslint --fix ${files.map((f) => `"${f}"`).join(' ')}`,
+    `pnpm -C apps/client exec prettier --write ${files.map((f) => `"${f}"`).join(' ')}`,
   ],
   'apps/admin/**/*.{js,jsx,ts,tsx}': (files) => [
-    `cd apps/admin && pnpm exec eslint --fix ${files.join(' ')}`,
-    `cd apps/admin && pnpm exec prettier --write ${files.join(' ')}`
+    `pnpm -C apps/admin exec eslint --fix ${files.map((f) => `"${f}"`).join(' ')}`,
+    `pnpm -C apps/admin exec prettier --write ${files.map((f) => `"${f}"`).join(' ')}`,
   ],
   'apps/product-service/**/*.{js,jsx,ts,tsx}': (files) => [
-    `cd apps/product-service && pnpm exec eslint --fix ${files.join(' ')}`,
-    `cd apps/product-service && pnpm exec prettier --write ${files.join(' ')}`
+    `pnpm -C apps/product-service exec eslint --fix ${files.map((f) => `"${f}"`).join(' ')}`,
+    `pnpm -C apps/product-service exec prettier --write ${files.map((f) => `"${f}"`).join(' ')}`,
   ],
   'apps/**/*.{json,md,css,scss,html}': (files) =>
-    files.map((f) => `pnpm exec prettier --write ${f}`)
+    files.map((f) => `pnpm exec prettier --write "${f}"`),
 };

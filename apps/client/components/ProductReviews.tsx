@@ -126,15 +126,13 @@ const ProductReviews = () => {
           />
         </div>
 
-        {true && (
-          <div className='w-32 h-32 relative '>
-            <Button className='w-full h-full' aria-label='More image (1000+)'>
-              <Typography className='absolute top-1/2 left-1/2 transform -translate-1/2 text-[10px] md:text-sm  text-background font-normal'>
-                1000+
-              </Typography>
-            </Button>
-          </div>
-        )}
+        <div className='w-32 h-32 relative '>
+          <Button className='w-full h-full' aria-label='More image (1000+)'>
+            <Typography className='absolute top-1/2 left-1/2 transform -translate-1/2 text-[10px] md:text-sm  text-background font-normal'>
+              1000+
+            </Typography>
+          </Button>
+        </div>
       </div>
 
       {/* {ProductReview} */}

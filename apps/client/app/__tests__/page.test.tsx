@@ -2,10 +2,11 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import HomePage from '../page';
 
-// 🧱 Mock the BannerImage component
-jest.mock('../../components/BannerImage', () => () => (
-  <div data-testid='banner-image'>Mock Banner Image</div>
-));
+jest.mock('../../components/BannerImage', () => {
+  const MockBannerImage = () => <div data-testid='banner-image'>Mock Banner Image</div>;
+  MockBannerImage.displayName = 'BannerImage';
+  return MockBannerImage;
+});
 
 describe('HomePage', () => {
   it('renders without crashing', () => {

@@ -12,7 +12,7 @@ const Test = async () => {
     },
   });
   const product = await resProduct.json();
-
+  console.log(product);
   // const resPayment = await fetch('http://localhost:8001/test', {
   // 	headers: {
   // 		Authorization: `Bearer ${token}`

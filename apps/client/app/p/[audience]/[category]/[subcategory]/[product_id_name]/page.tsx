@@ -23,7 +23,6 @@ import { Typography } from '@/components/ui/typography';
 import { ChevronDown, Heart, Mail } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { toast } from 'sonner';
 
 const product = {
   id: 'product_123',
