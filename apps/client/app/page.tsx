@@ -1,7 +1,7 @@
-import BannerImage from '@/components/BannerImage'
+import BannerImage from '@/components/BannerImage';
 
 const HomePage = () => {
-	return <BannerImage />
-}
+  return <BannerImage />;
+};
 
-export default HomePage
+export default HomePage;

@@ -1,8 +1,8 @@
-import React from 'react'
-import CategoryPage from '../page'
+import React from 'react';
+import CategoryPage from '../page';
 
 const Subcategory = () => {
-	return <CategoryPage />
-}
+  return <CategoryPage />;
+};
 
-export default Subcategory
+export default Subcategory;
