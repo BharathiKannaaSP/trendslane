@@ -1,7 +1,7 @@
-import React from 'react'
+import BannerImage from '@/components/BannerImage'
 
 const HomePage = () => {
-	return <h1>Client Home is working now</h1>
+	return <BannerImage />
 }
 
 export default HomePage
