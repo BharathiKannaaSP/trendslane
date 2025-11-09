@@ -42,7 +42,6 @@
       ]
     },
     "format": {
-      "cache": false,
       "dependsOn": [
         "^build"
       ],
