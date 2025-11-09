@@ -31,7 +31,5 @@ app.get('/test', shouldBeUser, (req: Request, res: Response) => {
 });
 
 app.listen(process.env.PRODUCT_SERVICE_PORT, () => {
-  console.log(
-    `Product service is running on PORT - ${process.env.PRODUCT_SERVICE_PORT}`,
-  );
+  console.log(`Product service is running on PORT - ${process.env.PRODUCT_SERVICE_PORT}`);
 });

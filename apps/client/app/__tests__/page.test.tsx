@@ -4,7 +4,7 @@ import HomePage from '../page';
 
 // 🧱 Mock the BannerImage component
 jest.mock('../../components/BannerImage', () => () => (
-  <div data-testid="banner-image">Mock Banner Image</div>
+  <div data-testid='banner-image'>Mock Banner Image</div>
 ));
 
 describe('HomePage', () => {

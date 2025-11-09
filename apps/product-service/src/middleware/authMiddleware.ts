@@ -7,11 +7,7 @@ declare module 'express' {
   }
 }
 
-export const shouldBeUser = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const shouldBeUser = (req: Request, res: Response, next: NextFunction) => {
   const auth = getAuth(req);
 
   const userId = auth.userId;

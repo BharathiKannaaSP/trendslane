@@ -19,13 +19,13 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme={theme as ToasterProps['theme']}
-      className="toaster group"
+      className='toaster group'
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: <CircleCheckIcon className='size-4' />,
+        info: <InfoIcon className='size-4' />,
+        warning: <TriangleAlertIcon className='size-4' />,
+        error: <OctagonXIcon className='size-4' />,
+        loading: <Loader2Icon className='size-4 animate-spin' />,
       }}
       style={
         {
@@ -58,18 +58,18 @@ export function CustomToast({ title, description, button, id, component }: Toast
   }
 
   return (
-    <div className="flex border-2 border-primary bg-white shadow-lg ring-1 ring-black/5 w-full md:max-w-[364px] items-center p-4 rounded-lg">
-      <div className="flex flex-1 items-center">
-        <div className="w-full">
+    <div className='flex border-2 border-primary bg-white shadow-lg ring-1 ring-black/5 w-full md:max-w-[364px] items-center p-4 rounded-lg'>
+      <div className='flex flex-1 items-center'>
+        <div className='w-full'>
           <Typography>{title}</Typography>
-          {description && <p className="mt-1 text-sm text-gray-500">{description}</p>}
+          {description && <p className='mt-1 text-sm text-gray-500'>{description}</p>}
         </div>
       </div>
 
       {button && (
-        <div className="ml-5 shrink-0">
+        <div className='ml-5 shrink-0'>
           <button
-            className="rounded bg-indigo-50 px-3 py-1 text-sm font-semibold text-indigo-600 hover:bg-indigo-100"
+            className='rounded bg-indigo-50 px-3 py-1 text-sm font-semibold text-indigo-600 hover:bg-indigo-100'
             onClick={() => {
               button.onClick();
               sonnerToast.dismiss(id);

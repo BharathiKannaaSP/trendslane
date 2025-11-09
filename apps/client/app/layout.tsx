@@ -30,23 +30,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClerkProvider>
           <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
+            attribute='class'
+            defaultTheme='system'
             enableSystem
             disableTransitionOnChange
           >
-            <main className="w-full">
+            <main className='w-full'>
               <Navbar />
               {children}
               <Subscribe />
               <Footer />
             </main>
           </ThemeProvider>
-          <Toaster duration={3000} position="top-right" />
+          <Toaster duration={3000} position='top-right' />
         </ClerkProvider>
       </body>
     </html>

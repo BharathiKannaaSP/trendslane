@@ -28,16 +28,16 @@ const CategoryPage = () => {
   const { audience, category } = useParams();
   return (
     <>
-      <div className="flex flex-col gap-2 pt-6 px-8">
+      <div className='flex flex-col gap-2 pt-6 px-8'>
         <Typography>
           {audience}
           &apos; {category}{' '}
         </Typography>
-        <ul className="flex gap-4 overflow-auto whitespace-nowrap">
+        <ul className='flex gap-4 overflow-auto whitespace-nowrap'>
           {womenSubCategories.map((item) => (
             <li key={item.id}>
               <NavLink
-                labelSize="sm"
+                labelSize='sm'
                 label={item.label}
                 href={`/c/${audience}/${category}/${item.link}`}
               />
@@ -46,51 +46,51 @@ const CategoryPage = () => {
         </ul>
       </div>
 
-      <div className="sticky top-[56px] z-20 isolate min-h-15 flex justify-between items-center w-full px-8 py-4 bg-background">
+      <div className='sticky top-[56px] z-20 isolate min-h-15 flex justify-between items-center w-full px-8 py-4 bg-background'>
         <Sheet>
           <SheetTrigger asChild>
-            <Button className="font-semibold shadow-none cursor-pointer p-0" variant="ghost">
+            <Button className='font-semibold shadow-none cursor-pointer p-0' variant='ghost'>
               FILTER AND ORDER
             </Button>
           </SheetTrigger>
           <FilterAndOrder />
         </Sheet>
-        <RadioGroup defaultValue="comfortable" className="flex gap-4">
-          <div className="flex items-center gap-3">
-            <RadioGroupItem value="comfortable" id="r1" className="sr-only " />
-            <Label htmlFor="r1" className="cursor-pointer ">
+        <RadioGroup defaultValue='comfortable' className='flex gap-4'>
+          <div className='flex items-center gap-3'>
+            <RadioGroupItem value='comfortable' id='r1' className='sr-only ' />
+            <Label htmlFor='r1' className='cursor-pointer '>
               <Image
-                src="/productList/singleGrid.svg"
-                alt="Show few items"
+                src='/productList/singleGrid.svg'
+                alt='Show few items'
                 width={24}
                 height={24}
-                title="Show few items"
+                title='Show few items'
               />
             </Label>
           </div>
 
-          <div className="flex items-center gap-3">
-            <RadioGroupItem value="default" id="r2" className="sr-only " />
-            <Label htmlFor="r2" className="cursor-pointer ">
+          <div className='flex items-center gap-3'>
+            <RadioGroupItem value='default' id='r2' className='sr-only ' />
+            <Label htmlFor='r2' className='cursor-pointer '>
               <Image
-                src="/productList/twoGrid.svg"
-                alt="Show more items"
+                src='/productList/twoGrid.svg'
+                alt='Show more items'
                 width={24}
                 height={24}
-                title="Show more items"
+                title='Show more items'
               />
             </Label>
           </div>
 
-          <div className="flex items-center gap-3">
-            <RadioGroupItem value="compact" id="r3" className="sr-only " />
-            <Label htmlFor="r3" className="cursor-pointer ">
+          <div className='flex items-center gap-3'>
+            <RadioGroupItem value='compact' id='r3' className='sr-only ' />
+            <Label htmlFor='r3' className='cursor-pointer '>
               <Image
-                src="/productList/moreGrid.svg"
-                alt="Show maximum items"
+                src='/productList/moreGrid.svg'
+                alt='Show maximum items'
                 width={24}
                 height={24}
-                title="Show maximum items"
+                title='Show maximum items'
               />
             </Label>
           </div>

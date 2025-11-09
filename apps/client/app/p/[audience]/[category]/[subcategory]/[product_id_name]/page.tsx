@@ -317,12 +317,12 @@ const SingleProductDetailsPage = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-[60%_40%]  gap-4 pb-10 items-start">
+      <div className='grid grid-cols-1 lg:grid-cols-[60%_40%]  gap-4 pb-10 items-start'>
         {/* Left */}
-        <div className="relative">
-          <ul className="grid grid-cols-12 gap-1 m-0 p-0">
-            <li className="relative flex col-span-6">
-              <div className="relative flex w-full h-[400px] md:h-[600px] lg:h-[800px]">
+        <div className='relative'>
+          <ul className='grid grid-cols-12 gap-1 m-0 p-0'>
+            <li className='relative flex col-span-6'>
+              <div className='relative flex w-full h-[400px] md:h-[600px] lg:h-[800px]'>
                 <SingleProductVideo />
               </div>
             </li>
@@ -331,42 +331,42 @@ const SingleProductDetailsPage = () => {
               <li className={`relative flex ${index < 7 ? 'col-span-6' : 'col-span-4'}`} key={img}>
                 <Sheet>
                   <SheetTrigger asChild>
-                    <button className="relative w-full">
-                      <div className="relative flex w-full h-[400px] md:h-[600px] lg:h-[800px]">
+                    <button className='relative w-full'>
+                      <div className='relative flex w-full h-[400px] md:h-[600px] lg:h-[800px]'>
                         <Image
                           fill
                           src={img}
                           alt={img}
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className='object-cover'
+                          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                         />
                       </div>
                     </button>
                   </SheetTrigger>
 
-                  <SheetContent className="w-full sm:max-w-full h-full p-0">
-                    <ScrollArea className="h-screen">
-                      <SheetHeader className="relative">
+                  <SheetContent className='w-full sm:max-w-full h-full p-0'>
+                    <ScrollArea className='h-screen'>
+                      <SheetHeader className='relative'>
                         <SheetTitle>Lorem ipsum, dolor sit amet consectetur</SheetTitle>
                       </SheetHeader>
 
-                      <div className="w-full relative">
-                        <div className="relative w-full aspect-3/7 md:aspect-4/7">
+                      <div className='w-full relative'>
+                        <div className='relative w-full aspect-3/7 md:aspect-4/7'>
                           <Image
                             fill
                             src={zoomImage}
                             alt={'zoomImage'}
-                            className="object-cover rounded-md -z-1"
+                            className='object-cover rounded-md -z-1'
                           />
                         </div>
-                        <div className=" h-full">
-                          <div className="fixed top-20 left-10 flex flex-col gap-2 ">
-                            <div className="w-16 h-20 relative">
+                        <div className=' h-full'>
+                          <div className='fixed top-20 left-10 flex flex-col gap-2 '>
+                            <div className='w-16 h-20 relative'>
                               <Image
-                                src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586"
+                                src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586'
                                 fill
-                                alt="thm"
-                                className="object-cover"
+                                alt='thm'
+                                className='object-cover'
                                 onMouseEnter={() =>
                                   setZoomImage(
                                     'https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586',
@@ -374,44 +374,44 @@ const SingleProductDetailsPage = () => {
                                 }
                               />
                             </div>
-                            <div className="w-16 h-20 relative">
+                            <div className='w-16 h-20 relative'>
                               <Image
-                                src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586"
+                                src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586'
                                 fill
-                                alt="thm"
-                                className="object-cover"
+                                alt='thm'
+                                className='object-cover'
                               />
                             </div>
-                            <div className="w-16 h-20 relative">
+                            <div className='w-16 h-20 relative'>
                               <Image
-                                src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586"
+                                src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586'
                                 fill
-                                alt="thm"
-                                className="object-cover"
+                                alt='thm'
+                                className='object-cover'
                               />
                             </div>
-                            <div className="w-16 h-20 relative">
+                            <div className='w-16 h-20 relative'>
                               <Image
-                                src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586"
+                                src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586'
                                 fill
-                                alt="thm"
-                                className="object-cover"
+                                alt='thm'
+                                className='object-cover'
                               />
                             </div>
-                            <div className="w-16 h-20 relative">
+                            <div className='w-16 h-20 relative'>
                               <Image
-                                src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586"
+                                src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586'
                                 fill
-                                alt="thm"
-                                className="object-cover"
+                                alt='thm'
+                                className='object-cover'
                               />
                             </div>
-                            <div className="w-16 h-20 relative">
+                            <div className='w-16 h-20 relative'>
                               <Image
-                                src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586"
+                                src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17027139_32.jpg?imwidth=2048&imdensity=1&ts=1760105109586'
                                 fill
-                                alt="thm"
-                                className="object-cover"
+                                alt='thm'
+                                className='object-cover'
                               />
                             </div>
                           </div>
@@ -426,18 +426,18 @@ const SingleProductDetailsPage = () => {
         </div>
 
         {/* Right */}
-        <div className="sticky top-14 self-start flex flex-col w-full gap-x-2 gap-y-6 py-14 px-0  mx-auto  max-w-[calc(100%-122px)]  min-w-[298px]">
-          <div className="flex flex-col">
-            <Typography className="text-md">{product.title}</Typography>
-            <Typography className="normal-case leading-8 tracking-wide font-normal">
+        <div className='sticky top-14 self-start flex flex-col w-full gap-x-2 gap-y-6 py-14 px-0  mx-auto  max-w-[calc(100%-122px)]  min-w-[298px]'>
+          <div className='flex flex-col'>
+            <Typography className='text-md'>{product.title}</Typography>
+            <Typography className='normal-case leading-8 tracking-wide font-normal'>
               Rs. {product?.colors?.[0]?.sizes[0]?.price}.00
             </Typography>
           </div>
-          <div className="flex gap-4">
-            <Image src={product?.colors?.[0]?.colorImg || ''} alt="img" width={16} height={16} />
-            <Image src={product?.colors?.[0]?.colorImg || ''} alt="img" width={16} height={16} />
+          <div className='flex gap-4'>
+            <Image src={product?.colors?.[0]?.colorImg || ''} alt='img' width={16} height={16} />
+            <Image src={product?.colors?.[0]?.colorImg || ''} alt='img' width={16} height={16} />
           </div>
-          <Typography className="normal-case tracking-wide font-normal">
+          <Typography className='normal-case tracking-wide font-normal'>
             The model is wearing size {product?.colors?.[0]?.modelDetails?.[0]?.wearingSize} and is{' '}
             {product?.colors?.[0]?.modelDetails?.[0]?.height} tall.
           </Typography>
@@ -447,12 +447,12 @@ const SingleProductDetailsPage = () => {
               selectedSize ? 'max-h-10' : 'max-h-40'
             }`}
           >
-            <ul className="flex gap-2 p-0 m-0 flex-col">
+            <ul className='flex gap-2 p-0 m-0 flex-col'>
               {selectedSize ? (
                 <Button
-                  variant="ghost"
+                  variant='ghost'
                   onClick={() => setSelectedSize(null)}
-                  className="flex items-center justify-between w-full"
+                  className='flex items-center justify-between w-full'
                 >
                   <Typography>{selectedSize}</Typography>
                   <ChevronDown />
@@ -463,10 +463,10 @@ const SingleProductDetailsPage = () => {
                     <li key={size.id}>
                       {size.available ? (
                         <Button
-                          variant="ghost"
+                          variant='ghost'
                           key={size.size}
                           onClick={() => handleSelectSize(size)}
-                          className="flex items-center justify-between w-full"
+                          className='flex items-center justify-between w-full'
                         >
                           <Typography>{size.size}</Typography>
                         </Button>
@@ -474,12 +474,12 @@ const SingleProductDetailsPage = () => {
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button
-                              variant="ghost"
-                              className="flex items-center text-primary/80 justify-between w-full cursor-pointer"
+                              variant='ghost'
+                              className='flex items-center text-primary/80 justify-between w-full cursor-pointer'
                             >
                               {size.size}
-                              <div className="flex items-center gap-2">
-                                <Typography className="mt-1 font-normal normal-case">
+                              <div className='flex items-center gap-2'>
+                                <Typography className='mt-1 font-normal normal-case'>
                                   Not available, I want it!
                                 </Typography>{' '}
                                 <Mail />
@@ -497,38 +497,38 @@ const SingleProductDetailsPage = () => {
           </ScrollArea>
           <Separator />
 
-          <Button variant="link" className="p-0 w-max">
+          <Button variant='link' className='p-0 w-max'>
             <Typography>Size Guide</Typography>
           </Button>
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-1 items-center justify-between">
+          <div className='flex flex-col gap-4'>
+            <div className='flex gap-1 items-center justify-between'>
               <Button
-                className="w-[calc(100%-40px)] p-6"
+                className='w-[calc(100%-40px)] p-6'
                 onClick={() =>
                   customToast({
                     component: <BagToaster />,
                   })
                 }
               >
-                <Typography className="text-sm">ADD</Typography>
+                <Typography className='text-sm'>ADD</Typography>
               </Button>
-              <Button className="py-6">
-                <Typography className="text-sm">
-                  <Heart aria-label="Add to wishlist" />
+              <Button className='py-6'>
+                <Typography className='text-sm'>
+                  <Heart aria-label='Add to wishlist' />
                 </Typography>
               </Button>
             </div>
-            <Button variant="outline" className="w-[calc(100%+15px)]  p-6">
-              <Typography className="text-sm">Get the Look</Typography>
+            <Button variant='outline' className='w-[calc(100%+15px)]  p-6'>
+              <Typography className='text-sm'>Get the Look</Typography>
             </Button>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className='flex flex-col gap-2'>
             <Typography>Description</Typography>
-            <Typography className="normal-case font-normal">{product.desc}</Typography>
+            <Typography className='normal-case font-normal'>{product.desc}</Typography>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="link" className="w-max p-0">
+                <Button variant='link' className='w-max p-0'>
                   <Typography>See details</Typography>
                 </Button>
               </SheetTrigger>
@@ -540,36 +540,36 @@ const SingleProductDetailsPage = () => {
       {/* Bottom */}
 
       <ProductReviews />
-      <ProductRecommendations title="In same the style" />
-      <ProductRecommendations title="Combined Perfectly" />
-      <ProductRecommendations title="Popular right now" />
-      <ProductRecommendations title="You also viewed" />
-      <Breadcrumb className="p-10">
+      <ProductRecommendations title='In same the style' />
+      <ProductRecommendations title='Combined Perfectly' />
+      <ProductRecommendations title='Popular right now' />
+      <ProductRecommendations title='You also viewed' />
+      <Breadcrumb className='p-10'>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">
+            <BreadcrumbLink href='/'>
               <Typography>Home</Typography>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
-            <div className="h-4 -mt-1 w-px rotate-20 bg-primary" />
+            <div className='h-4 -mt-1 w-px rotate-20 bg-primary' />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/components">
+            <BreadcrumbLink href='/components'>
               <Typography>New now</Typography>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
-            <div className="h-4 -mt-1 w-px rotate-20 bg-primary" />
+            <div className='h-4 -mt-1 w-px rotate-20 bg-primary' />
           </BreadcrumbSeparator>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href="/components">
+            <BreadcrumbLink href='/components'>
               <Typography>Coats</Typography>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
-            <div className="h-4 -mt-1 w-px rotate-20 bg-primary" />
+            <div className='h-4 -mt-1 w-px rotate-20 bg-primary' />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
             <BreadcrumbPage>

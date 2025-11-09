@@ -13,102 +13,102 @@ const ProductGrid = () => {
 
   return (
     <div
-      className="grid 
+      className='grid 
 		 [grid-template-columns:repeat(auto-fill,minmax(calc(50%-1px),1fr))]
 		 lg:[grid-template-columns:repeat(auto-fill,minmax(calc(25%-1px),1fr))] 
-		 grid-flow-dense my-0 mx-auto pb-4 p-0"
+		 grid-flow-dense my-0 mx-auto pb-4 p-0'
     >
-      <div className="col-span-2">
-        <div className="flex flex-col justify-between">
+      <div className='col-span-2'>
+        <div className='flex flex-col justify-between'>
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
-            className="relative flex justify-between flex-col"
+            className='relative flex justify-between flex-col'
           >
             <div>
-              <fieldset className="relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(7/4.9)]">
+              <fieldset className='relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(7/4.9)]'>
                 <Link href={`/p/${audience}/${category}/subcategory/product_name`}>
-                  <div className="[aspect-ratio:calc(7/4.89)]">
+                  <div className='[aspect-ratio:calc(7/4.89)]'>
                     <Image
-                      className="absolute inset-0 w-full h-full object-cover"
-                      src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/outfit/S6/A2/17067907_92-99999999_01.jpg"
-                      alt="s"
+                      className='absolute inset-0 w-full h-full object-cover'
+                      src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/outfit/S6/A2/17067907_92-99999999_01.jpg'
+                      alt='s'
                       fill
                     />
                   </div>
                 </Link>
-                <div className="absolute bottom-0 h-max bg-background w-full z-0 opacity-0 translate-y-10 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                  <ScrollArea className="h-16 lg:h-max">
-                    <div className="flex flex-wrap items-center justify-center gap-4 p-2">
-                      <Button variant="outline" disabled className="border-0">
-                        <Typography className="text-sm">S</Typography>
+                <div className='absolute bottom-0 h-max bg-background w-full z-0 opacity-0 translate-y-10 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
+                  <ScrollArea className='h-16 lg:h-max'>
+                    <div className='flex flex-wrap items-center justify-center gap-4 p-2'>
+                      <Button variant='outline' disabled className='border-0'>
+                        <Typography className='text-sm'>S</Typography>
                       </Button>
-                      <Button variant="outline" className="border-0">
-                        <Typography className="text-sm">S</Typography>
+                      <Button variant='outline' className='border-0'>
+                        <Typography className='text-sm'>S</Typography>
                       </Button>
                     </div>
                   </ScrollArea>
                 </div>
               </fieldset>
             </div>
-            <div className="mt-4 h-20">
-              <div className="flex justify-between ">
-                <div className="ml-2 lg:ml-4 flex flex-col gap-2">
-                  <Typography className="normal-case font-normal text-sm">
+            <div className='mt-4 h-20'>
+              <div className='flex justify-between '>
+                <div className='ml-2 lg:ml-4 flex flex-col gap-2'>
+                  <Typography className='normal-case font-normal text-sm'>
                     Lori tapered-fit jeans
                   </Typography>
-                  <Typography className="normal-case text-sm tracking-wider">
+                  <Typography className='normal-case text-sm tracking-wider'>
                     Rs. 5190.00
                   </Typography>
                 </div>
-                <Heart className="mr-2 -mt-2" />
+                <Heart className='mr-2 -mt-2' />
               </div>
             </div>
           </form>
         </div>
       </div>
 
-      <div className="flex flex-col justify-between">
-        <form action="" className="flex justify-between flex-col">
+      <div className='flex flex-col justify-between'>
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1'
+                    alt='s'
                     fill
                   />
                 </div>
               </Link>
-              <div className="absolute bottom-0 h-max bg-background w-full z-0 opacity-0 translate-y-10 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                <ScrollArea className="h-16 lg:h-max">
-                  <div className="flex flex-wrap items-center justify-center gap-4 p-2">
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+              <div className='absolute bottom-0 h-max bg-background w-full z-0 opacity-0 translate-y-10 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
+                <ScrollArea className='h-16 lg:h-max'>
+                  <div className='flex flex-wrap items-center justify-center gap-4 p-2'>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
                   </div>
                 </ScrollArea>
@@ -116,137 +116,137 @@ const ProductGrid = () => {
             </fieldset>
           </div>
 
-          <div className="mt-4 mb-4 h-max">
-            <div className="flex justify-between">
-              <div className="ml-2 lg:ml-4  flex flex-col gap-2">
-                <Badge variant="outline">Plus Available</Badge>
-                <Typography className="normal-case font-normal text-sm truncate w-40">
+          <div className='mt-4 mb-4 h-max'>
+            <div className='flex justify-between'>
+              <div className='ml-2 lg:ml-4  flex flex-col gap-2'>
+                <Badge variant='outline'>Plus Available</Badge>
+                <Typography className='normal-case font-normal text-sm truncate w-40'>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore excepturi rerum
                   facilis nesciunt assumenda corrupti, veritatis perferendis doloremque, soluta
                   reprehenderit et, voluptates dolorum est mollitia ipsa quibusdam! Dolore, hic.
                   Quis?
                 </Typography>
-                <Typography className="normal-case text-sm tracking-wider">Rs. 5190.00</Typography>
-                <div className="flex gap-4">
+                <Typography className='normal-case text-sm tracking-wider'>Rs. 5190.00</Typography>
+                <div className='flex gap-4'>
                   <Image
-                    alt="color"
+                    alt='color'
                     width={16}
                     height={16}
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674"
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674'
                   />
                   <Image
-                    alt="color"
+                    alt='color'
                     width={16}
                     height={16}
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674"
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674'
                   />
                   <Image
-                    alt="color"
+                    alt='color'
                     width={16}
                     height={16}
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674"
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674'
                   />
                   <Image
-                    alt="color"
+                    alt='color'
                     width={16}
                     height={16}
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674"
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/colv3/17007786_56_C.png?imwidth=40&imdensity=1&ts=1755605118674'
                   />
                 </div>
               </div>
-              <Heart className="mr-2 -mt-2" />
+              <Heart className='mr-2 -mt-2' />
             </div>
           </div>
         </form>
       </div>
-      <div className="flex flex-col justify-between">
-        <form action="" className="flex justify-between flex-col">
+      <div className='flex flex-col justify-between'>
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative group overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1'
+                    alt='s'
                     fill
                   />
                 </div>
               </Link>
-              <div className="absolute bottom-0 h-max bg-background w-full z-0 opacity-0 translate-y-10 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                <ScrollArea className="h-16 lg:h-max">
-                  <div className="flex flex-wrap items-center justify-center gap-4 p-2">
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+              <div className='absolute bottom-0 h-max bg-background w-full z-0 opacity-0 translate-y-10 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0'>
+                <ScrollArea className='h-16 lg:h-max'>
+                  <div className='flex flex-wrap items-center justify-center gap-4 p-2'>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
-                    <Button variant="outline" className="border-0">
-                      <Typography className="text-sm">S</Typography>
+                    <Button variant='outline' className='border-0'>
+                      <Typography className='text-sm'>S</Typography>
                     </Button>
                   </div>
                 </ScrollArea>
@@ -254,32 +254,32 @@ const ProductGrid = () => {
             </fieldset>
           </div>
 
-          <div className="mt-4 h-20">
-            <div className="flex justify-between items-start">
-              <div className="ml-2 lg:ml-4 flex flex-col gap-2">
-                <Typography className="normal-case font-normal text-sm truncate w-30">
+          <div className='mt-4 h-20'>
+            <div className='flex justify-between items-start'>
+              <div className='ml-2 lg:ml-4 flex flex-col gap-2'>
+                <Typography className='normal-case font-normal text-sm truncate w-30'>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore excepturi rerum
                   facilis nesciunt assumenda corrupti, veritatis perferendis doloremque, soluta
                   reprehenderit et, voluptates dolorum est mollitia ipsa quibusdam! Dolore, hic.
                   Quis?
                 </Typography>
-                <Typography className="normal-case text-sm tracking-wider">Rs. 5190.00</Typography>
+                <Typography className='normal-case text-sm tracking-wider'>Rs. 5190.00</Typography>
               </div>
-              <Heart className="mr-2 -mt-2 size-4 lg:size-6" />
+              <Heart className='mr-2 -mt-2 size-4 lg:size-6' />
             </div>
           </div>
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -289,15 +289,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full object-cover"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full object-cover'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -307,15 +307,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -325,15 +325,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -343,15 +343,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -361,15 +361,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -379,15 +379,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -397,15 +397,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -415,15 +415,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -433,15 +433,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -451,15 +451,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17077909_76_D6.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -469,15 +469,15 @@ const ProductGrid = () => {
         </form>
       </div>
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -489,15 +489,15 @@ const ProductGrid = () => {
 
       {/* <div className='col-span-2'> */}
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className="[aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className='[aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full object-cover"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17067907_92.jpg"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full object-cover'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17067907_92.jpg'
+                    alt='s'
                     fill
                   />
                 </div>
@@ -508,15 +508,15 @@ const ProductGrid = () => {
       </div>
       {/* </div> */}
       <div>
-        <form action="" className="flex justify-between flex-col">
+        <form action='' className='flex justify-between flex-col'>
           <div>
-            <fieldset className="relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]">
-              <Link href="/">
-                <div className=" [aspect-ratio:calc(5/7)]">
+            <fieldset className='relative overflow-hidden border-0 p-0 m-0 [aspect-ratio:calc(5/7)]'>
+              <Link href='/'>
+                <div className=' [aspect-ratio:calc(5/7)]'>
                   <Image
-                    className="absolute inset-0 w-full h-full"
-                    src="https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1"
-                    alt="s"
+                    className='absolute inset-0 w-full h-full'
+                    src='https://shop.mango.com/assets/rcs/pics/static/T1/fotos/S/17046739_09_D1.jpg?ts=1757932581566&im=SmartCrop,width=480,height=672&imdensity=1'
+                    alt='s'
                     fill
                   />
                 </div>
