@@ -107,6 +107,7 @@ jobs:
     env: # 🧩 Clerk environment variables (for build time)
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
       CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+      NEXT_PUBLIC_PRODUCT_SERVICE_URL: ${{ secrets.NEXT_PUBLIC_PRODUCT_SERVICE_URL }}
     steps:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v4
@@ -165,6 +166,7 @@ jobs:
           VERCEL_PROJECT_ID_CLIENT: ${{ secrets.VERCEL_PROJECT_ID_CLIENT }}
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          NEXT_PUBLIC_PRODUCT_SERVICE_URL: ${{ secrets.NEXT_PUBLIC_PRODUCT_SERVICE_URL }}
 
         run: |
           for app in ${{ needs.build.outputs.changed }}; do
