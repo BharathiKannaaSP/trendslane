@@ -18,13 +18,15 @@
   "packageManager": "pnpm@10.20.0",
   "dependencies": {
     "@clerk/express": "^1.7.46",
+    "@repo/product-db": "workspace:*",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "redis": "^5.9.0"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
     "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5"
   }

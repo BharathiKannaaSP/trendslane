@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model BannerImage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  audience  Audience @unique
+  image     String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Audience {
+  women
+  men
+  teen
+  kids
+}

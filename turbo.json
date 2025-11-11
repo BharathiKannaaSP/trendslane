@@ -14,7 +14,12 @@
         "!.next/cache/**"
       ],
       "env": [
-        "PRODUCT_SERVICE_PORT"
+        "DATABASE_URL",
+        "PRODUCT_SERVICE_PORT",
+        "REDIS_CLIENT_USERNAME",
+        "REDIS_CLIENT_PASSWORD",
+        "REDIS_CLIENT_HOST",
+        "REDIS_CLIENT_PORT"
       ]
     },
     "lint": {
@@ -60,6 +65,16 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:deploy": {
+      "cache": false
     }
   }
 }
