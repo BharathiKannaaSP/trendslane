@@ -1,8 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { clerkMiddleware } from '@clerk/express';
 import { shouldBeUser } from './middleware/authMiddleware.js';
 import bannerRouter from './routes/bannerImage.routes.js';
+import { errorHandler } from './utils/errorHandler.js';
 const app = express();
 
 app.use(
@@ -31,13 +32,9 @@ app.get('/test', shouldBeUser, (req: Request, res: Response) => {
   });
 });
 
-app.use('/products', bannerRouter);
+app.use('/api/banners', bannerRouter);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log(err);
-  return res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' });
-});
+app.use(errorHandler);
 
 app.listen(process.env.PRODUCT_SERVICE_PORT, () => {
   console.log(`Product service is running on PORT - ${process.env.PRODUCT_SERVICE_PORT}`);

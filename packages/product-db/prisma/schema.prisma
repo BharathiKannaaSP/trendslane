@@ -10,11 +10,29 @@ datasource db {
 
 
 model BannerImage {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  audience  Audience @unique
-  image     String   
+  id        String   @id @map("_id") @default(auto()) @db.ObjectId
+  country   Country
+  audience  Audience
+  imageUrl  String
+  altText   String?
+  title     String?
+  active    Boolean  @default(true)
+  priority  Int?
+  startAt   DateTime?
+  endAt     DateTime?
+  sortIndex Int 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([active])
+  @@unique([country, audience])
+}
+
+enum Country {
+  in
+  fr
+  de
+  us
 }
 
 enum Audience {

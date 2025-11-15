@@ -1,12 +1,16 @@
 import { Router } from 'express';
-import { createBannerImage, getAllBannerImage } from '../controllers/bannerImage.controller';
+import {
+  createBannerImage,
+  getListBanner,
+  updateBannerById,
+  deleteBannerImageById,
+} from '../controllers/bannerImage.controller';
 
 const router: Router = Router();
 
-router.post('/', createBannerImage);
-// router.put('/:id', updateBannerImage);
-// router.delete('/:id', deleteBannerImage);
-// router.get('/:id', getBannerImage);
-router.get('/', getAllBannerImage);
+router.post('/createBanner', createBannerImage);
+router.get('/listBanner', getListBanner);
+router.patch('/updateBanner/:id', updateBannerById);
+router.delete('/deleteBanner/:id', deleteBannerImageById);
 
 export default router;
