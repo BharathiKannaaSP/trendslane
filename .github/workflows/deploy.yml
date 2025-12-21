@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "Checking for changed apps..."
           git fetch --unshallow || true
-          git fetch origin main
+          git fetch origin master
 
           if [ $(git rev-list --count HEAD) -eq 1 ]; then
             CHANGED=$(ls apps | xargs)
