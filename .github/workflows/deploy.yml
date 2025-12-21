@@ -157,7 +157,7 @@ jobs:
               npx vercel deploy --yes --prod --token=$VERCEL_TOKEN
             fi
 
-            if [ "$app" = "client" ]; then
+            if [ "$app" = "web" ]; then
               echo "Deploying Client app..."
               VERCEL_ORG_ID=$VERCEL_ORG_ID \
               VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID_CLIENT \
