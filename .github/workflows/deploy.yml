@@ -3,7 +3,7 @@ name: Trendslane Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   # 🧹 1️⃣ Lint Stage
