@@ -5,7 +5,7 @@ import {
 	Language
 } from '@workspace/types'
 import { NextRequest, NextResponse } from 'next/server'
-import { setCountryAndLangCookies } from './setCookies'
+import { setCountryAndLangCookies } from './set-cookies'
 
 export const handleRoot = (req: NextRequest) => {
 	// Take from cookie if available else go and detect the country from headers
