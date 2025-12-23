@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model BannerImage {
+  id        Int       @id @default(autoincrement())
+  country   Country[]
+  audience  Audience
+  imageUrl  String
+  altText   String
+  title     String?
+  active    Boolean   @default(true)
+  sortIndex Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([audience, country])
+  @@index([active])
+}
+
+enum Country {
+  in
+  fr
+  us
+}
+
+enum Audience {
+  women
+  men
+  teen
+  kids
+}

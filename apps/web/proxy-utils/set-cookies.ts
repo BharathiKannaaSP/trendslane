@@ -1,14 +1,14 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function cookieSettings() {
-	return { path: '/', maxAge: 60 * 60 * 24 * 365 }
+  return { path: "/", maxAge: 60 * 60 * 24 * 365 };
 }
 
 export function setCountryAndLangCookies(
-	res: NextResponse,
-	country: string,
-	language: string
+  res: NextResponse,
+  country: string,
+  language: string,
 ) {
-	res.cookies.set('country', country, cookieSettings())
-	res.cookies.set('lang', language, cookieSettings())
+  res.cookies.set("country", country, cookieSettings());
+  res.cookies.set("lang", language, cookieSettings());
 }
