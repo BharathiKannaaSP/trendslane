@@ -1,11 +1,8 @@
-import { NextRequest } from "next/server";
-import { handleRoot } from "./proxy-utils/handle-root";
-import { handleAutoPrefix } from "./proxy-utils/handle-auto-prefix";
-import {
-  isValidCountry,
-  isValidLanguage,
-} from "./proxy-utils/region-validators";
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextRequest } from 'next/server';
+import { handleRoot } from './proxy-utils/handle-root';
+import { handleAutoPrefix } from './proxy-utils/handle-auto-prefix';
+import { isValidCountry, isValidLanguage } from './proxy-utils/region-validators';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
 export default clerkMiddleware();
 
@@ -13,10 +10,10 @@ export const proxy = (req: NextRequest) => {
   const pathname = req.nextUrl.pathname;
 
   // Root
-  if (pathname === "/") return handleRoot(req);
+  if (pathname === '/') return handleRoot(req);
 
   // Segments
-  const segments = pathname.split("/").filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean);
 
   // Auto prefix
   const autoPrefix = handleAutoPrefix(req, segments);
@@ -28,15 +25,14 @@ export const proxy = (req: NextRequest) => {
   const [country, lang] = segments;
 
   // Validate country and language
-  if (!isValidCountry(country) || !isValidLanguage(lang))
-    return handleRoot(req);
+  if (!isValidCountry(country) || !isValidLanguage(lang)) return handleRoot(req);
 };
 
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     // Always run for API routes
-    "/(api|trpc)(.*)",
+    '/(api|trpc)(.*)',
   ],
 };

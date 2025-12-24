@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
-        hostname: "shop.mango.com",
+        hostname: 'shop.mango.com',
       },
       {
-        hostname: "images.pexels.com",
+        hostname: 'images.pexels.com',
       },
     ],
   },

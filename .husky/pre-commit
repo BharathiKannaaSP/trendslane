@@ -1,0 +1,8 @@
+echo "Running pre-commit hooks..."
+# Run ESLint
+pnpm turbo lint
+pnpm turbo check-types
+pnpm turbo format
+
+# Run Test
+# pnpm test

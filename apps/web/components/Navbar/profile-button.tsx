@@ -1,8 +1,8 @@
-"use client";
-import { UserButton } from "@clerk/nextjs";
-import { ShoppingBag } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React from "react";
+'use client';
+import { UserButton } from '@clerk/nextjs';
+import { ShoppingBag } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 
 const ProfileButton = () => {
   const router = useRouter();
@@ -10,9 +10,9 @@ const ProfileButton = () => {
     <UserButton>
       <UserButton.MenuItems>
         <UserButton.Action
-          label="Orders"
-          labelIcon={<ShoppingBag className="w-4 h-4" />}
-          onClick={() => router.push("/orders")}
+          label='Orders'
+          labelIcon={<ShoppingBag className='w-4 h-4' />}
+          onClick={() => router.push('/orders')}
         />
       </UserButton.MenuItems>
     </UserButton>

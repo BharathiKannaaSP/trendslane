@@ -1,18 +1,13 @@
-import {
-  allowedCountries,
-  allowedLanguages,
-  Country,
-  Language,
-} from "@workspace/types";
-import { NextRequest, NextResponse } from "next/server";
-import { setCountryAndLangCookies } from "./set-cookies";
+import { allowedCountries, allowedLanguages, Country, Language } from '@workspace/types';
+import { NextRequest, NextResponse } from 'next/server';
+import { setCountryAndLangCookies } from './set-cookies';
 
 export const handleRoot = (req: NextRequest) => {
   // Take from cookie if available else go and detect the country from headers
   // FOR LOCAL DEFAULTED TO 'in'(India)
-  const cookieCountry = req.cookies.get("country")?.value;
-  const cookieLang = req.cookies.get("lang")?.value;
-  const cookieBrand = req.cookies.get("brandId")?.value;
+  const cookieCountry = req.cookies.get('country')?.value;
+  const cookieLang = req.cookies.get('lang')?.value;
+  const cookieBrand = req.cookies.get('brandId')?.value;
 
   if (
     cookieCountry &&
@@ -30,11 +25,9 @@ export const handleRoot = (req: NextRequest) => {
   }
 
   // PROD
-  let detectedCountry =
-    req.headers.get("x-vercel-ip-country")?.toLowerCase() || "in";
+  let detectedCountry = req.headers.get('x-vercel-ip-country')?.toLowerCase() || 'in';
 
-  if (!allowedCountries.includes(detectedCountry as Country))
-    detectedCountry = "in";
+  if (!allowedCountries.includes(detectedCountry as Country)) detectedCountry = 'in';
 
   const lang = allowedLanguages[0];
 

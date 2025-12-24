@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Prisma } from "@workspace/product-db";
+import { Prisma } from '@workspace/product-db';
 
 export function mapPrismaError(err: any) {
   // Prisma Client Known Request Errors
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
-    const model = err.meta?.modelName || "Unknown Model";
-    const target = err.meta?.target || "Unknown Field";
+    const model = err.meta?.modelName || 'Unknown Model';
+    const target = err.meta?.target || 'Unknown Field';
     const cause = err.meta?.cause || null;
     const fieldValue = err.meta?.field_value || null;
 
@@ -13,7 +13,7 @@ export function mapPrismaError(err: any) {
       /**
        * Unique constraint failed
        */
-      case "P2002":
+      case 'P2002':
         return {
           status: 409,
           message: `Duplicate value error: The field "${target}" in "${model}" must be unique.`,
@@ -29,7 +29,7 @@ export function mapPrismaError(err: any) {
       /**
        * Record not found
        */
-      case "P2025":
+      case 'P2025':
         return {
           status: 404,
           message: `Record not found in "${model}".`,
@@ -37,15 +37,14 @@ export function mapPrismaError(err: any) {
             model,
             cause,
             operation: err.meta?.operation || undefined,
-            explanation:
-              "The record you are trying to read/update/delete does not exist.",
+            explanation: 'The record you are trying to read/update/delete does not exist.',
           },
         };
 
       /**
        * Foreign key constraint failed
        */
-      case "P2003":
+      case 'P2003':
         return {
           status: 409,
           message: `Foreign key constraint failed on "${target}" in "${model}".`,
@@ -54,14 +53,14 @@ export function mapPrismaError(err: any) {
             target,
             cause,
             explanation:
-              "You are referencing a related record that does not exist or deleting a record that is still referenced.",
+              'You are referencing a related record that does not exist or deleting a record that is still referenced.',
           },
         };
 
       /**
        * Value too long for column
        */
-      case "P2000":
+      case 'P2000':
         return {
           status: 400,
           message: `Invalid data format for field "${target}" in "${model}".`,
@@ -69,14 +68,14 @@ export function mapPrismaError(err: any) {
             model,
             target,
             cause,
-            explanation: "The provided value exceeds allowed size or format.",
+            explanation: 'The provided value exceeds allowed size or format.',
           },
         };
 
       /**
        * Required field missing
        */
-      case "P2011":
+      case 'P2011':
         return {
           status: 400,
           message: `Missing required field "${target}" in "${model}".`,
@@ -84,14 +83,14 @@ export function mapPrismaError(err: any) {
             model,
             target,
             cause,
-            explanation: "A required field was not provided.",
+            explanation: 'A required field was not provided.',
           },
         };
 
       /**
        * Data validation failed
        */
-      case "P2005":
+      case 'P2005':
         return {
           status: 400,
           message: `Value validation error for "${target}" in "${model}".`,
@@ -99,15 +98,14 @@ export function mapPrismaError(err: any) {
             model,
             target,
             cause,
-            explanation:
-              "Prisma rejected the provided value due to invalid type or format.",
+            explanation: 'Prisma rejected the provided value due to invalid type or format.',
           },
         };
 
       /**
        * Record already exists with conflicting data (general)
        */
-      case "P2014":
+      case 'P2014':
         return {
           status: 400,
           message: `Invalid relational operation on "${model}" for field "${target}".`,
@@ -116,7 +114,7 @@ export function mapPrismaError(err: any) {
             target,
             cause,
             explanation:
-              "You may be nesting writes incorrectly or referencing invalid relation data.",
+              'You may be nesting writes incorrectly or referencing invalid relation data.',
           },
         };
 
@@ -133,10 +131,10 @@ export function mapPrismaError(err: any) {
   if (err instanceof Prisma.PrismaClientValidationError) {
     return {
       status: 400,
-      message: "Validation error: Incorrect or missing fields.",
+      message: 'Validation error: Incorrect or missing fields.',
       details: {
         explanation:
-          "You passed invalid data to Prisma. Check if your input fields exist in the schema and match the types.",
+          'You passed invalid data to Prisma. Check if your input fields exist in the schema and match the types.',
       },
     };
   }
@@ -145,9 +143,9 @@ export function mapPrismaError(err: any) {
   if (err instanceof Prisma.PrismaClientInitializationError) {
     return {
       status: 500,
-      message: "Database initialization failed.",
+      message: 'Database initialization failed.',
       details: {
-        explanation: "The Prisma client was unable to connect to the database.",
+        explanation: 'The Prisma client was unable to connect to the database.',
         cause: err.message,
       },
     };
@@ -157,10 +155,10 @@ export function mapPrismaError(err: any) {
   if (err instanceof Prisma.PrismaClientRustPanicError) {
     return {
       status: 500,
-      message: "Critical Prisma engine error.",
+      message: 'Critical Prisma engine error.',
       details: {
         explanation:
-          "Prisma engine panicked. This is usually caused by schema corruption or invalid binary.",
+          'Prisma engine panicked. This is usually caused by schema corruption or invalid binary.',
       },
     };
   }
@@ -169,9 +167,9 @@ export function mapPrismaError(err: any) {
   if (err instanceof Prisma.PrismaClientUnknownRequestError) {
     return {
       status: 500,
-      message: "Unknown Prisma error occurred.",
+      message: 'Unknown Prisma error occurred.',
       details: {
-        explanation: "An unknown request error occurred inside Prisma.",
+        explanation: 'An unknown request error occurred inside Prisma.',
         cause: err.message,
       },
     };
@@ -180,10 +178,9 @@ export function mapPrismaError(err: any) {
   // Not a Prisma error → return generic error
   return {
     status: err.status || 500,
-    message: err.message || "Internal server error",
+    message: err.message || 'Internal server error',
     details: {
-      explanation:
-        "This is a non-Prisma error thrown somewhere in your application.",
+      explanation: 'This is a non-Prisma error thrown somewhere in your application.',
     },
   };
 }
