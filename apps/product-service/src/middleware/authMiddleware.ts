@@ -43,7 +43,7 @@ export const authorizeCountryAccess = () => {
     if (claims?.metadata?.role !== 'admin') {
       return res.status(403).json({ error: 'Forbidden' });
     }
-    
+
     const inputCountries: Country[] = [req.query.country] as Country[];
     if (!inputCountries) {
       return res.status(400).json({ error: 'Country is required' });
