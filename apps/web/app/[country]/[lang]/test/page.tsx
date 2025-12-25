@@ -12,7 +12,6 @@ const Test = async ({ params }: { params: Promise<{ country: Country; lang: Lang
 
     const token = await getToken();
 
-    // console.log(token);
     const baseURL = process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL;
 
     const res = await fetch(`${baseURL}/test?country=${country}`, {

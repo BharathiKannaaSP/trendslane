@@ -19,7 +19,7 @@ export const authorize =
     }
 
     const claims = auth.sessionClaims as CustomJWTSessionClaims;
-    console.log(claims, 'claims');
+
     if (claims?.metadata?.role && !allowedRoles.includes(claims.metadata.role)) {
       return res.status(403).json({ error: 'Forbidden user role' });
     }
@@ -47,7 +47,7 @@ export const authorizeCountryAccess = () => {
     }
 
     const inputCountries: Country[] = [req.query.country] as Country[];
-    console.log(inputCountries, 'Input');
+
     if (!inputCountries) {
       return res.status(400).json({ error: 'Country is required' });
     }

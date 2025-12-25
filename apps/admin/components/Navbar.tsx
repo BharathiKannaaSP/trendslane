@@ -20,14 +20,12 @@ const Navbar = () => {
   const user = useUser();
   const { signOut } = useAuth();
 
-  console.log(user)
-
   const imageUrl = user.user?.imageUrl;
   const firstName = user.user?.firstName ?? '';
   const lastName = user.user?.lastName ?? '';
 
   const fallback = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-  console.log(fallback)
+
   return (
     <nav className='p-4 flex items-center justify-between sticky top-0 z-10 bg-background'>
       <SidebarTrigger />

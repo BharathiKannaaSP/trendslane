@@ -98,7 +98,6 @@ const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
       const skippedCountries = data?.skippedCountries || [];
       const createdFor = data?.createdFor || [];
       const message = data?.message;
-      console.log(data);
       if (skippedCountries.length) {
         toast.warning(`${message} - ${skippedCountries.join(', ')}`);
       }

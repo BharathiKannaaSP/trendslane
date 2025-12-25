@@ -23,7 +23,6 @@ const getData = async (country: Country, lang: Language): Promise<Prisma.BannerI
       },
     );
     const data = await res.json();
-    console.log(data);
     if (!res.ok) {
       throw new Error(data.error);
     }
@@ -41,7 +40,6 @@ const BannerImage = async ({
 }) => {
   const { country, lang } = await params;
   const data = await getData(country, lang);
-  console.log(data);
   if (!data) return <>Will implement 404</>;
 
   return (
