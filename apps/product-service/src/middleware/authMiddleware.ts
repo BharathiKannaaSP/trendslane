@@ -15,13 +15,13 @@ export const authorize =
     const userId = auth.userId;
 
     if (!userId) {
-      return res.status(401).json({ message: 'You are not logged in!' });
+      return res.status(401).json({ error: 'You are not logged in!' });
     }
 
     const claims = auth.sessionClaims as CustomJWTSessionClaims;
-    console.log(claims);
+    console.log(claims, 'claims');
     if (claims?.metadata?.role && !allowedRoles.includes(claims.metadata.role)) {
-      return res.status(403).json({ error: 'Forbidden' });
+      return res.status(403).json({ error: 'Forbidden user role' });
     }
 
     next();
@@ -33,18 +33,21 @@ export const authorizeCountryAccess = () => {
     const userId = auth.userId;
 
     if (!userId) {
-      return res.status(401).json({ message: 'You are not logged in!' });
+      return res.status(401).json({ error: 'You are not logged in!' });
     }
 
     const claims = auth.sessionClaims as CustomJWTSessionClaims;
 
-    if (claims?.metadata?.role === 'superAdmin') next();
+    if (claims?.metadata?.role === 'superAdmin') {
+      return next();
+    }
 
     if (claims?.metadata?.role !== 'admin') {
-      return res.status(403).json({ error: 'Forbidden' });
+      return res.status(403).json({ error: 'Forbidden user role' });
     }
 
     const inputCountries: Country[] = [req.query.country] as Country[];
+    console.log(inputCountries, 'Input');
     if (!inputCountries) {
       return res.status(400).json({ error: 'Country is required' });
     }

@@ -75,7 +75,7 @@ export const getListBanner = async (req: Request, res: Response) => {
     orderBy: { sortIndex: 'asc' },
   });
 
-  res.status(200).json({ bannerList });
+  res.status(200).json({ bannerList, message: 'Banner list fetched successfully' });
 };
 
 // UPDATE BANNER BY ID

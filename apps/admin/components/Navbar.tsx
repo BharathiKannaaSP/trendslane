@@ -14,9 +14,20 @@ import {
 import { useTheme } from 'next-themes';
 import { Button } from '@workspace/ui/components/button';
 import { SidebarTrigger } from '@workspace/ui/components/sidebar';
+import { useAuth, useUser } from '@clerk/nextjs';
 const Navbar = () => {
   const { setTheme } = useTheme();
+  const user = useUser();
+  const { signOut } = useAuth();
 
+  console.log(user)
+
+  const imageUrl = user.user?.imageUrl;
+  const firstName = user.user?.firstName ?? '';
+  const lastName = user.user?.lastName ?? '';
+
+  const fallback = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  console.log(fallback)
   return (
     <nav className='p-4 flex items-center justify-between sticky top-0 z-10 bg-background'>
       <SidebarTrigger />
@@ -41,8 +52,8 @@ const Navbar = () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src='https://images.pexels.com/photos/2169428/pexels-photo-2169428.jpeg' />
-              <AvatarFallback>RG</AvatarFallback>
+              <AvatarImage src={imageUrl} />
+              <AvatarFallback>{fallback}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent sideOffset={10}>
@@ -56,7 +67,7 @@ const Navbar = () => {
               <Settings className='h-[1.2rem] w-[1.2rem] mr-2' />
               Settings
             </DropdownMenuItem>
-            <DropdownMenuItem variant='destructive'>
+            <DropdownMenuItem variant='destructive' onClick={() => signOut()}>
               <LogOut className='h-[1.2rem] w-[1.2rem] mr-2' />
               Logout
             </DropdownMenuItem>

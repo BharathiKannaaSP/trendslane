@@ -3,16 +3,33 @@ import { BannerImageDataTable } from './data-table';
 import { Prisma } from '@workspace/product-db';
 import { columns } from './columns';
 import { Country, Language } from '@workspace/types';
+import { auth } from '@clerk/nextjs/server';
+
+export type ListBannerResponse = {
+  bannerList: Prisma.BannerImageModel[];
+};
 
 const getData = async (country: Country, lang: Language): Promise<Prisma.BannerImageModel[]> => {
   try {
+    const { getToken } = await auth();
+    const token = await getToken();
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/listBanner?country=${country}&lang=${lang}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     const data = await res.json();
+    console.log(data);
+    if (!res.ok) {
+      throw new Error(data.error);
+    }
     return data.bannerList;
-  } catch {
-    console.error('Failed to fetch banner images');
+  } catch (error) {
+    console.error('Failed to fetch banners', error);
     return [];
   }
 };
@@ -24,7 +41,7 @@ const BannerImage = async ({
 }) => {
   const { country, lang } = await params;
   const data = await getData(country, lang);
-
+  console.log(data);
   if (!data) return <>Will implement 404</>;
 
   return (

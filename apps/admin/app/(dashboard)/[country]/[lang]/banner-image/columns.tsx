@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
+import { useAuth } from '@clerk/nextjs';
 import { ColumnDef } from '@tanstack/react-table';
 import { Prisma } from '@workspace/product-db';
+import { Country } from '@workspace/types';
 import { Button } from '@workspace/ui/components/button';
 import { Checkbox } from '@workspace/ui/components/checkbox';
 import {
@@ -12,9 +15,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu';
+import { Typography } from '@workspace/ui/components/typography';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 export type BannerImage = Prisma.BannerImageModel;
@@ -81,6 +85,23 @@ export const columns: ColumnDef<BannerImage>[] = [
     },
   },
   {
+    accessorKey: 'country',
+    header: 'Country',
+    cell: ({ row }) => {
+      const countryData = row.getValue('country') as Country[];
+      const { country } = useParams();
+      const isActive = countryData.filter((c) => c.includes(country as Country));
+      const isNotActive = countryData.filter((c) => !c.includes(country as Country));
+      return (
+        <div>
+          <Typography>{isActive}</Typography>
+
+          <Typography className='text-muted-foreground ml-2'>{isNotActive.join(', ')}</Typography>
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: 'active',
     header: ({ column }) => {
       return (
@@ -103,18 +124,19 @@ export const columns: ColumnDef<BannerImage>[] = [
     id: 'actions',
     header: 'Actions',
     cell: ({ row }) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
       const router = useRouter();
       const bannerImage: Prisma.BannerImageModel = row.original;
+      const { getToken } = useAuth();
+      const { country } = useParams();
       const handleDeleteBannerImage = async (id: number) => {
-        console.log('Delete banner image with ID:', id);
         try {
-          //send delete request to backend
+          const token = await getToken();
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/deleteBanner/${id}?country=${row.original.country[0]}`,
+            `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/deleteBanner/${id}?country=${country}`,
             {
               method: 'DELETE',
               headers: {
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
               },
             },

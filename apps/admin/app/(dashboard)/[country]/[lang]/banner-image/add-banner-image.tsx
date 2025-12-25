@@ -36,25 +36,29 @@ import {
 } from '@workspace/ui/components/command';
 import { cn } from '@workspace/ui/lib/utils';
 import { Typography } from '@workspace/ui/components/typography';
-import { allowedCountries, AUDIENCE_ORDER, getFullCountryName } from '@workspace/types';
+import {
+  allowedCountries,
+  AUDIENCE_ORDER,
+  CustomJWTSessionClaims,
+  getFullCountryName,
+} from '@workspace/types';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { ScrollArea } from '@workspace/ui/components/scroll-area';
 import { useMutation } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useAuth } from '@clerk/nextjs';
 
 type AddBannerImageProps = {
   onClose: () => void;
 };
 
 const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
-  const userRole = 'superAdmin'; // This should come from your auth logic
   const router = useRouter();
   const pathname = useParams<{ country: string }>();
   const [bannerImageFile, setBannerImageFile] = useState<string | null>(null);
   const [imageUploading, setImageUploading] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
-
   const form = useForm<z.infer<typeof bannerImageFormSchema>>({
     resolver: zodResolver(bannerImageFormSchema),
     defaultValues: {
@@ -64,39 +68,43 @@ const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
       imageUrl: '',
     },
   });
+  const { getToken, sessionClaims } = useAuth();
+  const userRole = (sessionClaims as CustomJWTSessionClaims)?.metadata?.role;
 
   const mutation = useMutation({
     mutationFn: async (payload: z.infer<typeof bannerImageFormSchema>) => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/createBanner`,
-        {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const token = await getToken();
+      const baseUrl = `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/createBanner`;
+      const url = userRole === 'superAdmin' ? baseUrl : `${baseUrl}?country=${pathname.country}`;
+
+      const res = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error.message);
+        throw new Error(data.error);
       }
-      console.log(data);
 
       return data;
     },
     onSuccess: (data) => {
       const skippedCountries = data?.skippedCountries || [];
       const createdFor = data?.createdFor || [];
-
+      const message = data?.message;
+      console.log(data);
       if (skippedCountries.length) {
-        toast.warning(`Banner already exists for audience in: ${skippedCountries.join(', ')}`);
+        toast.warning(`${message} - ${skippedCountries.join(', ')}`);
       }
 
       if (createdFor.length) {
-        toast.success(`Banner created successfully for: ${createdFor.join(', ')}`);
+        toast.success(`${message} for: ${createdFor.join(', ')}`);
       }
 
       form.reset();

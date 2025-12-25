@@ -37,6 +37,7 @@ import { useMutation } from '@tanstack/react-query';
 import { BannerImage } from './columns';
 import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
 
 interface BannerImageDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -73,10 +74,12 @@ export function BannerImageDataTable<TData, TValue>({
   });
 
   const router = useRouter();
+  const { getToken } = useAuth();
   const pathname = useParams<{ country: string }>();
 
   const mutation = useMutation({
     mutationFn: async () => {
+      const token = await getToken();
       const selectedRows = table.getSelectedRowModel().rows;
 
       Promise.all(
@@ -86,6 +89,9 @@ export function BannerImageDataTable<TData, TValue>({
             `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/deleteBanner/${bannerId}?&country=${pathname.country}`,
             {
               method: 'DELETE',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
           );
         }),
@@ -109,7 +115,7 @@ export function BannerImageDataTable<TData, TValue>({
           </SheetTrigger>
           <AddBannerImage onClose={() => setOpenBannerSheet(false)} />
         </Sheet>
-        {Object.keys(rowSelection).length > 0 && (
+        {Object.keys(rowSelection).length > 0 && table.getRowModel().rows?.length && (
           <div className='flex'>
             <Button
               className='ml-2'

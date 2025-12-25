@@ -1,32 +1,61 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { handleRoot } from './proxy-utils/handle-root';
 import { handleAutoPrefix } from './proxy-utils/handle-auto-prefix';
 import { isValidCountry, isValidLanguage } from './proxy-utils/region-validators';
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { CustomJWTSessionClaims } from '@workspace/types';
 
-export default clerkMiddleware();
+const isPublicRoute = createRouteMatcher([
+  '/:country/:lang/sign-in(.*)',
+  '/:country/:lang/unauthorized(.*)',
+]);
 
-export const proxy = (req: NextRequest) => {
+export default clerkMiddleware(async (auth, req: NextRequest) => {
+  /**
+   * --------------------
+   * 1. Proxy logic first
+   * --------------------
+   */
   const pathname = req.nextUrl.pathname;
 
-  // Root
   if (pathname === '/') return handleRoot(req);
 
-  // Segments
   const segments = pathname.split('/').filter(Boolean);
 
-  // Auto prefix
   const autoPrefix = handleAutoPrefix(req, segments);
   if (autoPrefix) return autoPrefix;
 
-  // If less than 2 segments, redirect to root handler
   if (segments.length < 2) return handleRoot(req);
 
   const [country, lang] = segments;
 
-  // Validate country and language
-  if (!isValidCountry(country) || !isValidLanguage(lang)) return handleRoot(req);
-};
+  if (!isValidCountry(country) || !isValidLanguage(lang)) {
+    return handleRoot(req);
+  }
+
+  /**
+   * --------------------
+   * 2. Auth logic
+   * --------------------
+   */
+  if (isPublicRoute(req)) {
+    return NextResponse.next();
+  }
+
+  const { userId, sessionClaims } = await auth();
+
+  if (!userId) {
+    const url = req.nextUrl.clone();
+    url.pathname = `/${country}/${lang}/sign-in`;
+    return NextResponse.redirect(url);
+  }
+
+  const role = (sessionClaims as CustomJWTSessionClaims)?.metadata?.role;
+
+  if (role !== 'admin' && role !== 'superAdmin') {
+    return NextResponse.redirect(new URL(`/${country}/${lang}/unauthorized`, req.url));
+  }
+});
 
 export const config = {
   matcher: [

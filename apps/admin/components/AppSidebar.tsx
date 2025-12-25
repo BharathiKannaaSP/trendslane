@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Home,
@@ -47,6 +48,10 @@ import {
   CollapsibleTrigger,
 } from '@workspace/ui/components/collapsible';
 import Image from 'next/image';
+import { setLocaleCookies } from '@/app/actions/set-locale-cookies';
+import { useUser } from '@clerk/nextjs';
+import { Country, UserRole } from '@workspace/types';
+import { Typography } from '@workspace/ui/components/typography';
 
 export const navLinks = [
   {
@@ -55,8 +60,8 @@ export const navLinks = [
     icon: Home,
   },
   {
-    title: 'Country',
-    url: '/country',
+    title: 'Details',
+    url: '/details',
     icon: Earth,
   },
   {
@@ -102,6 +107,13 @@ export const navLinks = [
 ];
 
 const AppSidebar = () => {
+  const user = useUser();
+
+  if (!user) return;
+
+  const role = user.user?.publicMetadata.role as UserRole | undefined;
+  const countries = user.user?.publicMetadata.country as Country[] | undefined;
+
   return (
     <Sidebar collapsible='icon'>
       <SidebarHeader className='py-4'>
@@ -116,7 +128,7 @@ const AppSidebar = () => {
                   alt='Trendslane'
                   className='dark:invert'
                 />
-                <p className='text-xs text-muted-foreground'>Super Admin</p>
+                <p className='text-xs text-muted-foreground capitalize'>{role ?? ''}</p>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -181,30 +193,21 @@ const AppSidebar = () => {
             <CollapsibleContent>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href='/details'>
-                        <Projector />
-                        India
-                      </Link>
+                  {countries?.map((c) => (
+                    <SidebarMenuButton key={c} asChild>
+                      <SidebarMenuItem className='w-full'>
+                        <Link
+                          href={'#'}
+                          className='w-full'
+                          onClick={async () => {
+                            await setLocaleCookies(c, 'en');
+                          }}
+                        >
+                          <Typography>{c}</Typography>
+                        </Link>
+                      </SidebarMenuItem>
                     </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href='/details'>
-                        <Plus />
-                        France
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href='/details'>
-                        <Plus />
-                        United States
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                  ))}
                 </SidebarMenu>
               </SidebarGroupContent>
             </CollapsibleContent>
@@ -252,10 +255,10 @@ const AppSidebar = () => {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
                   <Avatar className='size-4'>
-                    <AvatarImage src='https://images.pexels.com/photos/2169428/pexels-photo-2169428.jpeg' />
-                    <AvatarFallback>RG</AvatarFallback>
+                    <AvatarImage src={user.user?.imageUrl} />
+                    <AvatarFallback>{user.user?.firstName}</AvatarFallback>
                   </Avatar>
-                  Rachel Green <ChevronUp className='ml-auto' />
+                  {user.user?.fullName} <ChevronUp className='ml-auto' />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align='end'>
