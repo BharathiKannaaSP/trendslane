@@ -5,12 +5,33 @@ import {
   getListBanner,
   updateBannerById,
 } from '../controllers/banner-image-controllers';
+import { authorize, authorizeCountryAccess } from '../middleware/authMiddleware';
 
 const router: Router = Router();
 
-router.post('/createBanner', createBannerImage);
-router.get('/listBanner', getListBanner);
-router.patch('/updateBanner/:id', updateBannerById);
-router.delete('/deleteBanner/:id', deleteBannerImageById);
+router.post(
+  '/createBanner',
+  authorize(['superAdmin', 'admin']),
+  authorizeCountryAccess(),
+  createBannerImage,
+);
+router.get(
+  '/listBanner',
+  authorize(['superAdmin', 'admin', 'user']),
+  authorizeCountryAccess(),
+  getListBanner,
+);
+router.patch(
+  '/updateBanner/:id',
+  authorize(['superAdmin', 'admin']),
+  authorizeCountryAccess(),
+  updateBannerById,
+);
+router.delete(
+  '/deleteBanner/:id',
+  authorize(['superAdmin', 'admin']),
+  authorizeCountryAccess(),
+  deleteBannerImageById,
+);
 
 export default router;

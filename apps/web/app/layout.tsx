@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from '@/components/Navbar/navbar';
 import { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'sonner';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -27,17 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang='en' suppressHydrationWarning>
-        <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}>
+    <html lang='en' suppressHydrationWarning>
+      <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}>
+        <ClerkProvider>
           <Providers>
             <Navbar />
             {children}
 
             <SpeedInsights />
           </Providers>
-        </body>
-      </html>
-    </ClerkProvider>
+          <Toaster />
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

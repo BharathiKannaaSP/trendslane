@@ -12,8 +12,8 @@ model BannerImage {
   country   Country[]
   audience  Audience
   imageUrl  String
-  altText   String
-  title     String?
+  title     String
+  altText   String?
   active    Boolean   @default(true)
   sortIndex Int
   createdAt DateTime  @default(now())

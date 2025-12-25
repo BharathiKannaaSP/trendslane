@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       {
         hostname: 'images.pexels.com',
       },
+      {
+        hostname: 'flagsapi.com',
+      },
+      {
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 };

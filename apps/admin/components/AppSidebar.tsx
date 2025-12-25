@@ -13,6 +13,7 @@ import {
   Projector,
   Plus,
   ChevronDown,
+  Earth,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -45,12 +46,18 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@workspace/ui/components/collapsible';
+import Image from 'next/image';
 
 export const navLinks = [
   {
     title: 'Dashboard',
     url: '/',
     icon: Home,
+  },
+  {
+    title: 'Country',
+    url: '/country',
+    icon: Earth,
   },
   {
     title: 'Shop',
@@ -101,8 +108,15 @@ const AppSidebar = () => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href='/'>
-                <span>Trendslane </span>
+              <Link href='/' className='flex items-center'>
+                <Image
+                  src='/logo.svg'
+                  width={100}
+                  height={20}
+                  alt='Trendslane'
+                  className='dark:invert'
+                />
+                <p className='text-xs text-muted-foreground'>Super Admin</p>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -160,7 +174,7 @@ const AppSidebar = () => {
           <SidebarGroup>
             <SidebarGroupLabel asChild>
               <CollapsibleTrigger>
-                Collapsable Group
+                Countries
                 <ChevronDown className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180' />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
@@ -169,17 +183,25 @@ const AppSidebar = () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
-                      <Link href='/#'>
+                      <Link href='/details'>
                         <Projector />
-                        See All Projects
+                        India
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
-                      <Link href='/#'>
+                      <Link href='/details'>
                         <Plus />
-                        Add Project
+                        France
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href='/details'>
+                        <Plus />
+                        United States
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

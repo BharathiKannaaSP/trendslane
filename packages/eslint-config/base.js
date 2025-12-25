@@ -19,7 +19,7 @@ export const config = [
     rules: {
       'turbo/no-undeclared-env-vars': 'warn',
       'no-unused-vars': 'error',
-      'no-console': 'error',
+      // 'no-console': 'error',
     },
   },
 

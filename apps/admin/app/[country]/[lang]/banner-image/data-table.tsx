@@ -1,17 +1,25 @@
 'use client';
 
+import { DataTablePagination } from '@/components/TablePagination';
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  useReactTable,
-  getPaginationRowModel,
-  SortingState,
-  getSortedRowModel,
-  ColumnFiltersState,
-  VisibilityState,
   getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+  VisibilityState,
 } from '@tanstack/react-table';
+import { Button } from '@workspace/ui/components/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@workspace/ui/components/dropdown-menu';
 
 import {
   Table,
@@ -21,28 +29,29 @@ import {
   TableHeader,
   TableRow,
 } from '@workspace/ui/components/table';
-import { DataTablePagination } from '@/components/TablePagination';
+import { ChevronDown, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { Input } from '@workspace/ui/components/input';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@workspace/ui/components/dropdown-menu';
-import { Button } from '@workspace/ui/components/button';
-import { ChevronDown } from 'lucide-react';
+import AddBannerImage from './add-banner-image';
+import { Sheet, SheetTrigger } from '@workspace/ui/components/sheet';
+import { useMutation } from '@tanstack/react-query';
+import { BannerImage } from './columns';
+import { toast } from 'sonner';
+import { useParams, useRouter } from 'next/navigation';
 
-interface DataTableProps<TData, TValue> {
+interface BannerImageDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function BannerImageDataTable<TData, TValue>({
+  columns,
+  data,
+}: BannerImageDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [openBannerSheet, setOpenBannerSheet] = useState(false);
 
   const table = useReactTable({
     data,
@@ -63,17 +72,56 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     },
   });
 
+  const router = useRouter();
+  const pathname = useParams<{ country: string }>();
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const selectedRows = table.getSelectedRowModel().rows;
+
+      Promise.all(
+        selectedRows.map(async (row) => {
+          const bannerId = (row.original as BannerImage).id;
+          await fetch(
+            `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/deleteBanner/${bannerId}?&country=${pathname.country}`,
+            {
+              method: 'DELETE',
+            },
+          );
+        }),
+      );
+    },
+    onSuccess: () => {
+      toast.success('Banner(s) deleted successfully');
+      router.refresh();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   return (
-    <div>
+    <div className='p-2'>
       <div className='flex items-center py-4'>
-        <Input
-          placeholder='Filter emails...'
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => {
-            table.getColumn('email')?.setFilterValue(event.target.value);
-          }}
-          className='max-w-sm'
-        />
+        <Sheet open={openBannerSheet} onOpenChange={setOpenBannerSheet}>
+          <SheetTrigger asChild>
+            <Button>Add Banner Image</Button>
+          </SheetTrigger>
+          <AddBannerImage onClose={() => setOpenBannerSheet(false)} />
+        </Sheet>
+        {Object.keys(rowSelection).length > 0 && (
+          <div className='flex'>
+            <Button
+              className='ml-2'
+              variant='destructive'
+              onClick={() => mutation.mutate()}
+              disabled={mutation.isPending}
+            >
+              <Trash2 className='w-4 h-4' />
+              {mutation.isPending ? 'Deleting' : 'Delete Banner(s)'}
+            </Button>
+          </div>
+        )}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='outline' className='ml-auto'>

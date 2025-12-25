@@ -4,12 +4,15 @@ import { handleAutoPrefix } from './proxy-utils/handle-auto-prefix';
 import { isValidCountry, isValidLanguage } from './proxy-utils/region-validators';
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware((auth, req: NextRequest) => {
+export default clerkMiddleware();
+
+export const proxy = (req: NextRequest) => {
   const pathname = req.nextUrl.pathname;
 
   // Root
   if (pathname === '/') return handleRoot(req);
 
+  // Segments
   const segments = pathname.split('/').filter(Boolean);
 
   // Auto prefix
@@ -23,11 +26,13 @@ export default clerkMiddleware((auth, req: NextRequest) => {
 
   // Validate country and language
   if (!isValidCountry(country) || !isValidLanguage(lang)) return handleRoot(req);
-});
+};
 
 export const config = {
   matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpg|jpeg|png|gif|svg|webp|ico|woff2?|ttf|zip|csv|docx?|xlsx?)).*)',
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
     '/(api|trpc)(.*)',
   ],
 };

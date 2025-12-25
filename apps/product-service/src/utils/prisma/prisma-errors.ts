@@ -4,8 +4,8 @@ import { Prisma } from '@workspace/product-db';
 export function mapPrismaError(err: any) {
   // Prisma Client Known Request Errors
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
-    const model = err.meta?.modelName || 'Unknown Model';
-    const target = err.meta?.target || 'Unknown Field';
+    const model = err.meta?.modelName;
+    const target = err.meta?.target;
     const cause = err.meta?.cause || null;
     const fieldValue = err.meta?.field_value || null;
 
@@ -16,7 +16,7 @@ export function mapPrismaError(err: any) {
       case 'P2002':
         return {
           status: 409,
-          message: `Duplicate value error: The field "${target}" in "${model}" must be unique.`,
+          message: `Duplicate value error in "${model}" must be unique.`,
           details: {
             model,
             target,
