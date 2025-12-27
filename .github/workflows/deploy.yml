@@ -78,6 +78,7 @@ jobs:
       CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
       NEXT_PUBLIC_PRODUCT_SERVICE_URL: ${{ secrets.NEXT_PUBLIC_PRODUCT_SERVICE_URL }}
       DATABASE_URL: ${{ secrets.PRODUCT_SERVICE_DB }}
+      DIRECT_URL: ${{ secrets.PRODUCT_SERVICE_DIRECT_URL }}
 
     steps:
       - name: 🛎️ Checkout repository
