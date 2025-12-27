@@ -124,6 +124,26 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    env:
+      # PROJECT_DEPLOYMENT_URL
+      #VERCEL
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+      #VERCEL PROJECT_ID
+      VERCEL_PROJECT_ID_ADMIN: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+      VERCEL_PROJECT_ID_CLIENT: ${{ secrets.VERCEL_PROJECT_ID_CLIENT }}
+      VERCEL_PROJECT_ID_PRODUCT_SERVICE: ${{ secrets.VERCEL_PROJECT_ID_PRODUCT_SERVICE}}
+
+      #VERCEL CLERK
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+      CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+
+      #PRODUCT_SERVICE_URL
+      NEXT_PUBLIC_PRODUCT_SERVICE_URL: ${{ secrets.NEXT_PUBLIC_PRODUCT_SERVICE_URL }}
+      DATABASE_URL: ${{ secrets.PRODUCT_SERVICE_DB }}
+      DIRECT_URL: ${{ secrets.PRODUCT_SERVICE_DIRECT_URL }}
+
     steps:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v4

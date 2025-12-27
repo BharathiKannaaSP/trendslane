@@ -20,7 +20,7 @@ app.get('/health', (req: Request, res: Response) => {
     status: 'ok',
     uptime: process.uptime(),
     timestamp: Date.now(),
-    serviceName: 'Product service works!!!',
+    serviceName: 'Product service works!!',
   });
 });
 
