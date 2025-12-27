@@ -23,6 +23,5 @@ export async function setLocaleCookies(country: string, lang: string, extendPath
     return redirect('/' + segments.join('/'));
   }
 
-  // Fallback if something fails
   redirect(`/${country}/${lang}`);
 }

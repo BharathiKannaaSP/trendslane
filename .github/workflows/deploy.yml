@@ -77,6 +77,8 @@ jobs:
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
       CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
       NEXT_PUBLIC_PRODUCT_SERVICE_URL: ${{ secrets.NEXT_PUBLIC_PRODUCT_SERVICE_URL }}
+      DATABASE_URL: ${{ secrets.PRODUCT_SERVICE_DB }}
+
     steps:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v4
@@ -91,8 +93,20 @@ jobs:
           corepack enable
           corepack prepare pnpm@latest --activate
 
+        # Turbo Cache Setup
+      - name: Cache Turbo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
       - name: 📦 Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: 🧬 Generate Prisma Client
+        run: pnpm --filter product-db prisma generate
 
       - name: 🏗️ Build Changed Apps
         if: needs.lint.outputs.changed != 'none'
@@ -122,6 +136,15 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
+
+        # Turbo Cache Setup
+      - name: Cache Turbo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - name: 📦 Install Dependencies
         run: pnpm install --frozen-lockfile

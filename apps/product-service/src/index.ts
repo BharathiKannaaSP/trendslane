@@ -31,7 +31,7 @@ app.get(
   authorizeCountryAccess(),
   (req: Request, res: Response) => {
     res.json({
-      message: 'Product service is authenticated!',
+      message: 'Product service is authenticated',
       userId: req.userId,
     });
   },
