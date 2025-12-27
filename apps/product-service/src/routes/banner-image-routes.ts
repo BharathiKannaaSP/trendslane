@@ -5,8 +5,8 @@ import {
   getBannerImageById,
   getListBanner,
   updateBannerById,
-} from '../controllers/banner-image-controllers';
-import { authorize, authorizeCountryAccess } from '../middleware/authMiddleware';
+} from '../controllers/banner-image-controllers.js';
+import { authorize, authorizeCountryAccess } from '../middleware/authMiddleware.js';
 
 const router: Router = Router();
 

@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { clerkMiddleware } from '@clerk/express';
-import bannerRouter from './routes/banner-image-routes';
-import { authorize, authorizeCountryAccess } from './middleware/authMiddleware';
+import bannerRouter from './routes/banner-image-routes.js';
+import { authorize, authorizeCountryAccess } from './middleware/authMiddleware.js';
 import { errorHandler } from '@workspace/utils';
 
 const app = express();
