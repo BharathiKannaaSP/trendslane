@@ -172,6 +172,8 @@ jobs:
 
           #PRODUCT_SERVICE_URL
           NEXT_PUBLIC_PRODUCT_SERVICE_URL: ${{ secrets.NEXT_PUBLIC_PRODUCT_SERVICE_URL }}
+          DATABASE_URL: ${{ secrets.PRODUCT_SERVICE_DB }}
+          DIRECT_URL: ${{ secrets.PRODUCT_SERVICE_DIRECT_URL }}
 
         run: |
           for app in ${{ needs.build.outputs.changed }}; do
