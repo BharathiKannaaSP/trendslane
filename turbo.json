@@ -15,7 +15,9 @@
       ],
       "env": [
         "DATABASE_URL",
-        "PRODUCT_SERVICE_PORT"
+        "PRODUCT_SERVICE_PORT",
+        "CORS_CLIENT_PORT",
+        "CORS_ADMIN_PORT"
       ]
     },
     "lint": {

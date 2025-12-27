@@ -11,11 +11,10 @@ app.use(clerkMiddleware());
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: [process.env.CORS_CLIENT_PORT!, process.env.CORS_ADMIN_PORT!],
     credentials: true,
   }),
 );
-
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({
     status: 'ok',
