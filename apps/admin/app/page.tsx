@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EmptyHomepage = () => {
-  return <div>EmptyHomepage!s!</div>;
+  return <div>EmptyHomepage!!</div>;
 };
 
 export default EmptyHomepage;
