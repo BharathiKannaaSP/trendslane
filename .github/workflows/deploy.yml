@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-turbo-
 
       - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: 🔍 Detect changed apps
         id: changes
@@ -103,7 +103,7 @@ jobs:
             ${{ runner.os }}-turbo-
 
       - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: 🧬 Generate Prisma Client
         run: pnpm --filter=product-db run db:generate
@@ -147,7 +147,7 @@ jobs:
             ${{ runner.os }}-turbo-
 
       - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: 🧬 Generate Prisma Client
         run: pnpm --filter=product-db run db:generate
