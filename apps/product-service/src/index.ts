@@ -3,7 +3,7 @@ import cors from 'cors';
 import { clerkMiddleware } from '@clerk/express';
 import bannerRouter from './routes/banner-image-routes.js';
 import { authorize, authorizeCountryAccess } from './middleware/authMiddleware.js';
-import { errorHandler } from '@workspace/utils';
+import { errorHandler } from './utils/prisma/error-handler.js';
 
 const app = express();
 
