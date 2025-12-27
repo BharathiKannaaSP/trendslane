@@ -142,7 +142,6 @@ export const deleteBannerImageById = async (req: Request, res: Response) => {
     return res.status(404).json({ error: 'Banner not found' });
   }
 
-  // Ensure country exists in banner
   if (!banner.country.includes(country as Country)) {
     return res.status(400).json({
       error: `Country ${country} does not exist in this banner`,

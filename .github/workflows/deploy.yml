@@ -149,6 +149,9 @@ jobs:
       - name: 📦 Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: 🧬 Generate Prisma Client
+        run: pnpm --filter=product-db run db:generate
+
       - name: 🚀 Deploy Changed Apps to Vercel
         if: needs.build.outputs.changed != 'none'
         env:
