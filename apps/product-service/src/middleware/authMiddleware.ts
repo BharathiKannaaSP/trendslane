@@ -1,5 +1,5 @@
 import { getAuth } from '@clerk/express';
-import { Country, CustomJWTSessionClaims, UserRole } from '@workspace/types';
+import { Country, CustomJWTSessionClaims, Role, UserRole } from '@workspace/types';
 import { NextFunction, Request, Response } from 'express';
 
 declare module 'express' {
@@ -31,14 +31,13 @@ export const authorizeCountryAccess = () => {
   return (req: Request, res: Response, next: NextFunction) => {
     const auth = getAuth(req);
     const userId = auth.userId;
-
     if (!userId) {
       return res.status(401).json({ error: 'You are not logged in!' });
     }
 
     const claims = auth.sessionClaims as CustomJWTSessionClaims;
 
-    if (claims?.metadata?.role === 'superAdmin') {
+    if (claims?.metadata?.role === Role.SuperAdmin) {
       return next();
     }
 

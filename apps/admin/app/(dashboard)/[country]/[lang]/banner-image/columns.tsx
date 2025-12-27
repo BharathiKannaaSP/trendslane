@@ -1,6 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
+import { useGetUserAccessCountryAndRole } from '@/hooks/use-get-user-access-country';
+import {
+  canNavigateToBannerImage,
+  navigateIfAllowed,
+} from '@/proxy-utils/check-user-authorization';
 import { useAuth } from '@clerk/nextjs';
 import { ColumnDef } from '@tanstack/react-table';
 import { Prisma } from '@workspace/product-db';
@@ -90,19 +95,49 @@ export const columns: ColumnDef<BannerImage>[] = [
     cell: ({ row }) => {
       const countryData = row.getValue('country') as Country[];
       const { country } = useParams();
+      const { role, userAccessCountry } = useGetUserAccessCountryAndRole();
+
       const isActive = countryData.filter((c) => c.includes(country as Country));
       const isNotActive = countryData.filter((c) => !c.includes(country as Country));
+
       return (
-        <div>
+        <div className='flex gap-2'>
           <Typography>{isActive}</Typography>
 
-          <Typography className='text-muted-foreground ml-2'>{isNotActive.join(', ')}</Typography>
+          {isNotActive.length > 0 && (
+            <>
+              [
+              {isNotActive.map((country, index) => (
+                <div key={country}>
+                  <Typography
+                    className={`${
+                      canNavigateToBannerImage(role, country as Country, userAccessCountry)
+                        ? 'hover:underline text-muted-foreground hover:cursor-pointer'
+                        : 'cursor-not-allowed text-muted-foreground'
+                    }`}
+                    onClick={async () => {
+                      await navigateIfAllowed(
+                        role,
+                        country as Country,
+                        userAccessCountry,
+                        'banner-image',
+                      );
+                    }}
+                  >
+                    {country}
+                  </Typography>
+                  {index < isNotActive.length - 1 && ', '}
+                </div>
+              ))}
+              ]
+            </>
+          )}
         </div>
       );
     },
   },
   {
-    accessorKey: 'active',
+    accessorKey: 'title',
     header: ({ column }) => {
       return (
         <Button
@@ -110,14 +145,10 @@ export const columns: ColumnDef<BannerImage>[] = [
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Active
+          Title
           <ArrowUpDown className='h-4 w-4' />
         </Button>
       );
-    },
-    cell: ({ row }) => {
-      const isActive = row.getValue('active') as boolean;
-      return <span>{isActive ? 'Yes' : 'No'}</span>;
     },
   },
   {
@@ -166,8 +197,22 @@ export const columns: ColumnDef<BannerImage>[] = [
             >
               Copy Banner ID
             </DropdownMenuItem>
-            <DropdownMenuItem>Edit Banner</DropdownMenuItem>
-            <DropdownMenuItem>View Banner</DropdownMenuItem>
+
+            <DropdownMenuItem
+              onClick={() => router.push(`/banner-image/${bannerImage.audience}/${bannerImage.id}`)}
+            >
+              View Banner
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(
+                  `/banner-image/${bannerImage.audience}/${bannerImage.id}#edit-banner-image`,
+                )
+              }
+            >
+              Edit Banner
+            </DropdownMenuItem>
+
             <DropdownMenuSeparator />
             <DropdownMenuItem
               variant='destructive'

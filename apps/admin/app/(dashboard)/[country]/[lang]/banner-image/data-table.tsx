@@ -115,7 +115,7 @@ export function BannerImageDataTable<TData, TValue>({
           </SheetTrigger>
           <AddBannerImage onClose={() => setOpenBannerSheet(false)} />
         </Sheet>
-        {Object.keys(rowSelection).length > 0 && table.getRowModel().rows?.length && (
+        {Object.keys(rowSelection).length > 0 && table.getRowModel().rows?.length > 0 && (
           <div className='flex'>
             <Button
               className='ml-2'

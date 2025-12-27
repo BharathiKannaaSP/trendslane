@@ -78,6 +78,31 @@ export const getListBanner = async (req: Request, res: Response) => {
   res.status(200).json({ bannerList, message: 'Banner list fetched successfully' });
 };
 
+export const getBannerImageById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { country } = req.query as { country: Country };
+  const { audience } = req.query as { audience: Audience };
+
+  if (!id) return res.status(400).json({ error: 'ID is required to fetch single banner!' });
+  if (!country)
+    return res.status(400).json({ error: 'Country is required to fetch single banner' });
+  if (!audience)
+    return res.status(400).json({ error: 'Audience is required to fetch single banner' });
+
+  const data: Prisma.BannerImageModel | null = await prisma.bannerImage.findUnique({
+    where: {
+      id: Number(id),
+      ...(country && { country: { has: country } }),
+      ...(audience && { audience }),
+    },
+  });
+
+  return res.status(200).json({
+    bannerList: data,
+    message: `Banner is fetched successfully for ${id}`,
+  });
+};
+
 // UPDATE BANNER BY ID
 export const updateBannerById = async (req: Request, res: Response) => {
   const { id } = req.params;

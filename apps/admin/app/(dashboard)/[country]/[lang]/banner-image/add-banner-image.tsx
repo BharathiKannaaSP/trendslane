@@ -41,6 +41,7 @@ import {
   AUDIENCE_ORDER,
   CustomJWTSessionClaims,
   getFullCountryName,
+  Role,
 } from '@workspace/types';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { ScrollArea } from '@workspace/ui/components/scroll-area';
@@ -50,7 +51,7 @@ import Image from 'next/image';
 import { useAuth } from '@clerk/nextjs';
 
 type AddBannerImageProps = {
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
@@ -59,6 +60,7 @@ const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
   const [bannerImageFile, setBannerImageFile] = useState<string | null>(null);
   const [imageUploading, setImageUploading] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
+
   const form = useForm<z.infer<typeof bannerImageFormSchema>>({
     resolver: zodResolver(bannerImageFormSchema),
     defaultValues: {
@@ -75,7 +77,7 @@ const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
     mutationFn: async (payload: z.infer<typeof bannerImageFormSchema>) => {
       const token = await getToken();
       const baseUrl = `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/banners/createBanner`;
-      const url = userRole === 'superAdmin' ? baseUrl : `${baseUrl}?country=${pathname.country}`;
+      const url = userRole === Role.SuperAdmin ? baseUrl : `${baseUrl}?country=${pathname.country}`;
 
       const res = await fetch(url, {
         method: 'POST',
@@ -109,7 +111,7 @@ const AddBannerImage = ({ onClose }: AddBannerImageProps) => {
       form.reset();
       setBannerImageFile(null);
       setFileInputKey((k) => k + 1);
-      onClose();
+      onClose?.();
       router.refresh();
     },
     onError: (err: Error) => {

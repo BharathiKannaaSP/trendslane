@@ -3,7 +3,8 @@ import { handleRoot } from './proxy-utils/handle-root';
 import { handleAutoPrefix } from './proxy-utils/handle-auto-prefix';
 import { isValidCountry, isValidLanguage } from './proxy-utils/region-validators';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { CustomJWTSessionClaims } from '@workspace/types';
+import { Country, CustomJWTSessionClaims, Role } from '@workspace/types';
+import { authorized } from './proxy-utils/check-user-authorization';
 
 const isPublicRoute = createRouteMatcher([
   '/:country/:lang/sign-in(.*)',
@@ -51,10 +52,17 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   }
 
   const role = (sessionClaims as CustomJWTSessionClaims)?.metadata?.role;
+  const userAccessCountry = (sessionClaims as CustomJWTSessionClaims).metadata?.country;
 
-  if (role !== 'admin' && role !== 'superAdmin') {
+  if (role !== 'admin' && role !== Role.SuperAdmin) {
     return NextResponse.redirect(new URL(`/${country}/${lang}/unauthorized`, req.url));
   }
+  if (role === 'admin' && !authorized(role, country as Country, userAccessCountry)) {
+    return NextResponse.redirect(new URL(`/${country}/${lang}/unauthorized`, req.url));
+  }
+  const response = NextResponse.next();
+  response.cookies.set('next.url', req.nextUrl.pathname, { path: '/' });
+  return response;
 });
 
 export const config = {

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createBannerImage,
   deleteBannerImageById,
+  getBannerImageById,
   getListBanner,
   updateBannerById,
 } from '../controllers/banner-image-controllers';
@@ -17,10 +18,13 @@ router.post(
 );
 router.get(
   '/listBanner',
-  authorize(['superAdmin', 'admin', 'user']),
-  authorizeCountryAccess(),
+  // authorize(['superAdmin', 'admin', 'user']),
+  // authorizeCountryAccess(),
   getListBanner,
 );
+
+router.get('/getBannerImageById/:id', getBannerImageById);
+
 router.patch(
   '/updateBanner/:id',
   authorize(['superAdmin', 'admin']),
