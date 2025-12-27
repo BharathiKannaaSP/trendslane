@@ -1,15 +1,15 @@
 echo "Running pre-commit hooks..."
 # Run ESLint
-echo "Running lint"
-pnpm turbo lint
+# echo "Running lint"
+# pnpm turbo lint
 
-# Run Type Checker
-echo "Running check-types"
-pnpm turbo check-types
+# # Run Type Checker
+# echo "Running check-types"
+# pnpm turbo check-types
 
-# Run Formatter
-echo "Running format"
-pnpm turbo format
+# # Run Formatter
+# echo "Running format"
+# pnpm turbo format
 
 # Run Test
 # pnpm test

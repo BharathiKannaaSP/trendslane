@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Prisma } from '@workspace/product-db';
+import { Prisma } from '@workspace/product-db'; 
 
 export function mapPrismaError(err: any) {
   // Prisma Client Known Request Errors
