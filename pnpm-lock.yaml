@@ -133,6 +133,9 @@ importers:
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@workspace/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -389,6 +392,19 @@ importers:
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
+
+  packages/utils:
+    dependencies:
+      '@workspace/product-db':
+        specifier: workspace:*
+        version: link:../product-db
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+    devDependencies:
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
 
 packages:
 

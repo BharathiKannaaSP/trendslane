@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Prisma } from '@workspace/product-db'; 
+import { Prisma } from '@workspace/product-db';
 
 export function mapPrismaError(err: any) {
   // Prisma Client Known Request Errors
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
-    const model = err.meta?.modelName;
-    const target = err.meta?.target;
+    const model = err.meta?.modelName || 'Unknown Model';
+    const target = err.meta?.target || 'Unknown Field';
     const cause = err.meta?.cause || null;
     const fieldValue = err.meta?.field_value || null;
 
@@ -16,11 +16,10 @@ export function mapPrismaError(err: any) {
       case 'P2002':
         return {
           status: 409,
-          message: `Duplicate value error in "${model}" must be unique.`,
+          message: `Duplicate value error: The field "${target}" in "${model}" must be unique.`,
           details: {
             model,
             target,
-            cause,
             providedValue: fieldValue,
             explanation: `Another "${model}" already exists with the same "${target}".`,
           },
@@ -35,7 +34,6 @@ export function mapPrismaError(err: any) {
           message: `Record not found in "${model}".`,
           details: {
             model,
-            cause,
             operation: err.meta?.operation || undefined,
             explanation: 'The record you are trying to read/update/delete does not exist.',
           },
@@ -51,7 +49,6 @@ export function mapPrismaError(err: any) {
           details: {
             model,
             target,
-            cause,
             explanation:
               'You are referencing a related record that does not exist or deleting a record that is still referenced.',
           },
@@ -67,7 +64,6 @@ export function mapPrismaError(err: any) {
           details: {
             model,
             target,
-            cause,
             explanation: 'The provided value exceeds allowed size or format.',
           },
         };
@@ -82,7 +78,6 @@ export function mapPrismaError(err: any) {
           details: {
             model,
             target,
-            cause,
             explanation: 'A required field was not provided.',
           },
         };
@@ -97,7 +92,6 @@ export function mapPrismaError(err: any) {
           details: {
             model,
             target,
-            cause,
             explanation: 'Prisma rejected the provided value due to invalid type or format.',
           },
         };
@@ -112,7 +106,6 @@ export function mapPrismaError(err: any) {
           details: {
             model,
             target,
-            cause,
             explanation:
               'You may be nesting writes incorrectly or referencing invalid relation data.',
           },

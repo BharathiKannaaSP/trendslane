@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { clerkMiddleware } from '@clerk/express';
-import { errorHandler } from './utils/prisma/error-handler';
 import bannerRouter from './routes/banner-image-routes';
 import { authorize, authorizeCountryAccess } from './middleware/authMiddleware';
+import { errorHandler } from '@workspace/utils';
+
 const app = express();
 
 app.use(express.json());
