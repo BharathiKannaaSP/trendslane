@@ -4,21 +4,8 @@
   "description": "",
   "main": "src/index.ts",
   "type": "module",
-  "tsup": {
-    "entry": [
-      "src/index.ts"
-    ],
-    "format": [
-      "esm"
-    ],
-    "outDir": "dist",
-    "splitting": false,
-    "sourcemap": true,
-    "clean": true
-  },
   "scripts": {
     "dev": "pnpm dlx tsx --env-file=.env.local --watch src/index.ts",
-    "build": "tsup",
     "check-types": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
