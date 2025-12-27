@@ -1,15 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  PrismaClientInitializationError,
-  PrismaClientKnownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientUnknownRequestError,
-  PrismaClientValidationError,
-} from '@workspace/product-db';
+import { Prisma } from '@workspace/product-db'; 
 
 export function mapPrismaError(err: any) {
   // Prisma Client Known Request Errors
-  if (err instanceof PrismaClientKnownRequestError) {
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
     const model = err.meta?.modelName;
     const target = err.meta?.target;
     const cause = err.meta?.cause || null;
@@ -134,7 +128,7 @@ export function mapPrismaError(err: any) {
   }
 
   // Prisma Validation Error (schema mismatch)
-  if (err instanceof PrismaClientValidationError) {
+  if (err instanceof Prisma.PrismaClientValidationError) {
     return {
       status: 400,
       message: 'Validation error: Incorrect or missing fields.',
@@ -146,7 +140,7 @@ export function mapPrismaError(err: any) {
   }
 
   // Prisma Initialization Error
-  if (err instanceof PrismaClientInitializationError) {
+  if (err instanceof Prisma.PrismaClientInitializationError) {
     return {
       status: 500,
       message: 'Database initialization failed.',
@@ -158,7 +152,7 @@ export function mapPrismaError(err: any) {
   }
 
   // Prisma Rust Panic Error (rare)
-  if (err instanceof PrismaClientRustPanicError) {
+  if (err instanceof Prisma.PrismaClientRustPanicError) {
     return {
       status: 500,
       message: 'Critical Prisma engine error.',
@@ -170,7 +164,7 @@ export function mapPrismaError(err: any) {
   }
 
   // Prisma Unknown Error
-  if (err instanceof PrismaClientUnknownRequestError) {
+  if (err instanceof Prisma.PrismaClientUnknownRequestError) {
     return {
       status: 500,
       message: 'Unknown Prisma error occurred.',
