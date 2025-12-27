@@ -14,7 +14,7 @@ export const createBannerImage = async (req: Request, res: Response) => {
   const audience = input.audience as Audience;
   const country = input.country as Country[];
 
-  const existing = await prisma.bannerImage.findMany({
+  const existing: { country: Country[] }[] = await prisma.bannerImage.findMany({
     where: {
       audience,
       country: {
