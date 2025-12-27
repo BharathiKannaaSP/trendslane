@@ -106,7 +106,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: 🧬 Generate Prisma Client
-        run: pnpm --filter product-db prisma generate
+        run: pnpm --filter=product-db run db:generate
 
       - name: 🏗️ Build Changed Apps
         if: needs.lint.outputs.changed != 'none'

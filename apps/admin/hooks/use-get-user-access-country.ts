@@ -1,7 +1,7 @@
 import { useUser } from '@clerk/nextjs';
 import { Country, UserRole } from '@workspace/types';
 
-type UserAccessCountryAndRole = {
+export type UserAccessCountryAndRole = {
   role: UserRole | undefined;
   userAccessCountry: Country[] | undefined;
 };
