@@ -148,7 +148,7 @@ export const deleteBannerImageById = async (req: Request, res: Response) => {
     });
   }
 
-  const updatedCountries = banner.country.filter((c) => c !== country);
+  const updatedCountries = banner.country.filter((c: Country) => c !== country);
 
   // If no countries left → delete banner
   if (updatedCountries.length === 0) {
