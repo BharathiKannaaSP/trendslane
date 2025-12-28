@@ -5,13 +5,15 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "pnpm dlx tsx --env-file=.env.local --watch src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.4.1",
   "dependencies": {
+    "@workspace/typescript-config": "workspace:*",
     "@types/express": "^5.0.6",
     "express": "^5.2.1"
   }
