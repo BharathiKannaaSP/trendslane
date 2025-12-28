@@ -11,6 +11,7 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production
 
 # Testing
 coverage
@@ -34,3 +35,7 @@ npm-debug.log*
 # Misc
 .DS_Store
 *.pem
+
+
+# clerk configuration (can include secrets)
+/.clerk
