@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm dlx tsx --env-file=.env.local --watch src/index.ts",
+    "start": "node --env-file=.env.local dist/index.js",
+    "build": "tsc",
     "check-types": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
@@ -18,17 +20,22 @@
   "dependencies": {
     "@clerk/express": "^1.7.60",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
+    "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.6",
+    "@types/node": "^25.0.3",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/product-db": "workspace:*",
     "@workspace/types": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "@workspace/utils": "workspace:*",
     "eslint": "^9.39.1",
-    "tsup": "^8.5.1"
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
