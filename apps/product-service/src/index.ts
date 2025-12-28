@@ -1,11 +1,12 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { clerkMiddleware } from '@clerk/express';
-import bannerRouter from './routes/banner-image-routes.js';
-import { authorize, authorizeCountryAccess } from './middleware/authMiddleware.js';
-import { errorHandler } from './utils/prisma/error-handler.js';
+import bannerRouter from './routes/banner-image-routes';
+import { authorize, authorizeCountryAccess } from './middleware/authMiddleware';
+import { errorHandler } from './utils/prisma/error-handler';
 
 const app = express();
+const PORT = process.env.PRODUCT_SERVICE_PORT || 8000;
 
 app.use(express.json());
 app.use(clerkMiddleware());
@@ -41,6 +42,6 @@ app.use('/api/products/banners', bannerRouter);
 
 app.use(errorHandler);
 
-app.listen(process.env.PRODUCT_SERVICE_PORT, () => {
-  console.log(`Product service is running on PORT - ${process.env.PRODUCT_SERVICE_PORT}`);
+app.listen(PORT, () => {
+  console.log(`Product service is running on PORT - ${PORT}`);
 });

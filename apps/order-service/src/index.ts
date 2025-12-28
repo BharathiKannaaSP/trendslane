@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 
 const app = express();
+const PORT = process.env.ORDER_SERVICE_PORT || 8001;
 
 app.use(express.json());
 
@@ -13,6 +14,6 @@ app.get('/health', (req: Request, res: Response) => {
   });
 });
 
-app.listen(process.env.ORDER_SERVICE_PORT, () => {
-  console.log(`Order service is running on PORT - ${process.env.ORDER_SERVICE_PORT}`);
+app.listen(PORT, () => {
+  console.log(`Order service is running on PORT - ${PORT}`);
 });
