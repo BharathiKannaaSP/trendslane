@@ -103,6 +103,15 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/order-service:
+    dependencies:
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+
   apps/product-service:
     dependencies:
       '@clerk/express':
@@ -279,11 +288,24 @@ importers:
       '@types/pg':
         specifier: ^8.16.0
         version: 8.16.0
+      '@workspace/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       prisma:
         specifier: ^7.2.0
         version: 7.2.0(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
+      typescript:
+        specifier: latest
+        version: 5.9.3
 
-  packages/types: {}
+  packages/types:
+    devDependencies:
+      '@workspace/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: latest
+        version: 5.9.3
 
   packages/typescript-config: {}
 

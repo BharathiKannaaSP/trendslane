@@ -1,2 +1,2 @@
-export * from './common/common';
-export * from './admin/common';
+export * from './common/common.js';
+export * from './admin/common.js';
