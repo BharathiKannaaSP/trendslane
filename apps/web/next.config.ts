@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       {
         hostname: 'images.pexels.com',
       },
+      {
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 };

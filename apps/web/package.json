@@ -29,6 +29,7 @@
     "@types/react-dom": "^19.2.3",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/types": "workspace: *",
+    "@workspace/product-db": "workspace: *",
     "@workspace/typescript-config": "workspace:*",
     "@workspace/ui": "workspace:*",
     "eslint": "^9.39.1",

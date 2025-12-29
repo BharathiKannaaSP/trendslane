@@ -6,6 +6,8 @@ import Navbar from '@/components/Navbar/navbar';
 import { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from 'sonner';
+import Subscribe from '@/components/Subscribe/subscribe';
+import Footer from '@/components/Footer/footer';
 
 const fontSans = Geist({
   subsets: ['latin'],
@@ -34,7 +36,8 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             {children}
-
+            <Subscribe />
+            <Footer />
             <SpeedInsights />
           </Providers>
           <Toaster />

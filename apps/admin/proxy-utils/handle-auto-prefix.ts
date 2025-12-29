@@ -9,8 +9,8 @@ export const handleAutoPrefix = (req: NextRequest, segments: string[]) => {
 
   if (!isNotAllowedCountry || !isAutoPrefixSection) return null;
 
-  const cookieCountry = req.cookies.get('country')?.value;
-  const cookieLang = req.cookies.get('lang')?.value;
+  const cookieCountry = req.cookies.get('admin.country')?.value;
+  const cookieLang = req.cookies.get('admin.lang')?.value;
 
   const url = req.nextUrl.clone();
   url.pathname = `/${cookieCountry}/${cookieLang}/${segments.join('/')}`;

@@ -212,6 +212,9 @@ importers:
       '@workspace/eslint-config':
         specifier: workspace:^
         version: link:../../packages/eslint-config
+      '@workspace/product-db':
+        specifier: 'workspace: *'
+        version: link:../../packages/product-db
       '@workspace/types':
         specifier: 'workspace: *'
         version: link:../../packages/types

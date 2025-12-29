@@ -5,6 +5,6 @@ export function cookieSettings() {
 }
 
 export function setCountryAndLangCookies(res: NextResponse, country: string, language: string) {
-  res.cookies.set('country', country, cookieSettings());
-  res.cookies.set('lang', language, cookieSettings());
+  res.cookies.set('web.country', country, cookieSettings());
+  res.cookies.set('web.lang', language, cookieSettings());
 }

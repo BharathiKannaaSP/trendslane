@@ -4,11 +4,13 @@ import { redirect } from 'next/navigation';
 import { getCookie, setCookie } from './cookie-helper';
 
 export async function setLocaleCookies(country: string, lang: string, extendPath?: string) {
-  setCookie('admin.country', country);
-  setCookie('admin.lang', lang);
+  setCookie('web.country', country);
+  setCookie('web.lang', lang);
+
   console.log(extendPath, 'Extend path');
-  const currentPath = await getCookie('admin.next.url'); // set via middleware
+  const currentPath = await getCookie('web.next.url'); // set via middleware
   console.log(currentPath, 'Current path');
+
   if (currentPath) {
     let segments = currentPath.split('/').filter(Boolean);
 

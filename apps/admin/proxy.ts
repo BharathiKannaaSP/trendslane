@@ -61,7 +61,7 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     return NextResponse.redirect(new URL(`/${country}/${lang}/unauthorized`, req.url));
   }
   const response = NextResponse.next();
-  response.cookies.set('next.url', req.nextUrl.pathname, { path: '/' });
+  response.cookies.set('admin.next.url', req.nextUrl.pathname, { path: '/' });
   return response;
 });
 

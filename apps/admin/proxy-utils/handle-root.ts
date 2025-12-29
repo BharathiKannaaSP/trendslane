@@ -5,9 +5,9 @@ import { setCountryAndLangCookies } from './set-cookies';
 export const handleRoot = (req: NextRequest) => {
   // Take from cookie if available else go and detect the country from headers
   // FOR LOCAL DEFAULTED TO 'in'(India)
-  const cookieCountry = req.cookies.get('country')?.value;
-  const cookieLang = req.cookies.get('lang')?.value;
-  const cookieBrand = req.cookies.get('brandId')?.value;
+  const cookieCountry = req.cookies.get('admin.country')?.value;
+  const cookieLang = req.cookies.get('admin.lang')?.value;
+  const cookieBrand = req.cookies.get('admin.brandId')?.value;
 
   if (
     cookieCountry &&

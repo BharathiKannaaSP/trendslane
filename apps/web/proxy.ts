@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { handleRoot } from './proxy-utils/handle-root';
 import { handleAutoPrefix } from './proxy-utils/handle-auto-prefix';
 import { isValidCountry, isValidLanguage } from './proxy-utils/region-validators';
@@ -16,13 +16,22 @@ export default clerkMiddleware((auth, req: NextRequest) => {
   const autoPrefix = handleAutoPrefix(req, segments);
   if (autoPrefix) return autoPrefix;
 
-  // If less than 2 segments, redirect to root handler
   if (segments.length < 2) return handleRoot(req);
 
   const [country, lang] = segments;
 
-  // Validate country and language
-  if (!isValidCountry(country) || !isValidLanguage(lang)) return handleRoot(req);
+  if (!isValidCountry(country) || !isValidLanguage(lang)) {
+    return handleRoot(req);
+  }
+
+  const existing = req.cookies.get('web.next.url')?.value;
+  if (existing !== req.nextUrl.pathname) {
+    const response = NextResponse.next();
+    response.cookies.set('web.next.url', req.nextUrl.pathname, { path: '/' });
+    return response;
+  }
+
+  return NextResponse.next();
 });
 
 export const config = {
