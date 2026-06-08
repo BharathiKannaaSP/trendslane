@@ -1,28 +1,22 @@
 import {
-  Activity,
   BarChart3,
   Building2,
-  CheckCircle2,
   Database,
-  Download,
-  FileText,
-  Flag,
-  FolderTree,
   Globe,
-  History,
-  KeyRound,
-  Languages,
-  LanguagesIcon,
-  LayoutDashboard,
-  LucideIcon,
-  Navigation,
+  Mail,
   Package,
   Settings,
   Shield,
-  Upload,
   Users,
-  UsersRound,
-  Webhook,
+  UserCog,
+  FolderTree,
+  Navigation,
+  Upload,
+  Languages,
+  FileCheck,
+  History,
+  LucideIcon,
+  Home,
 } from "lucide-react"
 
 export interface NavItem {
@@ -33,15 +27,15 @@ export interface NavItem {
 }
 
 export const navigation: NavItem[] = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: LayoutDashboard,
-  },
+  // PLATFORM
   {
     title: "Platform",
-    icon: Globe,
     children: [
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: Home,
+      },
       {
         title: "Countries",
         url: "/countries",
@@ -58,21 +52,16 @@ export const navigation: NavItem[] = [
         icon: Users,
       },
       {
-        title: "Roles",
-        url: "/roles",
-        icon: Shield,
-      },
-      {
-        title: "Permissions",
-        url: "/permissions",
-        icon: Shield,
+        title: "Invitations",
+        url: "/invitations",
+        icon: Mail,
       },
     ],
   },
 
+  // CATALOG
   {
     title: "Catalog",
-    icon: Package,
     children: [
       {
         title: "Products",
@@ -87,147 +76,88 @@ export const navigation: NavItem[] = [
       {
         title: "Audiences",
         url: "/audiences",
-        icon: UsersRound,
+        icon: Users,
       },
       {
         title: "Navigation",
         url: "/navigation",
         icon: Navigation,
       },
-      {
-        title: "Pages",
-        url: "/pages",
-        icon: FileText,
-      },
     ],
   },
 
+  // OPERATIONS
   {
-    title: "Localization",
-    icon: Languages,
+    title: "Operations",
     children: [
       {
-        title: "Languages",
-        url: "/languages",
-        icon: LanguagesIcon,
+        title: "Product Approvals",
+        url: "/product-approvals",
+        icon: FileCheck,
       },
-      {
-        title: "Translations",
-        url: "/translations",
-        icon: Languages,
-      },
-      {
-        title: "Translation Queue",
-        url: "/translations/queue",
-        icon: Activity,
-      },
-    ],
-  },
-
-  {
-    title: "Data Management",
-    icon: Database,
-    children: [
       {
         title: "Imports",
         url: "/imports",
         icon: Upload,
       },
       {
-        title: "Exports",
-        url: "/exports",
-        icon: Download,
+        title: "Translation Queue",
+        url: "/translation-queue",
+        icon: Languages,
       },
       {
-        title: "Batch Jobs",
-        url: "/batches",
+        title: "Cache Management",
+        url: "/cache-management",
         icon: Database,
       },
     ],
   },
 
-  {
-    title: "Operations",
-    icon: CheckCircle2,
-    children: [
-      {
-        title: "Product Approvals",
-        url: "/approvals/products",
-        icon: CheckCircle2,
-      },
-      {
-        title: "Cache Management",
-        url: "/cache",
-        icon: Activity,
-      },
-      {
-        title: "Navigation Rebuild",
-        url: "/navigation/rebuild",
-        icon: Navigation,
-      },
-      {
-        title: "Audit Logs",
-        url: "/audit-logs",
-        icon: History,
-      },
-    ],
-  },
-
+  // ANALYTICS
   {
     title: "Analytics",
-    icon: BarChart3,
     children: [
       {
-        title: "Overview",
-        url: "/analytics",
+        title: "Platform Analytics",
+        url: "/analytics/platform",
         icon: BarChart3,
       },
       {
-        title: "Countries",
+        title: "Country Analytics",
         url: "/analytics/countries",
         icon: Globe,
       },
       {
-        title: "Organizations",
+        title: "Organization Analytics",
         url: "/analytics/organizations",
         icon: Building2,
-      },
-      {
-        title: "Products",
-        url: "/analytics/products",
-        icon: Package,
-      },
-      {
-        title: "Imports",
-        url: "/analytics/imports",
-        icon: Upload,
       },
     ],
   },
 
+  // SYSTEM
   {
     title: "System",
-    icon: Settings,
     children: [
+      {
+        title: "Roles",
+        url: "/roles",
+        icon: Shield,
+      },
+      {
+        title: "Permissions",
+        url: "/permissions",
+        icon: UserCog,
+      },
       {
         title: "Settings",
         url: "/settings",
         icon: Settings,
       },
       {
-        title: "API Keys",
-        url: "/api-keys",
-        icon: KeyRound,
-      },
-      {
-        title: "Webhooks",
-        url: "/webhooks",
-        icon: Webhook,
-      },
-      {
-        title: "Feature Flags",
-        url: "/feature-flags",
-        icon: Flag,
+        title: "Audit Logs",
+        url: "/audit-logs",
+        icon: History,
       },
     ],
   },
