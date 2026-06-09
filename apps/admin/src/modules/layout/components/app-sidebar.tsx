@@ -26,7 +26,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard" aria-label="Admin Dashboard">
+              <Link href="/" aria-label="Admin Dashboard">
                 <Logo />
               </Link>
             </SidebarMenuButton>

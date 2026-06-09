@@ -3,8 +3,8 @@
 import React from "react"
 import { Label } from "@workspace/ui/components/label"
 import { Switch } from "@workspace/ui/components/switch"
-import { useTheme } from "next-themes"
 import { Moon } from "lucide-react"
+import { useTheme } from "next-themes"
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()

@@ -1,14 +1,19 @@
+import PageHeader from "@/src/components/page-header"
+import LocalizationPreferences from "@/src/modules/preferences/components/localization-preferences"
 import React from "react"
 
 const UserPreferences = () => {
   return (
-    <div>
-      <div className="flex gap-4 border p-4">
-        <span>One</span>
-        <span>Two</span>
-        <span>Three</span>
+    <>
+      <PageHeader
+        title="Preferences"
+        description="Manage your personal settings and preferences."
+      />
+
+      <div className="mt-6">
+        <LocalizationPreferences />
       </div>
-    </div>
+    </>
   )
 }
 

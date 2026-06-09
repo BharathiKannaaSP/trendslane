@@ -1,5 +1,4 @@
 import { Geist_Mono, Inter } from "next/font/google"
-
 import "@workspace/ui/globals.css"
 import { DirectionProvider } from "@workspace/ui/components/direction"
 import { ThemeProvider } from "@/src/providers/theme-provider"
@@ -37,7 +36,6 @@ export default async function RootLayout({
   children: React.ReactNode
   params: Promise<{ locale: string }>
 }>) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) {
     notFound()

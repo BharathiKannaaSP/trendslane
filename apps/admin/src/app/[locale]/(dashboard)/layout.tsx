@@ -1,5 +1,5 @@
-import { AppSidebar } from "@/src/components/layout/app-sidebar"
-import Navbar from "@/src/components/layout/header"
+import { AppSidebar } from "@/src/modules/layout/components/app-sidebar"
+import Navbar from "@/src/modules/layout/components/header"
 import { SidebarInset, SidebarProvider } from "@workspace/ui/components/sidebar"
 
 export default function DashboardLayout({
