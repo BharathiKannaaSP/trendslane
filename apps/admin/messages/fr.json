@@ -1,5 +1,52 @@
 {
-  "HomePage": {
-    "title": "Bonjour le monde !"
+  "Navigation": {
+    "platform": {
+      "title": "Plateforme",
+      "dashboard": "Tableau de bord",
+      "countries": "Pays",
+      "organizations": "Organisations",
+      "users": "Utilisateurs",
+      "invitations": "Invitations"
+    },
+    "organization": {
+      "title": "Organisation",
+      "members": "Membres",
+      "organizationSettings": "Paramètres de l'organisation"
+    },
+    "workspace": {
+      "title": "Espace de travail",
+      "mySubmissions": "Mes soumissions"
+    },
+    "catalog": {
+      "title": "Catalogue",
+      "products": "Produits",
+      "categories": "Catégories",
+      "audiences": "Audiences",
+      "navigation": "Navigation"
+    },
+    "operations": {
+      "title": "Opérations",
+      "productApprovals": "Approbations des produits",
+      "imports": "Importations",
+      "translationQueue": "File d'attente des traductions",
+      "cacheManagement": "Gestion du cache"
+    },
+    "analytics": {
+      "title": "Analytique",
+      "overview": "Vue d'ensemble",
+      "platformAnalytics": "Analytique de la plateforme",
+      "countryAnalytics": "Analytique des pays",
+      "organizationAnalytics": "Analytique des organisations"
+    },
+    "insights": {
+      "title": "Insights"
+    },
+    "system": {
+      "title": "Système",
+      "roles": "Rôles",
+      "permissions": "Autorisations",
+      "settings": "Paramètres",
+      "auditLogs": "Journaux d'audit"
+    }
   }
 }

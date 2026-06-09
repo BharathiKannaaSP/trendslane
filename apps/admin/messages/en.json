@@ -1,5 +1,59 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "Navigation": {
+    "platform": {
+      "title": "Platform",
+      "dashboard": "Dashboard",
+      "countries": "Countries",
+      "organizations": "Organizations",
+      "users": "Users",
+      "invitations": "Invitations"
+    },
+
+    "organization": {
+      "title": "Organization",
+      "members": "Members",
+      "organizationSettings": "Organization Settings"
+    },
+
+    "workspace": {
+      "title": "Workspace",
+      "mySubmissions": "My Submissions"
+    },
+
+    "catalog": {
+      "title": "Catalog",
+      "products": "Products",
+      "categories": "Categories",
+      "audiences": "Audiences",
+      "navigation": "Navigation"
+    },
+
+    "operations": {
+      "title": "Operations",
+      "productApprovals": "Product Approvals",
+      "imports": "Imports",
+      "translationQueue": "Translation Queue",
+      "cacheManagement": "Cache Management"
+    },
+
+    "analytics": {
+      "title": "Analytics",
+      "overview": "Overview",
+      "platformAnalytics": "Platform Analytics",
+      "countryAnalytics": "Country Analytics",
+      "organizationAnalytics": "Organization Analytics"
+    },
+
+    "insights": {
+      "title": "Insights"
+    },
+
+    "system": {
+      "title": "System",
+      "roles": "Roles",
+      "permissions": "Permissions",
+      "settings": "Settings",
+      "auditLogs": "Audit Logs"
+    }
   }
 }

@@ -1,5 +1,59 @@
 {
-  "HomePage": {
-    "title": "مرحباً بالعالم!"
+  "Navigation": {
+    "platform": {
+      "title": "المنصة",
+      "dashboard": "لوحة التحكم",
+      "countries": "الدول",
+      "organizations": "المؤسسات",
+      "users": "المستخدمون",
+      "invitations": "الدعوات"
+    },
+
+    "organization": {
+      "title": "المؤسسة",
+      "members": "الأعضاء",
+      "organizationSettings": "إعدادات المؤسسة"
+    },
+
+    "workspace": {
+      "title": "مساحة العمل",
+      "mySubmissions": "إرسالاتي"
+    },
+
+    "catalog": {
+      "title": "الكتالوج",
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "audiences": "الجماهير",
+      "navigation": "التنقل"
+    },
+
+    "operations": {
+      "title": "العمليات",
+      "productApprovals": "موافقات المنتجات",
+      "imports": "الاستيراد",
+      "translationQueue": "قائمة انتظار الترجمة",
+      "cacheManagement": "إدارة التخزين المؤقت"
+    },
+
+    "analytics": {
+      "title": "التحليلات",
+      "overview": "نظرة عامة",
+      "platformAnalytics": "تحليلات المنصة",
+      "countryAnalytics": "تحليلات الدول",
+      "organizationAnalytics": "تحليلات المؤسسات"
+    },
+
+    "insights": {
+      "title": "الرؤى"
+    },
+
+    "system": {
+      "title": "النظام",
+      "roles": "الأدوار",
+      "permissions": "الصلاحيات",
+      "settings": "الإعدادات",
+      "auditLogs": "سجلات التدقيق"
+    }
   }
 }

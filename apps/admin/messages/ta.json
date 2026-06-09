@@ -1,5 +1,52 @@
 {
-  "HomePage": {
-    "title": "வணக்கம் உலகமே!"
+  "Navigation": {
+    "platform": {
+      "title": "தளம்",
+      "dashboard": "டாஷ்போர்டு",
+      "countries": "நாடுகள்",
+      "organizations": "அமைப்புகள்",
+      "users": "பயனர்கள்",
+      "invitations": "அழைப்புகள்"
+    },
+    "organization": {
+      "title": "அமைப்பு",
+      "members": "உறுப்பினர்கள்",
+      "organizationSettings": "அமைப்பு அமைப்புகள்"
+    },
+    "workspace": {
+      "title": "பணியிடம்",
+      "mySubmissions": "எனது சமர்ப்பிப்புகள்"
+    },
+    "catalog": {
+      "title": "பட்டியல்",
+      "products": "தயாரிப்புகள்",
+      "categories": "வகைகள்",
+      "audiences": "இலக்கு குழுக்கள்",
+      "navigation": "வழிசெலுத்தல்"
+    },
+    "operations": {
+      "title": "செயல்பாடுகள்",
+      "productApprovals": "தயாரிப்பு ஒப்புதல்கள்",
+      "imports": "இறக்குமதிகள்",
+      "translationQueue": "மொழிபெயர்ப்பு வரிசை",
+      "cacheManagement": "கேச் மேலாண்மை"
+    },
+    "analytics": {
+      "title": "பகுப்பாய்வு",
+      "overview": "மேலோட்டம்",
+      "platformAnalytics": "தள பகுப்பாய்வு",
+      "countryAnalytics": "நாட்டு பகுப்பாய்வு",
+      "organizationAnalytics": "அமைப்பு பகுப்பாய்வு"
+    },
+    "insights": {
+      "title": "நுண்ணறிவுகள்"
+    },
+    "system": {
+      "title": "அமைப்பு",
+      "roles": "பாத்திரங்கள்",
+      "permissions": "அனுமதிகள்",
+      "settings": "அமைப்புகள்",
+      "auditLogs": "தணிக்கை பதிவுகள்"
+    }
   }
 }

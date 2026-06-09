@@ -1,18 +1,21 @@
-import { adminNavigation } from "./admin-navigation"
-import { orgAdminNavigation } from "./org-admin-navigation"
-import { orgMemberNavigation } from "./org-member-navigation"
-import { NavItem, Roles } from "./types"
+import { getAdminNavigation } from "./admin-navigation"
+import { getOrgAdminNavigation } from "./org-admin-navigation"
+import { getOrgMemberNavigation } from "./org-member-navigation"
+import { NavItem, RoleType } from "./types"
 
-export function getNavigation(role: Roles): NavItem[] {
+export function getNavigation(
+  role: RoleType,
+  t: (key: string) => string
+): NavItem[] {
   switch (role) {
     case "ADMIN":
-      return adminNavigation
+      return getAdminNavigation(t)
 
     case "ORG_ADMIN":
-      return orgAdminNavigation
+      return getOrgAdminNavigation(t)
 
     case "ORG_MEMBER":
-      return orgMemberNavigation
+      return getOrgMemberNavigation(t)
 
     default:
       return []

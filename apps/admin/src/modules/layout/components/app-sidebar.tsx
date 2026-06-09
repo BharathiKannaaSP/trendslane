@@ -16,10 +16,13 @@ import {
 } from "@workspace/ui/components/sidebar"
 import { Logo } from "@workspace/ui/components/logo"
 import { getNavigation } from "@/src/config/sidebar/get-navigation"
+import { useTranslations } from "next-intl"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
-  const navigation = getNavigation("ADMIN") // TODO: Replace with actual role from auth context
+  const t = useTranslations("Navigation")
+  const navigation = getNavigation("ADMIN", t) // TODO: Replace with actual role from auth context
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>

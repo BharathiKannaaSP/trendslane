@@ -7,5 +7,5 @@ export interface NavItem {
   children?: NavItem[]
 }
 
-export const Roles = ["ADMIN", "ORG_ADMIN", "ORG_MEMBER"] as const
-export type Roles = (typeof Roles)[number]
+export const Role = ["ADMIN", "ORG_ADMIN", "ORG_MEMBER"] as const
+export type RoleType = (typeof Role)[number]

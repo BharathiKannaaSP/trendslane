@@ -1,5 +1,52 @@
 {
-  "HomePage": {
-    "title": "नमस्ते दुनिया!"
+  "Navigation": {
+    "platform": {
+      "title": "प्लेटफ़ॉर्म",
+      "dashboard": "डैशबोर्ड",
+      "countries": "देश",
+      "organizations": "संगठन",
+      "users": "उपयोगकर्ता",
+      "invitations": "निमंत्रण"
+    },
+    "organization": {
+      "title": "संगठन",
+      "members": "सदस्य",
+      "organizationSettings": "संगठन सेटिंग्स"
+    },
+    "workspace": {
+      "title": "कार्यस्थान",
+      "mySubmissions": "मेरे सबमिशन"
+    },
+    "catalog": {
+      "title": "कैटलॉग",
+      "products": "उत्पाद",
+      "categories": "श्रेणियाँ",
+      "audiences": "दर्शक समूह",
+      "navigation": "नेविगेशन"
+    },
+    "operations": {
+      "title": "संचालन",
+      "productApprovals": "उत्पाद अनुमोदन",
+      "imports": "आयात",
+      "translationQueue": "अनुवाद कतार",
+      "cacheManagement": "कैश प्रबंधन"
+    },
+    "analytics": {
+      "title": "विश्लेषण",
+      "overview": "अवलोकन",
+      "platformAnalytics": "प्लेटफ़ॉर्म विश्लेषण",
+      "countryAnalytics": "देश विश्लेषण",
+      "organizationAnalytics": "संगठन विश्लेषण"
+    },
+    "insights": {
+      "title": "अंतर्दृष्टि"
+    },
+    "system": {
+      "title": "सिस्टम",
+      "roles": "भूमिकाएँ",
+      "permissions": "अनुमतियाँ",
+      "settings": "सेटिंग्स",
+      "auditLogs": "ऑडिट लॉग्स"
+    }
   }
 }

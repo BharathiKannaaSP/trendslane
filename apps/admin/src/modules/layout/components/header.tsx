@@ -5,10 +5,10 @@ import CountrySwitcher from "./country-switcher"
 import Notification from "./notification"
 import UserMenu from "./user-menu"
 import { Logo } from "@workspace/ui/components/logo"
-import { Roles } from "@/src/config/sidebar/types"
+import { Role } from "@/src/config/sidebar/types"
 
 const Header = () => {
-  const role = Roles[0] // TODO: Replace with actual role from auth context
+  const role = Role[0] // TODO: Replace with actual role from auth context
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background px-4">
       <div className="flex items-center gap-4">
@@ -18,7 +18,7 @@ const Header = () => {
 
       <div className="flex items-center gap-2 lg:gap-4">
         <CommandSearch />
-        {role === Roles[0] && <CountrySwitcher />}
+        {role === Role[0] && <CountrySwitcher />}
         <Notification />
         <UserMenu />
       </div>
