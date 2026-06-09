@@ -15,18 +15,11 @@ import {
   Languages,
   FileCheck,
   History,
-  LucideIcon,
   Home,
 } from "lucide-react"
+import { NavItem } from "./types"
 
-export interface NavItem {
-  title: string
-  url?: string
-  icon?: LucideIcon
-  children?: NavItem[]
-}
-
-export const navigation: NavItem[] = [
+export const adminNavigation: NavItem[] = [
   // PLATFORM
   {
     title: "Platform",
@@ -38,22 +31,22 @@ export const navigation: NavItem[] = [
       },
       {
         title: "Countries",
-        url: "/countries",
+        url: "/dashboard/countries",
         icon: Globe,
       },
       {
         title: "Organizations",
-        url: "/organizations",
+        url: "/dashboard/organizations",
         icon: Building2,
       },
       {
         title: "Users",
-        url: "/users",
+        url: "/dashboard/users",
         icon: Users,
       },
       {
         title: "Invitations",
-        url: "/invitations",
+        url: "/dashboard/invitations",
         icon: Mail,
       },
     ],
@@ -65,22 +58,22 @@ export const navigation: NavItem[] = [
     children: [
       {
         title: "Products",
-        url: "/products",
+        url: "/dashboard/products",
         icon: Package,
       },
       {
         title: "Categories",
-        url: "/categories",
+        url: "/dashboard/categories",
         icon: FolderTree,
       },
       {
         title: "Audiences",
-        url: "/audiences",
+        url: "/dashboard/audiences",
         icon: Users,
       },
       {
         title: "Navigation",
-        url: "/navigation",
+        url: "/dashboard/navigation",
         icon: Navigation,
       },
     ],
@@ -92,22 +85,22 @@ export const navigation: NavItem[] = [
     children: [
       {
         title: "Product Approvals",
-        url: "/product-approvals",
+        url: "/dashboard/product-approvals",
         icon: FileCheck,
       },
       {
         title: "Imports",
-        url: "/imports",
+        url: "/dashboard/imports",
         icon: Upload,
       },
       {
         title: "Translation Queue",
-        url: "/translation-queue",
+        url: "/dashboard/translation-queue",
         icon: Languages,
       },
       {
         title: "Cache Management",
-        url: "/cache-management",
+        url: "/dashboard/cache-management",
         icon: Database,
       },
     ],
@@ -119,17 +112,17 @@ export const navigation: NavItem[] = [
     children: [
       {
         title: "Platform Analytics",
-        url: "/analytics/platform",
+        url: "/dashboard/analytics/platform",
         icon: BarChart3,
       },
       {
         title: "Country Analytics",
-        url: "/analytics/countries",
+        url: "/dashboard/analytics/countries",
         icon: Globe,
       },
       {
         title: "Organization Analytics",
-        url: "/analytics/organizations",
+        url: "/dashboard/analytics/organizations",
         icon: Building2,
       },
     ],
@@ -141,22 +134,22 @@ export const navigation: NavItem[] = [
     children: [
       {
         title: "Roles",
-        url: "/roles",
+        url: "/dashboard/roles",
         icon: Shield,
       },
       {
         title: "Permissions",
-        url: "/permissions",
+        url: "/dashboard/permissions",
         icon: UserCog,
       },
       {
         title: "Settings",
-        url: "/settings",
+        url: "/dashboard/settings",
         icon: Settings,
       },
       {
         title: "Audit Logs",
-        url: "/audit-logs",
+        url: "/dashboard/audit-logs",
         icon: History,
       },
     ],

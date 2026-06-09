@@ -14,13 +14,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@workspace/ui/components/sidebar"
-
 import { Logo } from "@workspace/ui/components/logo"
-import { navigation } from "@/src/config/navigation"
+import { getNavigation } from "@/src/config/sidebar/get-navigation"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
-
+  const navigation = getNavigation("ADMIN") // TODO: Replace with actual role from auth context
   return (
     <Sidebar {...props}>
       <SidebarHeader>
