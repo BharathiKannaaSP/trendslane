@@ -1,12 +1,17 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
-import { COMMANDS } from "../config/commands"
+import { commandGroups } from "../config/commands"
 
 export function useCommandSearch() {
   const [open, setOpen] = useState(false)
   const router = useRouter()
+
+  const commands = useMemo(
+    () => commandGroups.flatMap((group) => group.items),
+    []
+  )
 
   const navigate = (path: string) => {
     setOpen(false)
@@ -24,16 +29,18 @@ export function useCommandSearch() {
         return
       }
 
-      if (!open) return
+      if (!open || !isMetaPressed) {
+        return
+      }
 
-      // Command shortcuts require Ctrl/Cmd
-      if (!isMetaPressed) return
-
-      const command = COMMANDS.find(
-        (cmd) => cmd.shortcut === event.key.toLowerCase()
+      const command = commands.find(
+        (cmd) =>
+          cmd.shortcut && cmd.shortcut.toLowerCase() === event.key.toLowerCase()
       )
 
-      if (!command) return
+      if (!command) {
+        return
+      }
 
       event.preventDefault()
       navigate(command.path)
@@ -45,11 +52,13 @@ export function useCommandSearch() {
       window.removeEventListener("keydown", handleKeyDown)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open])
+  }, [open, commands])
+
   return {
     open,
     setOpen,
     navigate,
-    commands: COMMANDS,
+    commands,
+    commandGroups,
   }
 }

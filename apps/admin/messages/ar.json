@@ -55,5 +55,41 @@
       "settings": "الإعدادات",
       "auditLogs": "سجلات التدقيق"
     }
+  },
+  "CommandSearch": {
+    "search": "بحث",
+    "searchAnything": "ابحث عن أي شيء...",
+    "searchPlaceholder": "اكتب أمراً أو ابحث...",
+    "noResults": "لم يتم العثور على نتائج.",
+    "groups": {
+      "organization": "المؤسسة",
+      "catalog": "الكتالوج",
+      "settings": "الإعدادات",
+      "profile": "الملف الشخصي"
+    },
+    "items": {
+      "dashboard": "لوحة التحكم",
+      "myTasks": "مهامي",
+      "activity": "النشاط",
+      "notifications": "الإشعارات",
+      "helpSupport": "المساعدة والدعم",
+
+      "products": "المنتجات",
+      "categories": "الفئات",
+      "audiences": "الجماهير",
+      "navigation": "التنقل",
+
+      "preferences": "التفضيلات",
+      "accountSettings": "إعدادات الحساب",
+      "security": "الأمان",
+      "notificationPreferences": "تفضيلات الإشعارات",
+      "language": "اللغة",
+
+      "myProfile": "ملفي الشخصي",
+      "editProfile": "تعديل الملف الشخصي",
+      "changePassword": "تغيير كلمة المرور",
+      "sessions": "الجلسات",
+      "signOut": "تسجيل الخروج"
+    }
   }
 }

@@ -48,5 +48,41 @@
       "settings": "அமைப்புகள்",
       "auditLogs": "தணிக்கை பதிவுகள்"
     }
+  },
+  "CommandSearch": {
+    "search": "தேடல்",
+    "searchAnything": "எதையும் தேடுங்கள்...",
+    "searchPlaceholder": "ஒரு கட்டளையை தட்டச்சு செய்யவும் அல்லது தேடவும்...",
+    "noResults": "முடிவுகள் எதுவும் கிடைக்கவில்லை.",
+    "groups": {
+      "organization": "நிறுவனம்",
+      "catalog": "பட்டியல்",
+      "settings": "அமைப்புகள்",
+      "profile": "சுயவிவரம்"
+    },
+    "items": {
+      "dashboard": "டாஷ்போர்டு",
+      "myTasks": "எனது பணிகள்",
+      "activity": "செயல்பாடுகள்",
+      "notifications": "அறிவிப்புகள்",
+      "helpSupport": "உதவி மற்றும் ஆதரவு",
+
+      "products": "தயாரிப்புகள்",
+      "categories": "வகைகள்",
+      "audiences": "பார்வையாளர் குழுக்கள்",
+      "navigation": "வழிசெலுத்தல்",
+
+      "preferences": "விருப்பத்தேர்வுகள்",
+      "accountSettings": "கணக்கு அமைப்புகள்",
+      "security": "பாதுகாப்பு",
+      "notificationPreferences": "அறிவிப்பு விருப்பத்தேர்வுகள்",
+      "language": "மொழி",
+
+      "myProfile": "எனது சுயவிவரம்",
+      "editProfile": "சுயவிவரத்தைத் திருத்து",
+      "changePassword": "கடவுச்சொல்லை மாற்று",
+      "sessions": "அமர்வுகள்",
+      "signOut": "வெளியேறு"
+    }
   }
 }

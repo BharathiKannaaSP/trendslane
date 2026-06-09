@@ -55,5 +55,43 @@
       "settings": "Settings",
       "auditLogs": "Audit Logs"
     }
+  },
+  "CommandSearch": {
+    "search": "Search",
+    "searchAnything": "Search anything...",
+    "searchPlaceholder": "Type a command or search...",
+    "noResults": "No results found.",
+    
+    "groups": {
+      "organization": "Organization",
+      "catalog": "Catalog",
+      "settings": "Settings",
+      "profile": "Profile"
+    },
+
+    "items": {
+      "dashboard": "Dashboard",
+      "myTasks": "My Tasks",
+      "activity": "Activity",
+      "notifications": "Notifications",
+      "helpSupport": "Help & Support",
+
+      "products": "Products",
+      "categories": "Categories",
+      "audiences": "Audiences",
+      "navigation": "Navigation",
+
+      "preferences": "Preferences",
+      "accountSettings": "Account Settings",
+      "security": "Security",
+      "notificationPreferences": "Notification Preferences",
+      "language": "Language",
+
+      "myProfile": "My Profile",
+      "editProfile": "Edit Profile",
+      "changePassword": "Change Password",
+      "sessions": "Sessions",
+      "signOut": "Sign Out"
+    }
   }
 }

@@ -13,8 +13,11 @@ import { TIMEZONES } from "../constants/time-zones"
 const TimezoneSwitcher = () => {
   return (
     <Select>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a timezone" />
+      <SelectTrigger className="w-full" aria-label="Select timezone">
+        <SelectValue
+          placeholder="Select a timezone"
+          aria-label="Selected timezone"
+        />
       </SelectTrigger>
 
       <SelectContent>

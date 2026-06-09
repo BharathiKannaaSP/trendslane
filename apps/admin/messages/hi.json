@@ -48,5 +48,41 @@
       "settings": "सेटिंग्स",
       "auditLogs": "ऑडिट लॉग्स"
     }
+  },
+  "CommandSearch": {
+    "search": "खोजें",
+    "searchAnything": "कुछ भी खोजें...",
+    "searchPlaceholder": "कोई कमांड टाइप करें या खोजें...",
+    "noResults": "कोई परिणाम नहीं मिला।",
+    "groups": {
+      "organization": "संगठन",
+      "catalog": "कैटलॉग",
+      "settings": "सेटिंग्स",
+      "profile": "प्रोफ़ाइल"
+    },
+    "items": {
+      "dashboard": "डैशबोर्ड",
+      "myTasks": "मेरे कार्य",
+      "activity": "गतिविधि",
+      "notifications": "सूचनाएँ",
+      "helpSupport": "सहायता और समर्थन",
+
+      "products": "उत्पाद",
+      "categories": "श्रेणियाँ",
+      "audiences": "दर्शक समूह",
+      "navigation": "नेविगेशन",
+
+      "preferences": "प्राथमिकताएँ",
+      "accountSettings": "खाता सेटिंग्स",
+      "security": "सुरक्षा",
+      "notificationPreferences": "सूचना प्राथमिकताएँ",
+      "language": "भाषा",
+
+      "myProfile": "मेरी प्रोफ़ाइल",
+      "editProfile": "प्रोफ़ाइल संपादित करें",
+      "changePassword": "पासवर्ड बदलें",
+      "sessions": "सत्र",
+      "signOut": "साइन आउट"
+    }
   }
 }

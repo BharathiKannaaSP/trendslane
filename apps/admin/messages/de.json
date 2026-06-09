@@ -48,5 +48,41 @@
       "settings": "Einstellungen",
       "auditLogs": "Audit-Protokolle"
     }
+  },
+  "CommandSearch": {
+    "search": "Suchen",
+    "searchAnything": "Nach allem suchen...",
+    "searchPlaceholder": "Befehl eingeben oder suchen...",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "groups": {
+      "organization": "Organisation",
+      "catalog": "Katalog",
+      "settings": "Einstellungen",
+      "profile": "Profil"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "myTasks": "Meine Aufgaben",
+      "activity": "Aktivität",
+      "notifications": "Benachrichtigungen",
+      "helpSupport": "Hilfe & Support",
+
+      "products": "Produkte",
+      "categories": "Kategorien",
+      "audiences": "Zielgruppen",
+      "navigation": "Navigation",
+
+      "preferences": "Einstellungen",
+      "accountSettings": "Kontoeinstellungen",
+      "security": "Sicherheit",
+      "notificationPreferences": "Benachrichtigungseinstellungen",
+      "language": "Sprache",
+
+      "myProfile": "Mein Profil",
+      "editProfile": "Profil bearbeiten",
+      "changePassword": "Passwort ändern",
+      "sessions": "Sitzungen",
+      "signOut": "Abmelden"
+    }
   }
 }

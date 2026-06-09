@@ -26,8 +26,8 @@ const LanguageSwitcher = () => {
 
   return (
     <Select value={locale} onValueChange={handleChange}>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a language" />
+      <SelectTrigger className="w-full" aria-label="Select language">
+        <SelectValue placeholder="Select a language" aria-label={locale} />
       </SelectTrigger>
 
       <SelectContent>
