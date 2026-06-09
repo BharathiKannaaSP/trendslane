@@ -15,12 +15,12 @@ export const orgMemberNavigation: NavItem[] = [
     children: [
       {
         title: "Dashboard",
-        url: "/dashboard",
+        url: "/",
         icon: Home,
       },
       {
         title: "My Submissions",
-        url: "/dashboard/my-submissions",
+        url: "/my-submissions",
         icon: FileCheck,
       },
     ],
@@ -31,22 +31,22 @@ export const orgMemberNavigation: NavItem[] = [
     children: [
       {
         title: "Products",
-        url: "/dashboard/products",
+        url: "/products",
         icon: Package,
       },
       {
         title: "Categories",
-        url: "/dashboard/categories",
+        url: "/categories",
         icon: FolderTree,
       },
       {
         title: "Audiences",
-        url: "/dashboard/audiences",
+        url: "/audiences",
         icon: Users,
       },
       {
         title: "Navigation",
-        url: "/dashboard/navigation",
+        url: "/navigation",
         icon: Navigation,
       },
     ],
@@ -57,7 +57,7 @@ export const orgMemberNavigation: NavItem[] = [
     children: [
       {
         title: "Analytics",
-        url: "/dashboard/analytics",
+        url: "/analytics",
         icon: BarChart3,
       },
     ],

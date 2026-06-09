@@ -26,6 +26,7 @@ const CommandSearch = () => {
         ref={searchButtonRef}
         onClick={() => setOpen(true)}
         variant="outline"
+        aria-label="Search"
         className="h-8 w-10 justify-between text-muted-foreground lg:w-60"
       >
         <div className="flex items-center gap-2 text-xs">

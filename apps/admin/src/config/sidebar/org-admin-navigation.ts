@@ -18,17 +18,17 @@ export const orgAdminNavigation: NavItem[] = [
     children: [
       {
         title: "Dashboard",
-        url: "/dashboard",
+        url: "/",
         icon: Home,
       },
       {
         title: "Members",
-        url: "/dashboard/members",
+        url: "/members",
         icon: Users,
       },
       {
         title: "Invitations",
-        url: "/dashboard/invitations",
+        url: "/invitations",
         icon: Mail,
       },
     ],
@@ -39,22 +39,22 @@ export const orgAdminNavigation: NavItem[] = [
     children: [
       {
         title: "Products",
-        url: "/dashboard/products",
+        url: "/products",
         icon: Package,
       },
       {
         title: "Categories",
-        url: "/dashboard/categories",
+        url: "/categories",
         icon: FolderTree,
       },
       {
         title: "Audiences",
-        url: "/dashboard/audiences",
+        url: "/audiences",
         icon: Users,
       },
       {
         title: "Navigation",
-        url: "/dashboard/navigation",
+        url: "/navigation",
         icon: Navigation,
       },
     ],
@@ -65,12 +65,12 @@ export const orgAdminNavigation: NavItem[] = [
     children: [
       {
         title: "Product Approvals",
-        url: "/dashboard/product-approvals",
+        url: "/product-approvals",
         icon: FileCheck,
       },
       {
         title: "Imports",
-        url: "/dashboard/imports",
+        url: "/imports",
         icon: Upload,
       },
     ],
@@ -81,7 +81,7 @@ export const orgAdminNavigation: NavItem[] = [
     children: [
       {
         title: "Analytics",
-        url: "/dashboard/analytics",
+        url: "/analytics",
         icon: BarChart3,
       },
     ],
@@ -92,7 +92,7 @@ export const orgAdminNavigation: NavItem[] = [
     children: [
       {
         title: "Organization Settings",
-        url: "/dashboard/settings",
+        url: "/settings",
         icon: Settings,
       },
     ],

@@ -1,3 +1,5 @@
+"use client"
+import Link from "next/link"
 import React from "react"
 import {
   Avatar,
@@ -20,7 +22,36 @@ import {
   SlidersHorizontal,
   User,
 } from "lucide-react"
+
 import ThemeSwitcher from "./theme-switcher"
+
+const menuItems = [
+  {
+    label: "Profile",
+    href: "/profile",
+    icon: User,
+  },
+  {
+    label: "Account Settings",
+    href: "/account",
+    icon: Settings,
+  },
+  {
+    label: "Preferences",
+    href: "/preferences",
+    icon: SlidersHorizontal,
+  },
+  {
+    label: "Activity Logs",
+    href: "/activity",
+    icon: ActivityIcon,
+  },
+  {
+    label: "Help & Support",
+    href: "/help",
+    icon: HelpCircle,
+  },
+]
 
 const UserMenu = () => {
   return (
@@ -30,6 +61,7 @@ const UserMenu = () => {
           <AvatarImage src="https://github.com/shadcn.png" alt="CN" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
+
         <div className="hidden flex-col gap-1 md:flex">
           <p className="text-xs font-semibold">Rachel Green</p>
           <p className="self-start text-xs text-muted-foreground">Admin</p>
@@ -37,40 +69,30 @@ const UserMenu = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
+        align="end"
         sideOffset={8}
         className="flex w-64 flex-col gap-2"
-        align="end"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User className="mr-2 h-[1.2rem] w-[1.2rem]" />
-          <span className="ml-1">Profile</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Settings className="mr-2 h-[1.2rem] w-[1.2rem]" />
-          <span className="ml-1">Account Settings</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <SlidersHorizontal className="mr-2 h-[1.2rem] w-[1.2rem]" />
-          <span className="ml-1">Preferences</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <ActivityIcon className="mr-2 h-[1.2rem] w-[1.2rem]" />
-          <span className="ml-1">Activity Logs</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <HelpCircle className="mr-2 h-[1.2rem] w-[1.2rem]" />
-          <span className="ml-1">Help & Support</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
+        {menuItems.map((item) => {
+          const Icon = item.icon
+          return (
+            <DropdownMenuItem key={item.href} asChild>
+              <Link href={item.href}>
+                <Icon className="size-4" />
+                <span>{item.label}</span>
+              </Link>
+            </DropdownMenuItem>
+          )
+        })}
+        <div className="px-1.5 py-1">
           <ThemeSwitcher />
-        </DropdownMenuItem>
+        </div>
         <DropdownMenuSeparator />
-
         <DropdownMenuItem variant="destructive">
-          <LogOut className="mr-1 ml-1 h-[1.2rem] w-[1.2rem]" />
-          <span className="ml-1">Logout</span>
+          <LogOut className="size-4" />
+          <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

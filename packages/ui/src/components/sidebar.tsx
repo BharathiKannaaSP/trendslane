@@ -22,6 +22,7 @@ import {
 } from "@workspace/ui/components/tooltip"
 import { PanelLeftIcon } from "lucide-react"
 import { useIsMobile } from "@workspace/ui/hooks/use-mobile"
+import { useDirection } from "@workspace/ui/components/direction"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -148,12 +149,10 @@ function SidebarProvider({
 }
 
 function Sidebar({
-  side = "left",
   variant = "sidebar",
   collapsible = "offcanvas",
   className,
   children,
-  dir,
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right"
@@ -161,6 +160,8 @@ function Sidebar({
   collapsible?: "offcanvas" | "icon" | "none"
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const dir = useDirection()
+  const side = dir === "rtl" ? "right" : "left"
 
   if (collapsible === "none") {
     return (

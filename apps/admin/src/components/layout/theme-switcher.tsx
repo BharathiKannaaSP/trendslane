@@ -12,7 +12,7 @@ const ThemeSwitcher = () => {
   return (
     <div className="flex w-full items-center justify-between space-x-2">
       <div className="flex items-center gap-2 text-xs">
-        <Moon className="mr-2 h-[1.2rem] w-[1.2rem]" />
+        <Moon className="inset-2 h-[1.2rem] w-[1.2rem]" />
         <Label htmlFor="dark-mode">Dark Mode</Label>
       </div>
       <Switch

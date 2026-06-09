@@ -26,27 +26,27 @@ export const adminNavigation: NavItem[] = [
     children: [
       {
         title: "Dashboard",
-        url: "/dashboard",
+        url: "/",
         icon: Home,
       },
       {
         title: "Countries",
-        url: "/dashboard/countries",
+        url: "/countries",
         icon: Globe,
       },
       {
         title: "Organizations",
-        url: "/dashboard/organizations",
+        url: "/organizations",
         icon: Building2,
       },
       {
         title: "Users",
-        url: "/dashboard/users",
+        url: "/users",
         icon: Users,
       },
       {
         title: "Invitations",
-        url: "/dashboard/invitations",
+        url: "/invitations",
         icon: Mail,
       },
     ],
@@ -58,22 +58,22 @@ export const adminNavigation: NavItem[] = [
     children: [
       {
         title: "Products",
-        url: "/dashboard/products",
+        url: "/products",
         icon: Package,
       },
       {
         title: "Categories",
-        url: "/dashboard/categories",
+        url: "/categories",
         icon: FolderTree,
       },
       {
         title: "Audiences",
-        url: "/dashboard/audiences",
+        url: "/audiences",
         icon: Users,
       },
       {
         title: "Navigation",
-        url: "/dashboard/navigation",
+        url: "/navigation",
         icon: Navigation,
       },
     ],
@@ -85,22 +85,22 @@ export const adminNavigation: NavItem[] = [
     children: [
       {
         title: "Product Approvals",
-        url: "/dashboard/product-approvals",
+        url: "/product-approvals",
         icon: FileCheck,
       },
       {
         title: "Imports",
-        url: "/dashboard/imports",
+        url: "/imports",
         icon: Upload,
       },
       {
         title: "Translation Queue",
-        url: "/dashboard/translation-queue",
+        url: "/translation-queue",
         icon: Languages,
       },
       {
         title: "Cache Management",
-        url: "/dashboard/cache-management",
+        url: "/cache-management",
         icon: Database,
       },
     ],
@@ -112,17 +112,17 @@ export const adminNavigation: NavItem[] = [
     children: [
       {
         title: "Platform Analytics",
-        url: "/dashboard/analytics/platform",
+        url: "/analytics/platform",
         icon: BarChart3,
       },
       {
         title: "Country Analytics",
-        url: "/dashboard/analytics/countries",
+        url: "/analytics/countries",
         icon: Globe,
       },
       {
         title: "Organization Analytics",
-        url: "/dashboard/analytics/organizations",
+        url: "/analytics/organizations",
         icon: Building2,
       },
     ],
@@ -134,22 +134,22 @@ export const adminNavigation: NavItem[] = [
     children: [
       {
         title: "Roles",
-        url: "/dashboard/roles",
+        url: "/roles",
         icon: Shield,
       },
       {
         title: "Permissions",
-        url: "/dashboard/permissions",
+        url: "/permissions",
         icon: UserCog,
       },
       {
         title: "Settings",
-        url: "/dashboard/settings",
+        url: "/settings",
         icon: Settings,
       },
       {
         title: "Audit Logs",
-        url: "/dashboard/audit-logs",
+        url: "/audit-logs",
         icon: History,
       },
     ],
