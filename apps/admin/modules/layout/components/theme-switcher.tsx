@@ -5,15 +5,17 @@ import { Label } from "@workspace/ui/components/label"
 import { Switch } from "@workspace/ui/components/switch"
 import { Moon } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useTranslations } from "next-intl"
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()
+  const t = useTranslations("UserMenu")
 
   return (
     <div className="flex w-full items-center justify-between space-x-2">
       <div className="flex items-center gap-2 text-xs">
         <Moon className="inset-2 h-[1.2rem] w-[1.2rem]" />
-        <Label htmlFor="dark-mode">Dark Mode</Label>
+        <Label htmlFor="dark-mode">{t("darkMode")}</Label>
       </div>
       <Switch
         id="dark-mode"

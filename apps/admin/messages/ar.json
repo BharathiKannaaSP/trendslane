@@ -91,5 +91,45 @@
       "sessions": "الجلسات",
       "signOut": "تسجيل الخروج"
     }
+  },
+  "CountrySwitcher": {
+    "selectCountry": "اختر الدولة",
+    "searchCountry": "ابحث عن دولة...",
+    "noCountryFound": "لم يتم العثور على أي دولة.",
+    "recent": "الأخيرة",
+    "allCountries": "جميع الدول",
+    "viewAllCountries": "عرض جميع الدول",
+    "manageCountries": "إدارة الدول",
+    "manageCountriesDescription": "إضافة الدول أو تعديلها أو إزالتها"
+  },
+  "UserMenu": {
+    "myAccount": "حسابي",
+    "profile": "الملف الشخصي",
+    "accountSettings": "إعدادات الحساب",
+    "preferences": "التفضيلات",
+    "activityLogs": "سجلات النشاط",
+    "helpSupport": "المساعدة والدعم",
+    "logout": "تسجيل الخروج",
+    "admin": "مسؤول",
+    "organizationAdmin": "مسؤول المؤسسة",
+    "organizationMember": "عضو المؤسسة",
+    "darkMode": "الوضع الداكن"
+  },
+  "Preferences": {
+    "title": "التفضيلات",
+    "description": "قم بإدارة إعداداتك وتفضيلاتك الشخصية."
+  },
+  "LocalizationPreferences": {
+    "title": "الإعدادات المحلية",
+    "description": "خصص إعدادات اللغة والمنطقة.",
+
+    "language": "اللغة",
+    "languageDescription": "اختر لغتك المفضلة.",
+
+    "timezone": "المنطقة الزمنية",
+    "timezoneDescription": "حدد منطقتك الزمنية المحلية.",
+
+    "dateFormat": "تنسيق التاريخ",
+    "dateFormatDescription": "اختر كيفية عرض التواريخ."
   }
 }

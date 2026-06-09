@@ -24,36 +24,37 @@ import {
 } from "lucide-react"
 
 import ThemeSwitcher from "./theme-switcher"
-
-const menuItems = [
-  {
-    label: "Profile",
-    href: "/profile",
-    icon: User,
-  },
-  {
-    label: "Account Settings",
-    href: "/account",
-    icon: Settings,
-  },
-  {
-    label: "Preferences",
-    href: "/preferences",
-    icon: SlidersHorizontal,
-  },
-  {
-    label: "Activity Logs",
-    href: "/activity",
-    icon: ActivityIcon,
-  },
-  {
-    label: "Help & Support",
-    href: "/help",
-    icon: HelpCircle,
-  },
-]
+import { useTranslations } from "next-intl"
 
 const UserMenu = () => {
+  const t = useTranslations("UserMenu")
+  const menuItems = [
+    {
+      label: t("profile"),
+      href: "/profile",
+      icon: User,
+    },
+    {
+      label: t("accountSettings"),
+      href: "/account",
+      icon: Settings,
+    },
+    {
+      label: t("preferences"),
+      href: "/preferences",
+      icon: SlidersHorizontal,
+    },
+    {
+      label: t("activityLogs"),
+      href: "/activity",
+      icon: ActivityIcon,
+    },
+    {
+      label: t("helpSupport"),
+      href: "/help",
+      icon: HelpCircle,
+    },
+  ]
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex gap-1">
@@ -64,7 +65,9 @@ const UserMenu = () => {
 
         <div className="hidden flex-col gap-1 md:flex">
           <p className="text-xs font-semibold">Rachel Green</p>
-          <p className="self-start text-xs text-muted-foreground">Admin</p>
+          <p className="self-start text-xs text-muted-foreground">
+            {t("admin")}
+          </p>
         </div>
       </DropdownMenuTrigger>
 
@@ -73,7 +76,7 @@ const UserMenu = () => {
         sideOffset={8}
         className="flex w-64 flex-col gap-2"
       >
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("myAccount")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {menuItems.map((item) => {
           const Icon = item.icon
@@ -92,7 +95,7 @@ const UserMenu = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
           <LogOut className="size-4" />
-          <span>Logout</span>
+          <span>{t("logout")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

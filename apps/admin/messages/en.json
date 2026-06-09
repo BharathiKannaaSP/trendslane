@@ -61,7 +61,7 @@
     "searchAnything": "Search anything...",
     "searchPlaceholder": "Type a command or search...",
     "noResults": "No results found.",
-    
+
     "groups": {
       "organization": "Organization",
       "catalog": "Catalog",
@@ -93,5 +93,42 @@
       "sessions": "Sessions",
       "signOut": "Sign Out"
     }
+  },
+  "CountrySwitcher": {
+    "selectCountry": "Select country",
+    "searchCountry": "Search country...",
+    "noCountryFound": "No country found.",
+    "recent": "Recent",
+    "allCountries": "All Countries",
+    "viewAllCountries": "View all countries",
+    "manageCountries": "Manage countries",
+    "manageCountriesDescription": "Add, edit or remove countries"
+  },
+  "UserMenu": {
+    "myAccount": "My Account",
+    "profile": "Profile",
+    "accountSettings": "Account Settings",
+    "preferences": "Preferences",
+    "activityLogs": "Activity Logs",
+    "helpSupport": "Help & Support",
+    "logout": "Logout",
+    "admin": "Admin",
+    "organizationAdmin": "Organization Admin",
+    "organizationMember": "Organization Member",
+    "darkMode": "Dark mode"
+  },
+  "Preferences": {
+    "title": "Preferences",
+    "description": "Manage your personal settings and preferences."
+  },
+  "LocalizationPreferences": {
+    "title": "Localization",
+    "description": "Customize language and regional settings.",
+    "language": "Language",
+    "languageDescription": "Choose your preferred language.",
+    "timezone": "Timezone",
+    "timezoneDescription": "Set your local timezone.",
+    "dateFormat": "Date Format",
+    "dateFormatDescription": "Choose how dates are displayed."
   }
 }

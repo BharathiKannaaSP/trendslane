@@ -84,5 +84,45 @@
       "sessions": "அமர்வுகள்",
       "signOut": "வெளியேறு"
     }
+  },
+  "CountrySwitcher": {
+    "selectCountry": "நாட்டைத் தேர்ந்தெடுக்கவும்",
+    "searchCountry": "நாட்டைத் தேடுங்கள்...",
+    "noCountryFound": "நாடு எதுவும் கிடைக்கவில்லை.",
+    "recent": "சமீபத்தியவை",
+    "allCountries": "அனைத்து நாடுகளும்",
+    "viewAllCountries": "அனைத்து நாடுகளையும் காண்க",
+    "manageCountries": "நாடுகளை நிர்வகிக்கவும்",
+    "manageCountriesDescription": "நாடுகளைச் சேர்க்கவும், திருத்தவும் அல்லது அகற்றவும்"
+  },
+  "UserMenu": {
+    "myAccount": "என் கணக்கு",
+    "profile": "சுயவிவரம்",
+    "accountSettings": "கணக்கு அமைப்புகள்",
+    "preferences": "விருப்பத்தேர்வுகள்",
+    "activityLogs": "செயல்பாட்டு பதிவுகள்",
+    "helpSupport": "உதவி & ஆதரவு",
+    "logout": "வெளியேறு",
+    "admin": "நிர்வாகி",
+    "organizationAdmin": "நிறுவன நிர்வாகி",
+    "organizationMember": "நிறுவன உறுப்பினர்",
+    "darkMode": "டார்க் தீம்"
+  },
+  "Preferences": {
+    "title": "விருப்பத்தேர்வுகள்",
+    "description": "உங்கள் தனிப்பட்ட அமைப்புகள் மற்றும் விருப்பத்தேர்வுகளை நிர்வகிக்கவும்."
+  },
+  "LocalizationPreferences": {
+    "title": "உள்ளூர்மயமாக்கல்",
+    "description": "மொழி மற்றும் பிராந்திய அமைப்புகளை தனிப்பயனாக்கவும்.",
+
+    "language": "மொழி",
+    "languageDescription": "உங்களுக்கு விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்.",
+
+    "timezone": "நேர மண்டலம்",
+    "timezoneDescription": "உங்கள் உள்ளூர் நேர மண்டலத்தை அமைக்கவும்.",
+
+    "dateFormat": "தேதி வடிவம்",
+    "dateFormatDescription": "தேதிகள் எவ்வாறு காட்டப்பட வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும்."
   }
 }

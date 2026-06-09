@@ -84,5 +84,45 @@
       "sessions": "Sitzungen",
       "signOut": "Abmelden"
     }
+  },
+  "CountrySwitcher": {
+    "selectCountry": "Land auswählen",
+    "searchCountry": "Land suchen...",
+    "noCountryFound": "Kein Land gefunden.",
+    "recent": "Zuletzt verwendet",
+    "allCountries": "Alle Länder",
+    "viewAllCountries": "Alle Länder anzeigen",
+    "manageCountries": "Länder verwalten",
+    "manageCountriesDescription": "Länder hinzufügen, bearbeiten oder entfernen"
+  },
+  "UserMenu": {
+    "myAccount": "Mein Konto",
+    "profile": "Profil",
+    "accountSettings": "Kontoeinstellungen",
+    "preferences": "Einstellungen",
+    "activityLogs": "Aktivitätsprotokolle",
+    "helpSupport": "Hilfe & Support",
+    "logout": "Abmelden",
+    "admin": "Administrator",
+    "organizationAdmin": "Organisationsadministrator",
+    "organizationMember": "Organisationsmitglied",
+    "darkMode": "Dunkelmodus"
+  },
+  "Preferences": {
+    "title": "Einstellungen",
+    "description": "Verwalten Sie Ihre persönlichen Einstellungen und Präferenzen."
+  },
+  "LocalizationPreferences": {
+    "title": "Lokalisierung",
+    "description": "Passen Sie Sprach- und Regionseinstellungen an.",
+
+    "language": "Sprache",
+    "languageDescription": "Wählen Sie Ihre bevorzugte Sprache aus.",
+
+    "timezone": "Zeitzone",
+    "timezoneDescription": "Legen Sie Ihre lokale Zeitzone fest.",
+
+    "dateFormat": "Datumsformat",
+    "dateFormatDescription": "Wählen Sie aus, wie Datumsangaben angezeigt werden."
   }
 }

@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { useRouter } from "next/navigation"
 import { commandGroups } from "../config/commands"
+import { useRouter } from "@/i18n/navigation"
 
 export function useCommandSearch() {
   const [open, setOpen] = useState(false)

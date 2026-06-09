@@ -5,7 +5,7 @@ import CountrySwitcher from "./country-switcher"
 import Notification from "./notification"
 import UserMenu from "./user-menu"
 import { Logo } from "@workspace/ui/components/logo"
-import { Role } from "@/src/config/sidebar/types"
+import { Role } from "@/config/sidebar/types"
 
 const Header = () => {
   const role = Role[0] // TODO: Replace with actual role from auth context

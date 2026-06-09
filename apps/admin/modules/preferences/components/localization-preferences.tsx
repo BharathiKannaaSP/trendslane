@@ -1,42 +1,44 @@
-import { SettingsCard } from "@/src/components/settings/settings-card"
-import { SettingsCardBody } from "@/src/components/settings/settings-card-body"
-import { SettingsCardHeader } from "@/src/components/settings/settings-card-header"
-import { SettingsField } from "@/src/components/settings/settings-field"
 import { Calendar, Clock3, Globe, Languages } from "lucide-react"
 import React from "react"
 import LanguageSwitcher from "./language-switcher"
 import TimezoneSwitcher from "./timezone-switcher"
+import { SettingsCard } from "@/components/settings/settings-card"
+import { SettingsCardHeader } from "@/components/settings/settings-card-header"
+import { SettingsCardBody } from "@/components/settings/settings-card-body"
+import { SettingsField } from "@/components/settings/settings-field"
+import { useTranslations } from "next-intl"
 
 const LocalizationPreferences = () => {
+  const t = useTranslations("LocalizationPreferences")
   return (
     <SettingsCard>
       <SettingsCardHeader
         icon={Globe}
-        title="Localization"
-        description="Customize language and regional settings."
+        title={t("title")}
+        description={t("description")}
       />
 
       <SettingsCardBody>
         <SettingsField
           icon={Languages}
-          label="Language"
-          description="Choose your preferred language."
+          label={t("language")}
+          description={t("languageDescription")}
         >
           <LanguageSwitcher />
         </SettingsField>
 
         <SettingsField
-          label="Timezone"
-          description="Set your local timezone."
           icon={Clock3}
+          label={t("timezone")}
+          description={t("timezoneDescription")}
         >
           <TimezoneSwitcher />
         </SettingsField>
 
         <SettingsField
           icon={Calendar}
-          label="Date Format"
-          description="Choose how dates are displayed."
+          label={t("dateFormat")}
+          description={t("dateFormatDescription")}
         >
           h3
           {/* <DateFormatSelect /> */}

@@ -1,14 +1,16 @@
 import { Geist_Mono, Inter } from "next/font/google"
 import "@workspace/ui/globals.css"
 import { DirectionProvider } from "@workspace/ui/components/direction"
-import { ThemeProvider } from "@/src/providers/theme-provider"
 import { cn } from "@workspace/ui/lib/utils"
 import { Metadata } from "next"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
-import { routing } from "@/src/i18n/routing"
-import { notFound } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
-import { getDirection } from "@/src/i18n/config"
+import { Suspense } from "react"
+import { routing } from "@/i18n/routing"
+import { getDirection } from "@/i18n/config"
+import CountryProviderServer from "@/providers/country-provider-server"
+import { ThemeProvider } from "@/providers/theme-provider"
+import { notFound } from "next/navigation"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -38,7 +40,7 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) {
-    notFound()
+    return notFound()
   }
 
   setRequestLocale(locale)
@@ -56,11 +58,15 @@ export default async function RootLayout({
       )}
     >
       <body>
-        <DirectionProvider dir={getDirection(locale)}>
-          <ThemeProvider>
-            <NextIntlClientProvider>{children}</NextIntlClientProvider>
-          </ThemeProvider>
-        </DirectionProvider>
+        <Suspense fallback={null}>
+          <NextIntlClientProvider>
+            <DirectionProvider dir={getDirection(locale)}>
+              <CountryProviderServer>
+                <ThemeProvider>{children}</ThemeProvider>
+              </CountryProviderServer>
+            </DirectionProvider>
+          </NextIntlClientProvider>
+        </Suspense>
       </body>
     </html>
   )

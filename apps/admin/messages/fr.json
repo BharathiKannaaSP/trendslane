@@ -84,5 +84,45 @@
       "sessions": "Sessions",
       "signOut": "Se déconnecter"
     }
+  },
+  "CountrySwitcher": {
+    "selectCountry": "Sélectionner un pays",
+    "searchCountry": "Rechercher un pays...",
+    "noCountryFound": "Aucun pays trouvé.",
+    "recent": "Récents",
+    "allCountries": "Tous les pays",
+    "viewAllCountries": "Voir tous les pays",
+    "manageCountries": "Gérer les pays",
+    "manageCountriesDescription": "Ajouter, modifier ou supprimer des pays"
+  },
+  "UserMenu": {
+    "myAccount": "Mon compte",
+    "profile": "Profil",
+    "accountSettings": "Paramètres du compte",
+    "preferences": "Préférences",
+    "activityLogs": "Journaux d'activité",
+    "helpSupport": "Aide et assistance",
+    "logout": "Se déconnecter",
+    "admin": "Administrateur",
+    "organizationAdmin": "Administrateur de l'organisation",
+    "organizationMember": "Membre de l'organisation",
+    "darkMode": "Mode sombre"
+  },
+  "Preferences": {
+    "title": "Préférences",
+    "description": "Gérez vos paramètres et préférences personnels."
+  },
+  "LocalizationPreferences": {
+    "title": "Localisation",
+    "description": "Personnalisez les paramètres de langue et de région.",
+
+    "language": "Langue",
+    "languageDescription": "Choisissez votre langue préférée.",
+
+    "timezone": "Fuseau horaire",
+    "timezoneDescription": "Définissez votre fuseau horaire local.",
+
+    "dateFormat": "Format de date",
+    "dateFormatDescription": "Choisissez la manière dont les dates sont affichées."
   }
 }

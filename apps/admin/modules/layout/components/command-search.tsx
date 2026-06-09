@@ -13,9 +13,9 @@ import {
   CommandList,
   CommandShortcut,
 } from "@workspace/ui/components/command"
-import { useCommandSearch } from "@/src/hooks/use-command-search"
-import { commandGroups } from "@/src/config/commands"
 import { useTranslations } from "next-intl"
+import { useCommandSearch } from "@/hooks/use-command-search"
+import { commandGroups } from "@/config/commands"
 
 const CommandSearch = () => {
   const t = useTranslations("CommandSearch")
@@ -28,7 +28,7 @@ const CommandSearch = () => {
         ref={searchButtonRef}
         onClick={() => setOpen(true)}
         variant="outline"
-        aria-label="Search"
+        aria-label={t("search")}
         className="h-8 w-10 justify-between text-muted-foreground lg:w-60"
       >
         <div className="flex items-center gap-2 text-xs">

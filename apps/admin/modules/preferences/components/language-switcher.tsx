@@ -10,7 +10,7 @@ import {
 import React from "react"
 import { LANGUAGES } from "../constants/languages"
 import { useLocale } from "next-intl"
-import { usePathname, useRouter } from "@/src/i18n/navigation"
+import { usePathname, useRouter } from "@/i18n/navigation"
 
 const LanguageSwitcher = () => {
   const locale = useLocale()

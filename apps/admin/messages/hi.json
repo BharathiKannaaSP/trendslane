@@ -84,5 +84,45 @@
       "sessions": "सत्र",
       "signOut": "साइन आउट"
     }
+  },
+  "CountrySwitcher": {
+    "selectCountry": "देश चुनें",
+    "searchCountry": "देश खोजें...",
+    "noCountryFound": "कोई देश नहीं मिला।",
+    "recent": "हाल ही में",
+    "allCountries": "सभी देश",
+    "viewAllCountries": "सभी देश देखें",
+    "manageCountries": "देश प्रबंधित करें",
+    "manageCountriesDescription": "देश जोड़ें, संपादित करें या हटाएँ"
+  },
+  "UserMenu": {
+    "myAccount": "मेरा खाता",
+    "profile": "प्रोफ़ाइल",
+    "accountSettings": "खाता सेटिंग्स",
+    "preferences": "प्राथमिकताएँ",
+    "activityLogs": "गतिविधि लॉग",
+    "helpSupport": "सहायता और समर्थन",
+    "logout": "लॉग आउट",
+    "admin": "व्यवस्थापक",
+    "organizationAdmin": "संगठन व्यवस्थापक",
+    "organizationMember": "संगठन सदस्य",
+    "darkMode": "डार्क मोड"
+  },
+  "Preferences": {
+    "title": "प्राथमिकताएँ",
+    "description": "अपनी व्यक्तिगत सेटिंग्स और प्राथमिकताओं का प्रबंधन करें।"
+  },
+  "LocalizationPreferences": {
+    "title": "स्थानीयकरण",
+    "description": "भाषा और क्षेत्रीय सेटिंग्स को अनुकूलित करें।",
+
+    "language": "भाषा",
+    "languageDescription": "अपनी पसंदीदा भाषा चुनें।",
+
+    "timezone": "समय क्षेत्र",
+    "timezoneDescription": "अपना स्थानीय समय क्षेत्र सेट करें।",
+
+    "dateFormat": "दिनांक प्रारूप",
+    "dateFormatDescription": "तिथियों को प्रदर्शित करने का तरीका चुनें।"
   }
 }

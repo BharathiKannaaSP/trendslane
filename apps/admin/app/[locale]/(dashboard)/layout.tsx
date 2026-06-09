@@ -1,6 +1,6 @@
-import { AppSidebar } from "@/src/modules/layout/components/app-sidebar"
-import Navbar from "@/src/modules/layout/components/header"
 import { SidebarInset, SidebarProvider } from "@workspace/ui/components/sidebar"
+import { AppSidebar } from "../../../modules/layout/components/app-sidebar"
+import Header from "@/modules/layout/components/header"
 
 export default function DashboardLayout({
   children,
@@ -11,7 +11,7 @@ export default function DashboardLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <Navbar />
+        <Header />
         <main className="flex-1 p-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>

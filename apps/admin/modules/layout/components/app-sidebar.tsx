@@ -15,8 +15,8 @@ import {
   SidebarRail,
 } from "@workspace/ui/components/sidebar"
 import { Logo } from "@workspace/ui/components/logo"
-import { getNavigation } from "@/src/config/sidebar/get-navigation"
 import { useTranslations } from "next-intl"
+import { getNavigation } from "@/config/sidebar/get-navigation"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
