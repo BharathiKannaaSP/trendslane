@@ -4,7 +4,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
-import type { Scale } from "../types"
+import type { Scale } from "../appearance-types"
 import { SCALE_OPTIONS } from "@/modules/preferences/constants/scale-options"
 import { useTranslations } from "next-intl"
 

@@ -2,7 +2,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
-import { ThemeMode } from "../types"
+import { ThemeMode } from "../appearance-types"
 import { THEME_OPTIONS } from "@/modules/preferences/constants/theme-options"
 import { useTranslations } from "next-intl"
 

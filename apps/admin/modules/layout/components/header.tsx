@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@workspace/ui/components/sidebar"
 import CountrySwitcher from "./country-switcher"
 import Notification from "./notification"
 import UserMenu from "./user-menu"
-import { Role } from "@/config/sidebar/types"
+import { Role } from "@/config/sidebar/sidebar-types"
 import { AppearancePopover } from "@/modules/preferences/components/header-appearance/appearance-popover"
 
 const Header = () => {

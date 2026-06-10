@@ -1,7 +1,7 @@
 import { getAdminNavigation } from "./admin-navigation"
 import { getOrgAdminNavigation } from "./org-admin-navigation"
 import { getOrgMemberNavigation } from "./org-member-navigation"
-import { NavItem, RoleType } from "./types"
+import { NavItem, RoleType } from "./sidebar-types"
 
 export function getNavigation(
   role: RoleType,

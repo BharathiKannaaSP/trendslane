@@ -2,7 +2,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
-import { SidebarMode } from "../types"
+import { SidebarMode } from "../appearance-types"
 import { SIDEBAR_OPTIONS } from "@/modules/preferences/constants/sidebar-options"
 import { useTranslations } from "next-intl"
 

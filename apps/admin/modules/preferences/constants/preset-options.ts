@@ -1,4 +1,7 @@
-import { AccentColor, ThemePreset } from "../components/header-appearance/types"
+import {
+  AccentColor,
+  ThemePreset,
+} from "../components/header-appearance/appearance-types"
 
 export const PRESET_OPTIONS: {
   value: ThemePreset

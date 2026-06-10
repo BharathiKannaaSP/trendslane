@@ -1,4 +1,4 @@
-import { Radius } from "../components/header-appearance/types"
+import { Radius } from "../components/header-appearance/appearance-types"
 
 export const RADIUS_OPTIONS: {
   value: Radius

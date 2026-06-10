@@ -11,7 +11,7 @@ import {
   Users,
 } from "lucide-react"
 
-import { NavItem } from "./types"
+import { NavItem } from "./sidebar-types"
 
 export function getOrgAdminNavigation(t: (key: string) => string): NavItem[] {
   return [

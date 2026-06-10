@@ -5,7 +5,7 @@ import {
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
 
-import type { Radius } from "../types"
+import type { Radius } from "../appearance-types"
 import { RADIUS_OPTIONS } from "@/modules/preferences/constants/radius-option"
 import { useTranslations } from "next-intl"
 

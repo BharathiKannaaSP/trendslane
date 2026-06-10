@@ -1,7 +1,7 @@
 "use client"
 
 import { RadiusSelector } from "./selectors/radius-selector"
-import { AppearanceSettings, DEFAULT_APPEARANCE } from "./types"
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "./appearance-types"
 import { Label } from "@workspace/ui/components/label"
 import { PresetSelector } from "./selectors/preset-selector"
 import { ScaleSelector } from "./selectors/scale-selector"

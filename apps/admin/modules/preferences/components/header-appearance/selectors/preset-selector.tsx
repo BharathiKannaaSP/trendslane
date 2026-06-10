@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select"
-import type { ThemePreset } from "../types"
+import type { ThemePreset } from "../appearance-types"
 import { PRESET_OPTIONS } from "@/modules/preferences/constants/preset-options"
 import { cn } from "@workspace/ui/lib/utils"
 import { ACCENT_DOT_CLASS } from "@/modules/preferences/constants/accent-options"

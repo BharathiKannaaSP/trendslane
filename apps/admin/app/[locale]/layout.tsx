@@ -11,6 +11,7 @@ import { getDirection } from "@/i18n/config"
 import CountryProviderServer from "@/providers/country-provider-server"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { notFound } from "next/navigation"
+import { AppearanceProvider } from "@/providers/appearance-provider"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -62,7 +63,9 @@ export default async function RootLayout({
           <NextIntlClientProvider>
             <DirectionProvider dir={getDirection(locale)}>
               <CountryProviderServer>
-                <ThemeProvider>{children}</ThemeProvider>
+                <ThemeProvider>
+                  <AppearanceProvider>{children}</AppearanceProvider>
+                </ThemeProvider>
               </CountryProviderServer>
             </DirectionProvider>
           </NextIntlClientProvider>

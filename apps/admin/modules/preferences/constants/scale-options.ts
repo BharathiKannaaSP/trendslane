@@ -1,4 +1,4 @@
-import { Scale } from "../components/header-appearance/types"
+import { Scale } from "../components/header-appearance/appearance-types"
 
 export const SCALE_OPTIONS: {
   value: Scale
