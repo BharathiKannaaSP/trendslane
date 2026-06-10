@@ -110,19 +110,25 @@
   },
   "Preferences": {
     "title": "प्राथमिकताएँ",
-    "description": "अपनी व्यक्तिगत सेटिंग्स और प्राथमिकताओं का प्रबंधन करें।"
-  },
-  "LocalizationPreferences": {
-    "title": "स्थानीयकरण",
-    "description": "भाषा और क्षेत्रीय सेटिंग्स को अनुकूलित करें।",
-
-    "language": "भाषा",
-    "languageDescription": "अपनी पसंदीदा भाषा चुनें।",
-
-    "timezone": "समय क्षेत्र",
-    "timezoneDescription": "अपना स्थानीय समय क्षेत्र सेट करें।",
-
-    "dateFormat": "दिनांक प्रारूप",
-    "dateFormatDescription": "तिथियों को प्रदर्शित करने का तरीका चुनें।"
+    "description": "अपनी व्यक्तिगत सेटिंग्स और प्राथमिकताओं का प्रबंधन करें।",
+    "Appearance": {
+      "themePreset": "थीम प्रीसेट",
+      "scale": "स्केल",
+      "radius": "कोना त्रिज्या",
+      "accent": "मुख्य रंग",
+      "themeMode": "थीम मोड",
+      "sidebarMode": "साइडबार मोड",
+      "reset": "डिफ़ॉल्ट पर रीसेट करें"
+    },
+    "LocalizationPreferences": {
+      "title": "स्थानीयकरण",
+      "description": "भाषा और क्षेत्रीय सेटिंग्स को अनुकूलित करें।",
+      "language": "भाषा",
+      "languageDescription": "अपनी पसंदीदा भाषा चुनें।",
+      "timezone": "समय क्षेत्र",
+      "timezoneDescription": "अपना स्थानीय समय क्षेत्र सेट करें।",
+      "dateFormat": "दिनांक प्रारूप",
+      "dateFormatDescription": "तिथियों को प्रदर्शित करने का तरीका चुनें।"
+    }
   }
 }

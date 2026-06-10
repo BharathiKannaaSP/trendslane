@@ -10,12 +10,12 @@ import { cn } from "@workspace/ui/lib/utils"
 import type { AccentColor } from "../types"
 import { ACCENT_OPTIONS } from "@/modules/preferences/constants/accent-options"
 
-interface Props {
+interface AccentSelectorProps {
   value: AccentColor
   onChange: (value: AccentColor) => void
 }
 
-export function AccentSelector({ value, onChange }: Props) {
+export function AccentSelector({ value, onChange }: AccentSelectorProps) {
   return (
     <ToggleGroup
       type="single"

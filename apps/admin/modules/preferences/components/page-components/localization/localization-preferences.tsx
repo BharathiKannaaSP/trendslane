@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl"
 import TimezoneSwitcher from "./timezone-switcher"
 
 const LocalizationPreferences = () => {
-  const t = useTranslations("LocalizationPreferences")
+  const t = useTranslations("Preferences.LocalizationPreferences")
   return (
     <SettingsCard>
       <SettingsCardHeader

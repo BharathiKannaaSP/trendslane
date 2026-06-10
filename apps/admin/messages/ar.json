@@ -117,19 +117,25 @@
   },
   "Preferences": {
     "title": "التفضيلات",
-    "description": "قم بإدارة إعداداتك وتفضيلاتك الشخصية."
-  },
-  "LocalizationPreferences": {
-    "title": "الإعدادات المحلية",
-    "description": "خصص إعدادات اللغة والمنطقة.",
-
-    "language": "اللغة",
-    "languageDescription": "اختر لغتك المفضلة.",
-
-    "timezone": "المنطقة الزمنية",
-    "timezoneDescription": "حدد منطقتك الزمنية المحلية.",
-
-    "dateFormat": "تنسيق التاريخ",
-    "dateFormatDescription": "اختر كيفية عرض التواريخ."
+    "description": "قم بإدارة إعداداتك وتفضيلاتك الشخصية.",
+    "Appearance": {
+      "themePreset": "الإعداد المسبق للمظهر",
+      "scale": "المقياس",
+      "radius": "نصف قطر الزوايا",
+      "accent": "لون التمييز",
+      "themeMode": "وضع المظهر",
+      "sidebarMode": "وضع الشريط الجانبي",
+      "reset": "إعادة التعيين إلى الافتراضي"
+    },
+    "LocalizationPreferences": {
+      "title": "الإعدادات المحلية",
+      "description": "خصص إعدادات اللغة والمنطقة.",
+      "language": "اللغة",
+      "languageDescription": "اختر لغتك المفضلة.",
+      "timezone": "المنطقة الزمنية",
+      "timezoneDescription": "حدد منطقتك الزمنية المحلية.",
+      "dateFormat": "تنسيق التاريخ",
+      "dateFormatDescription": "اختر كيفية عرض التواريخ."
+    }
   }
 }

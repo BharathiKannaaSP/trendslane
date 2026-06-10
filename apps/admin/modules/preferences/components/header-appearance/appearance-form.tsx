@@ -1,12 +1,17 @@
 "use client"
 
 import { RadiusSelector } from "./selectors/radius-selector"
-import { AppearanceSettings } from "./types"
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "./types"
 import { Label } from "@workspace/ui/components/label"
 import { PresetSelector } from "./selectors/preset-selector"
 import { ScaleSelector } from "./selectors/scale-selector"
 import { PRESET_OPTIONS } from "../../constants/preset-options"
 import { AccentSelector } from "./selectors/accent-selector"
+import { ThemeSelector } from "./selectors/theme-selector"
+import { SidebarSelector } from "./selectors/sidebar-selector"
+import { Separator } from "@workspace/ui/components/separator"
+import { Button } from "@workspace/ui/components/button"
+import { useTranslations } from "next-intl"
 
 interface Props {
   value: AppearanceSettings
@@ -14,10 +19,11 @@ interface Props {
 }
 
 export function AppearanceForm({ value, onChange }: Props) {
+  const t = useTranslations("Preferences.Appearance")
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="space-y-2">
-        <Label className="text-xs">Theme preset</Label>
+        <Label className="text-xs">{t("themePreset")}</Label>
         <PresetSelector
           value={value.preset}
           onChange={(preset) => {
@@ -34,7 +40,7 @@ export function AppearanceForm({ value, onChange }: Props) {
         />
       </div>
       <div className="space-y-2">
-        <Label className="text-xs">Scale</Label>
+        <Label className="text-xs">{t("scale")}</Label>
 
         <ScaleSelector
           value={value.scale}
@@ -47,7 +53,7 @@ export function AppearanceForm({ value, onChange }: Props) {
         />
       </div>
       <div className="space-y-2">
-        <Label className="text-xs">Radius</Label>
+        <Label className="text-xs">{t("radius")}</Label>
 
         <RadiusSelector
           value={value.radius}
@@ -61,7 +67,7 @@ export function AppearanceForm({ value, onChange }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label className="text-xs">Accent Selector</Label>
+        <Label className="text-xs">{t("accent")}</Label>
 
         <AccentSelector
           value={value.accent}
@@ -73,6 +79,41 @@ export function AppearanceForm({ value, onChange }: Props) {
           }
         />
       </div>
+
+      <div className="space-y-2">
+        <Label className="text-xs">{t("themeMode")}</Label>
+        <ThemeSelector
+          value={value.mode}
+          onChange={(mode) =>
+            onChange({
+              ...value,
+              mode,
+            })
+          }
+        />
+      </div>
+
+      <div className="hidden space-y-2 md:block">
+        <Label className="text-xs">{t("sidebarMode")}</Label>
+        <SidebarSelector
+          value={value.sidebar}
+          onChange={(sidebar) =>
+            onChange({
+              ...value,
+              sidebar,
+            })
+          }
+        />
+      </div>
+      <Separator />
+
+      <Button
+        variant="outline"
+        className="w-full"
+        onClick={() => onChange(DEFAULT_APPEARANCE)}
+      >
+        {t("reset")}
+      </Button>
     </div>
   )
 }

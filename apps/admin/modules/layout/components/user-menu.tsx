@@ -23,7 +23,6 @@ import {
   User,
 } from "lucide-react"
 
-import ThemeSwitcher from "./theme-switcher"
 import { useTranslations } from "next-intl"
 
 const UserMenu = () => {
@@ -89,9 +88,7 @@ const UserMenu = () => {
             </DropdownMenuItem>
           )
         })}
-        <div className="px-1.5 py-1">
-          <ThemeSwitcher />
-        </div>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
           <LogOut className="size-4" />

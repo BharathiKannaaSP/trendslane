@@ -45,7 +45,7 @@ export const DEFAULT_APPEARANCE: AppearanceSettings = {
   mode: "system",
   preset: "default",
   accent: "default",
-  radius: "lg",
+  radius: "md",
   scale: "comfortable",
   sidebar: "default",
 }

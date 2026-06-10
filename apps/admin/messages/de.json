@@ -110,19 +110,25 @@
   },
   "Preferences": {
     "title": "Einstellungen",
-    "description": "Verwalten Sie Ihre persönlichen Einstellungen und Präferenzen."
-  },
-  "LocalizationPreferences": {
-    "title": "Lokalisierung",
-    "description": "Passen Sie Sprach- und Regionseinstellungen an.",
-
-    "language": "Sprache",
-    "languageDescription": "Wählen Sie Ihre bevorzugte Sprache aus.",
-
-    "timezone": "Zeitzone",
-    "timezoneDescription": "Legen Sie Ihre lokale Zeitzone fest.",
-
-    "dateFormat": "Datumsformat",
-    "dateFormatDescription": "Wählen Sie aus, wie Datumsangaben angezeigt werden."
+    "description": "Verwalten Sie Ihre persönlichen Einstellungen und Präferenzen.",
+    "Appearance": {
+      "themePreset": "Designvorgabe",
+      "scale": "Skalierung",
+      "radius": "Eckenradius",
+      "accent": "Akzentfarbe",
+      "themeMode": "Designmodus",
+      "sidebarMode": "Seitenleistenmodus",
+      "reset": "Auf Standard zurücksetzen"
+    },
+    "LocalizationPreferences": {
+      "title": "Lokalisierung",
+      "description": "Passen Sie Sprach- und Regionseinstellungen an.",
+      "language": "Sprache",
+      "languageDescription": "Wählen Sie Ihre bevorzugte Sprache aus.",
+      "timezone": "Zeitzone",
+      "timezoneDescription": "Legen Sie Ihre lokale Zeitzone fest.",
+      "dateFormat": "Datumsformat",
+      "dateFormatDescription": "Wählen Sie aus, wie Datumsangaben angezeigt werden."
+    }
   }
 }

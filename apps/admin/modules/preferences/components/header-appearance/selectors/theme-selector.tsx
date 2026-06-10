@@ -1,30 +1,39 @@
-"use client"
-
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@workspace/ui/components/select"
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@workspace/ui/components/toggle-group"
+import { ThemeMode } from "../types"
+import { THEME_OPTIONS } from "@/modules/preferences/constants/theme-options"
 
-interface Props {
-  value: string
-  onChange: (value: string) => void
+interface ThemeSelectorProps {
+  value: ThemeMode
+  onChange: (value: ThemeMode) => void
 }
 
-export function ThemeSelector({ value, onChange }: Props) {
+export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
   return (
-    <Select value={value} onValueChange={onChange}>
-      <SelectTrigger>
-        <SelectValue />
-      </SelectTrigger>
-
-      <SelectContent>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
-      </SelectContent>
-    </Select>
+    <ToggleGroup
+      type="single"
+      variant="outline"
+      spacing={0}
+      value={value}
+      onValueChange={(value) => {
+        if (value) {
+          onChange(value as ThemeMode)
+        }
+      }}
+      className="w-full"
+    >
+      {THEME_OPTIONS.map((theme) => (
+        <ToggleGroupItem
+          key={theme.value}
+          value={theme.value}
+          className="flex-1 text-xs"
+        >
+          <theme.icon className="size-4" />
+          {theme.label}
+        </ToggleGroupItem>
+      ))}
+    </ToggleGroup>
   )
 }

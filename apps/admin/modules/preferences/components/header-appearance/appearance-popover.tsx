@@ -23,7 +23,7 @@ export function AppearancePopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button aria-label="Appearance" variant="ghost" size="icon">
           <Palette />
         </Button>
       </PopoverTrigger>

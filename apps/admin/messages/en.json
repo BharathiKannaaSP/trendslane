@@ -119,16 +119,25 @@
   },
   "Preferences": {
     "title": "Preferences",
-    "description": "Manage your personal settings and preferences."
-  },
-  "LocalizationPreferences": {
-    "title": "Localization",
-    "description": "Customize language and regional settings.",
-    "language": "Language",
-    "languageDescription": "Choose your preferred language.",
-    "timezone": "Timezone",
-    "timezoneDescription": "Set your local timezone.",
-    "dateFormat": "Date Format",
-    "dateFormatDescription": "Choose how dates are displayed."
+    "description": "Manage your personal settings and preferences.",
+    "Appearance": {
+      "themePreset": "Theme preset",
+      "scale": "Scale",
+      "radius": "Radius",
+      "accent": "Accent color",
+      "themeMode": "Theme mode",
+      "sidebarMode": "Sidebar mode",
+      "reset": "Reset to defaults"
+    },
+    "LocalizationPreferences": {
+      "title": "Localization",
+      "description": "Customize language and regional settings.",
+      "language": "Language",
+      "languageDescription": "Choose your preferred language.",
+      "timezone": "Timezone",
+      "timezoneDescription": "Set your local timezone.",
+      "dateFormat": "Date Format",
+      "dateFormatDescription": "Choose how dates are displayed."
+    }
   }
 }
