@@ -20,7 +20,7 @@ export function AppearancePopover() {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-max" sideOffset={8}>
+      <PopoverContent align="end" className="w-120" sideOffset={8}>
         <div className="flex flex-col">
           <AppearanceForm value={settings} onChange={update} />
         </div>
