@@ -1,10 +1,14 @@
-import { AppearanceSettings } from "../appearance-types"
+import { ACCENTS } from "@/modules/preferences/constants/theme-accents"
+import { AppearanceSettings, ThemePreset } from "../appearance-types"
+import { PRESETS } from "@/modules/preferences/constants/theme-presets"
 
-export function applyAppearance(settings: AppearanceSettings) {
+export function applyAppearance(settings: AppearanceSettings, theme?: string) {
   const root = document.documentElement
+
   root.style.setProperty("--radius", getRadius(settings.radius))
   root.style.setProperty("--font-size-base", getScale(settings.scale))
-  applyAccent(settings.accent)
+  applyPreset(settings.preset, theme === "dark")
+  applyAccent(settings.accent, theme === "dark")
 }
 
 function getRadius(radius: string) {
@@ -45,23 +49,37 @@ function getScale(scale: string) {
   }
 }
 
-function applyAccent(accent: string) {
+export function applyAccent(
+  accent: AppearanceSettings["accent"],
+  isDark: boolean
+) {
   const root = document.documentElement
+  const colors = ACCENTS[accent][isDark ? "dark" : "light"]
 
-  switch (accent) {
-    case "violet":
-      root.style.setProperty("--primary", "oklch(0.62 0.22 300)")
-      break
+  root.style.setProperty("--primary", colors.primary)
+  root.style.setProperty("--primary-foreground", colors.primaryForeground)
+  root.style.setProperty("--sidebar-primary", colors.primary)
+  root.style.setProperty("--ring", colors.primary)
+  root.style.setProperty(
+    "--sidebar-primary-foreground",
+    colors.primaryForeground
+  )
+}
 
-    case "blue":
-      root.style.setProperty("--primary", "oklch(0.6 0.2 250)")
-      break
+export function applyPreset(preset: ThemePreset, isDark: boolean) {
+  const root = document.documentElement
+  const theme = PRESETS[preset][isDark ? "dark" : "light"]
 
-    case "green":
-      root.style.setProperty("--primary", "oklch(0.65 0.2 145)")
-      break
-
-    default:
-      root.style.setProperty("--primary", "oklch(0.205 0 0)")
-  }
+  Object.entries({
+    "--background": theme.background,
+    "--card": theme.card,
+    "--popover": theme.popover,
+    "--sidebar": theme.sidebar,
+    "--muted": theme.muted,
+    "--border": theme.border,
+    "--input": theme.border,
+    "--sidebar-border": theme.border,
+  }).forEach(([property, value]) => {
+    root.style.setProperty(property, value)
+  })
 }

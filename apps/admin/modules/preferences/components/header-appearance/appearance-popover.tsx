@@ -1,7 +1,6 @@
 "use client"
 
 import { Palette } from "lucide-react"
-
 import {
   Popover,
   PopoverContent,
@@ -22,7 +21,9 @@ export function AppearancePopover() {
       </PopoverTrigger>
 
       <PopoverContent className="w-max" sideOffset={8}>
-        <AppearanceForm value={settings} onChange={update} />
+        <div className="flex flex-col">
+          <AppearanceForm value={settings} onChange={update} />
+        </div>
       </PopoverContent>
     </Popover>
   )

@@ -35,6 +35,7 @@ export interface AppearanceSettings {
   mode: ThemeMode
   preset: ThemePreset
   accent: AccentColor
+  accentCustomized: boolean
   radius: Radius
   scale: Scale
   sidebar: SidebarMode
@@ -45,6 +46,7 @@ export const DEFAULT_APPEARANCE: AppearanceSettings = {
   mode: "system",
   preset: "default",
   accent: "default",
+  accentCustomized: false,
   radius: "md",
   scale: "comfortable",
   sidebar: "default",

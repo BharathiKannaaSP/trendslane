@@ -13,7 +13,7 @@ export function SettingsCardHeader({
 }: SettingsCardHeaderProps) {
   return (
     <div className="flex items-start gap-4 border-b p-4">
-      <div className="hidden md:flex size-10 items-center justify-center rounded-full bg-accent-violet-foreground text-accent-violet">
+      <div className="hidden size-10 items-center justify-center rounded-full bg-primary/10 text-primary md:flex">
         <Icon className="size-5" />
       </div>
 

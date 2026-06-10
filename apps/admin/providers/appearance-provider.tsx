@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 import { useTheme } from "next-themes"
+
 import {
   AppearanceSettings,
   DEFAULT_APPEARANCE,
@@ -11,6 +12,7 @@ import { applyAppearance } from "@/modules/preferences/components/header-appeara
 type ContextValue = {
   settings: AppearanceSettings
   update: (settings: AppearanceSettings) => void
+  toggleMode: () => void
 }
 
 const AppearanceContext = createContext<ContextValue | null>(null)
@@ -22,36 +24,52 @@ export function AppearanceProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [settings, setSettings] = useState(DEFAULT_APPEARANCE)
-  const { setTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
+
+  const [settings, setSettings] = useState<AppearanceSettings>(() => {
+    if (typeof window === "undefined") {
+      return DEFAULT_APPEARANCE
+    }
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+
+      return saved
+        ? (JSON.parse(saved) as AppearanceSettings)
+        : DEFAULT_APPEARANCE
+    } catch {
+      return DEFAULT_APPEARANCE
+    }
+  })
+
+  function update(next: AppearanceSettings) {
+    setSettings(next)
+  }
+
+  function toggleMode() {
+    setSettings((prev) => ({
+      ...prev,
+      mode: prev.mode === "dark" ? "light" : "dark",
+    }))
+  }
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
-
-    if (!saved) return
-
-    const parsed = JSON.parse(saved)
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSettings(parsed)
-
-    applyAppearance(parsed)
-
-    setTheme(parsed.mode)
-  }, [setTheme])
-
-  function update(settings: AppearanceSettings) {
-    setSettings(settings)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
-    applyAppearance(settings)
+
     setTheme(settings.mode)
-  }
+
+    const activeTheme =
+      settings.mode === "system" ? (resolvedTheme ?? "light") : settings.mode
+
+    applyAppearance(settings, activeTheme)
+  }, [settings, setTheme, resolvedTheme])
 
   return (
     <AppearanceContext.Provider
       value={{
         settings,
         update,
+        toggleMode,
       }}
     >
       {children}

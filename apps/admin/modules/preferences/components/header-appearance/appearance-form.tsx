@@ -21,7 +21,7 @@ interface Props {
 export function AppearanceForm({ value, onChange }: Props) {
   const t = useTranslations("Preferences.Appearance")
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       <div className="space-y-2">
         <Label className="text-xs">{t("themePreset")}</Label>
         <PresetSelector
@@ -30,11 +30,12 @@ export function AppearanceForm({ value, onChange }: Props) {
             const selectedPreset = PRESET_OPTIONS.find(
               (item) => item.value === preset
             )
-
             onChange({
               ...value,
               preset,
-              accent: selectedPreset?.accent ?? value.accent,
+              accent: value.accentCustomized
+                ? value.accent
+                : (selectedPreset?.accent ?? value.accent),
             })
           }}
         />
@@ -107,11 +108,7 @@ export function AppearanceForm({ value, onChange }: Props) {
       </div>
       <Separator />
 
-      <Button
-        variant="outline"
-        className="w-full"
-        onClick={() => onChange(DEFAULT_APPEARANCE)}
-      >
+      <Button className="w-full" onClick={() => onChange(DEFAULT_APPEARANCE)}>
         {t("reset")}
       </Button>
     </div>
