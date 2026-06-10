@@ -125,7 +125,54 @@
       "accent": "لون التمييز",
       "themeMode": "وضع المظهر",
       "sidebarMode": "وضع الشريط الجانبي",
-      "reset": "إعادة التعيين إلى الافتراضي"
+      "reset": "إعادة التعيين إلى الافتراضي",
+      "appearanceOptions": {
+        "presets": {
+          "default": "افتراضي",
+          "underground": "تحت الأرض",
+          "lakeview": "إطلالة على البحيرة",
+          "forest-whisper": "همسات الغابة",
+          "ocean-breeze": "نسيم المحيط"
+        },
+        "scales": {
+          "compact": "مضغوط",
+          "comfortable": "مريح",
+          "spacious": "واسع"
+        },
+        "radius": {
+          "none": "بدون",
+          "xs": "صغير جدًا",
+          "md": "متوسط",
+          "lg": "كبير",
+          "xl": "كبير جدًا"
+        },
+        "theme": {
+          "light": "فاتح",
+          "dark": "داكن",
+          "system": "النظام"
+        },
+        "sidebar": {
+          "default": "افتراضي",
+          "icon": "أيقونة"
+        },
+        "accent": {
+          "default": "افتراضي",
+          "violet": "بنفسجي",
+          "blue": "أزرق",
+          "green": "أخضر",
+          "orange": "برتقالي",
+          "rose": "وردي",
+          "cyan": "سماوي",
+          "red": "أحمر",
+          "yellow": "أصفر",
+          "lime": "ليموني",
+          "emerald": "زمردي",
+          "teal": "تركوازي",
+          "sky": "سماوي",
+          "indigo": "نيلي",
+          "pink": "وردي"
+        }
+      }
     },
     "LocalizationPreferences": {
       "title": "الإعدادات المحلية",

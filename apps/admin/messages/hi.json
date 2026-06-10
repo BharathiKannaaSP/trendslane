@@ -118,7 +118,54 @@
       "accent": "मुख्य रंग",
       "themeMode": "थीम मोड",
       "sidebarMode": "साइडबार मोड",
-      "reset": "डिफ़ॉल्ट पर रीसेट करें"
+      "reset": "डिफ़ॉल्ट पर रीसेट करें",
+      "appearanceOptions": {
+        "presets": {
+          "default": "डिफ़ॉल्ट",
+          "underground": "अंडरग्राउंड",
+          "lakeview": "लेकव्यू",
+          "forest-whisper": "वन की फुसफुसाहट",
+          "ocean-breeze": "समुद्री हवा"
+        },
+        "scales": {
+          "compact": "कॉम्पैक्ट",
+          "comfortable": "आरामदायक",
+          "spacious": "विशाल"
+        },
+        "radius": {
+          "none": "कोई नहीं",
+          "xs": "अति छोटा",
+          "md": "मध्यम",
+          "lg": "बड़ा",
+          "xl": "अति बड़ा"
+        },
+        "theme": {
+          "light": "हल्का",
+          "dark": "गहरा",
+          "system": "सिस्टम"
+        },
+        "sidebar": {
+          "default": "डिफ़ॉल्ट",
+          "icon": "आइकन"
+        },
+        "accent": {
+          "default": "डिफ़ॉल्ट",
+          "violet": "बैंगनी",
+          "blue": "नीला",
+          "green": "हरा",
+          "orange": "नारंगी",
+          "rose": "गुलाबी",
+          "cyan": "सायन",
+          "red": "लाल",
+          "yellow": "पीला",
+          "lime": "लाइम",
+          "emerald": "पन्ना",
+          "teal": "टील",
+          "sky": "आसमानी",
+          "indigo": "इंडिगो",
+          "pink": "गुलाबी"
+        }
+      }
     },
     "LocalizationPreferences": {
       "title": "स्थानीयकरण",

@@ -127,7 +127,59 @@
       "accent": "Accent color",
       "themeMode": "Theme mode",
       "sidebarMode": "Sidebar mode",
-      "reset": "Reset to defaults"
+      "reset": "Reset to defaults",
+      "appearanceOptions": {
+        "presets": {
+          "default": "Default",
+          "underground": "Underground",
+          "lakeview": "Lakeview",
+          "forest-whisper": "Forest Whisper",
+          "ocean-breeze": "Ocean Breeze"
+        },
+
+        "scales": {
+          "compact": "Compact",
+          "comfortable": "Comfortable",
+          "spacious": "Spacious"
+        },
+
+        "radius": {
+          "none": "None",
+          "xs": "XS",
+          "md": "MD",
+          "lg": "LG",
+          "xl": "XL"
+        },
+
+        "theme": {
+          "light": "Light",
+          "dark": "Dark",
+          "system": "System"
+        },
+
+        "sidebar": {
+          "default": "Default",
+          "icon": "Icon"
+        },
+
+        "accent": {
+          "default": "Default",
+          "violet": "Violet",
+          "blue": "Blue",
+          "green": "Green",
+          "orange": "Orange",
+          "rose": "Rose",
+          "cyan": "Cyan",
+          "red": "Red",
+          "yellow": "Yellow",
+          "lime": "Lime",
+          "emerald": "Emerald",
+          "teal": "Teal",
+          "sky": "Sky",
+          "indigo": "Indigo",
+          "pink": "Pink"
+        }
+      }
     },
     "LocalizationPreferences": {
       "title": "Localization",

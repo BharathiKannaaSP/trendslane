@@ -118,7 +118,54 @@
       "accent": "Akzentfarbe",
       "themeMode": "Designmodus",
       "sidebarMode": "Seitenleistenmodus",
-      "reset": "Auf Standard zurücksetzen"
+      "reset": "Auf Standard zurücksetzen",
+      "appearanceOptions": {
+        "presets": {
+          "default": "Standard",
+          "underground": "Underground",
+          "lakeview": "Seeblick",
+          "forest-whisper": "Waldflüstern",
+          "ocean-breeze": "Meeresbrise"
+        },
+        "scales": {
+          "compact": "Kompakt",
+          "comfortable": "Komfortabel",
+          "spacious": "Geräumig"
+        },
+        "radius": {
+          "none": "Keine",
+          "xs": "Sehr klein",
+          "md": "Mittel",
+          "lg": "Groß",
+          "xl": "Sehr groß"
+        },
+        "theme": {
+          "light": "Hell",
+          "dark": "Dunkel",
+          "system": "System"
+        },
+        "sidebar": {
+          "default": "Standard",
+          "icon": "Symbol"
+        },
+        "accent": {
+          "default": "Standard",
+          "violet": "Violett",
+          "blue": "Blau",
+          "green": "Grün",
+          "orange": "Orange",
+          "rose": "Rosa",
+          "cyan": "Cyan",
+          "red": "Rot",
+          "yellow": "Gelb",
+          "lime": "Limette",
+          "emerald": "Smaragd",
+          "teal": "Blaugrün",
+          "sky": "Himmelblau",
+          "indigo": "Indigo",
+          "pink": "Pink"
+        }
+      }
     },
     "LocalizationPreferences": {
       "title": "Lokalisierung",

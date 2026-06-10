@@ -28,7 +28,7 @@ export function AppearancePopover() {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent sideOffset={8}>
+      <PopoverContent className="w-max" sideOffset={8}>
         <AppearanceForm
           value={settings}
           onChange={(value) => {

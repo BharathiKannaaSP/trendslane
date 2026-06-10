@@ -7,6 +7,7 @@ import {
 
 import type { Radius } from "../types"
 import { RADIUS_OPTIONS } from "@/modules/preferences/constants/radius-option"
+import { useTranslations } from "next-intl"
 
 interface RadiusSelectorProps {
   value: Radius
@@ -14,6 +15,7 @@ interface RadiusSelectorProps {
 }
 
 export function RadiusSelector({ value, onChange }: RadiusSelectorProps) {
+  const t = useTranslations("Preferences.Appearance.appearanceOptions.radius")
   return (
     <ToggleGroup
       type="single"
@@ -33,7 +35,7 @@ export function RadiusSelector({ value, onChange }: RadiusSelectorProps) {
           value={radius.value}
           className="flex-1 text-xs"
         >
-          {radius.label}
+          {t(radius.value)}
         </ToggleGroupItem>
       ))}
     </ToggleGroup>

@@ -6,6 +6,7 @@ import {
 } from "@workspace/ui/components/toggle-group"
 import type { Scale } from "../types"
 import { SCALE_OPTIONS } from "@/modules/preferences/constants/scale-options"
+import { useTranslations } from "next-intl"
 
 interface ScaleSelectorProps {
   value: Scale
@@ -13,6 +14,8 @@ interface ScaleSelectorProps {
 }
 
 export function ScaleSelector({ value, onChange }: ScaleSelectorProps) {
+  const t = useTranslations("Preferences.Appearance.appearanceOptions.scales")
+
   return (
     <ToggleGroup
       type="single"
@@ -30,7 +33,7 @@ export function ScaleSelector({ value, onChange }: ScaleSelectorProps) {
           value={scale.value}
           className="flex-1 text-xs"
         >
-          {scale.label}
+          {t(scale.value)}
         </ToggleGroupItem>
       ))}
     </ToggleGroup>

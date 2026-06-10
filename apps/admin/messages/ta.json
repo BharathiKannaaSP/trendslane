@@ -118,7 +118,54 @@
       "accent": "முக்கிய நிறம்",
       "themeMode": "தீம் பயன்முறை",
       "sidebarMode": "பக்கப்பட்டி பயன்முறை",
-      "reset": "இயல்புநிலைக்கு மீட்டமை"
+      "reset": "இயல்புநிலைக்கு மீட்டமை",
+      "appearanceOptions": {
+        "presets": {
+          "default": "இயல்புநிலை",
+          "underground": "அண்டர்கிரவுண்ட்",
+          "lakeview": "ஏரிக்காட்சி",
+          "forest-whisper": "காட்டு இசைவு",
+          "ocean-breeze": "கடல் தென்றல்"
+        },
+        "scales": {
+          "compact": "சுருக்கமான",
+          "comfortable": "வசதியான",
+          "spacious": "விசாலமான"
+        },
+        "radius": {
+          "none": "இல்லை",
+          "xs": "மிகச் சிறியது",
+          "md": "நடுத்தரம்",
+          "lg": "பெரியது",
+          "xl": "மிகப் பெரியது"
+        },
+        "theme": {
+          "light": "ஒளி",
+          "dark": "இருள்",
+          "system": "கணினி அமைப்பு"
+        },
+        "sidebar": {
+          "default": "இயல்புநிலை",
+          "icon": "ஐகான்"
+        },
+        "accent": {
+          "default": "இயல்புநிலை",
+          "violet": "ஊதா",
+          "blue": "நீலம்",
+          "green": "பச்சை",
+          "orange": "ஆரஞ்சு",
+          "rose": "ரோஜா",
+          "cyan": "சியான்",
+          "red": "சிவப்பு",
+          "yellow": "மஞ்சள்",
+          "lime": "எலுமிச்சை பச்சை",
+          "emerald": "மரகதம்",
+          "teal": "டீல்",
+          "sky": "வானம்",
+          "indigo": "கருநீலம்",
+          "pink": "இளஞ்சிவப்பு"
+        }
+      }
     },
     "LocalizationPreferences": {
       "title": "உள்ளூர்மயமாக்கல்",

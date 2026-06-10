@@ -118,7 +118,54 @@
       "accent": "Couleur d’accentuation",
       "themeMode": "Mode du thème",
       "sidebarMode": "Mode de la barre latérale",
-      "reset": "Réinitialiser par défaut"
+      "reset": "Réinitialiser par défaut",
+      "appearanceOptions": {
+        "presets": {
+          "default": "Par défaut",
+          "underground": "Underground",
+          "lakeview": "Vue sur le lac",
+          "forest-whisper": "Murmure de la forêt",
+          "ocean-breeze": "Brise océanique"
+        },
+        "scales": {
+          "compact": "Compact",
+          "comfortable": "Confortable",
+          "spacious": "Spacieux"
+        },
+        "radius": {
+          "none": "Aucun",
+          "xs": "Très petit",
+          "md": "Moyen",
+          "lg": "Grand",
+          "xl": "Très grand"
+        },
+        "theme": {
+          "light": "Clair",
+          "dark": "Sombre",
+          "system": "Système"
+        },
+        "sidebar": {
+          "default": "Par défaut",
+          "icon": "Icône"
+        },
+        "accent": {
+          "default": "Par défaut",
+          "violet": "Violet",
+          "blue": "Bleu",
+          "green": "Vert",
+          "orange": "Orange",
+          "rose": "Rose",
+          "cyan": "Cyan",
+          "red": "Rouge",
+          "yellow": "Jaune",
+          "lime": "Citron vert",
+          "emerald": "Émeraude",
+          "teal": "Sarcelle",
+          "sky": "Ciel",
+          "indigo": "Indigo",
+          "pink": "Rose"
+        }
+      }
     },
     "LocalizationPreferences": {
       "title": "Localisation",

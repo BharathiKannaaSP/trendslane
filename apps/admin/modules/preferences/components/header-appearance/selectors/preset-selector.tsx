@@ -10,6 +10,7 @@ import type { ThemePreset } from "../types"
 import { PRESET_OPTIONS } from "@/modules/preferences/constants/preset-options"
 import { cn } from "@workspace/ui/lib/utils"
 import { ACCENT_DOT_CLASS } from "@/modules/preferences/constants/accent-options"
+import { useTranslations } from "next-intl"
 
 interface PresetSelectorProps {
   value: ThemePreset
@@ -17,10 +18,11 @@ interface PresetSelectorProps {
 }
 
 export function PresetSelector({ value, onChange }: PresetSelectorProps) {
+  const t = useTranslations("Preferences.Appearance.appearanceOptions.presets")
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="w-full text-xs">
-        <SelectValue placeholder="Select preset" />
+        <SelectValue placeholder={t("default")} />
       </SelectTrigger>
 
       <SelectContent>
@@ -37,7 +39,7 @@ export function PresetSelector({ value, onChange }: PresetSelectorProps) {
                   ACCENT_DOT_CLASS[preset.accent]
                 )}
               />
-              {preset.label}
+              {t(preset.value)}
             </SelectItem>
           ))}
         </SelectGroup>

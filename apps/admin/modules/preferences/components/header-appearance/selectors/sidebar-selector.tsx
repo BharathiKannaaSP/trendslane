@@ -4,6 +4,7 @@ import {
 } from "@workspace/ui/components/toggle-group"
 import { SidebarMode } from "../types"
 import { SIDEBAR_OPTIONS } from "@/modules/preferences/constants/sidebar-options"
+import { useTranslations } from "next-intl"
 
 interface SidebarSelectorProps {
   value: SidebarMode
@@ -11,6 +12,7 @@ interface SidebarSelectorProps {
 }
 
 export function SidebarSelector({ value, onChange }: SidebarSelectorProps) {
+  const t = useTranslations("Preferences.Appearance.appearanceOptions.sidebar")
   return (
     <ToggleGroup
       type="single"
@@ -31,7 +33,7 @@ export function SidebarSelector({ value, onChange }: SidebarSelectorProps) {
           className="flex-1 gap-2 text-xs"
         >
           <option.icon className="size-4" />
-          {option.label}
+          {t(option.value)}
         </ToggleGroupItem>
       ))}
     </ToggleGroup>

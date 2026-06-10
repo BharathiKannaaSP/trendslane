@@ -4,6 +4,7 @@ import {
 } from "@workspace/ui/components/toggle-group"
 import { ThemeMode } from "../types"
 import { THEME_OPTIONS } from "@/modules/preferences/constants/theme-options"
+import { useTranslations } from "next-intl"
 
 interface ThemeSelectorProps {
   value: ThemeMode
@@ -11,6 +12,7 @@ interface ThemeSelectorProps {
 }
 
 export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
+  const t = useTranslations("Preferences.Appearance.appearanceOptions.theme")
   return (
     <ToggleGroup
       type="single"
@@ -31,7 +33,7 @@ export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
           className="flex-1 text-xs"
         >
           <theme.icon className="size-4" />
-          {theme.label}
+          {t(theme.value)}
         </ToggleGroupItem>
       ))}
     </ToggleGroup>
