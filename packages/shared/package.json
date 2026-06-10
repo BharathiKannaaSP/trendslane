@@ -1,0 +1,36 @@
+{
+  "name": "@workspace/shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "@workspace/auth-db": "workspace:*",
+    "@types/express": "^5.0.6",
+    "express": "^5.2.1",
+    "zod": "^4.4.3"
+  },
+   "devDependencies": {
+    "@types/node": "^25.2.3",
+    "@workspace/eslint-config": "workspace:^",
+    "@workspace/typescript-config": "workspace:*",
+    "eslint": "^9.39.2",
+    "tsx": "^4.22.0",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+   ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  }
+}

@@ -90,7 +90,7 @@ export default function CountrySwitcher() {
           role="combobox"
           aria-expanded={open}
           aria-label={t("selectCountry")}
-          className="w-9 lg:w-auto text-xs"
+          className="w-9 text-xs lg:w-auto"
           icon={<Globe className="size-4" />}
           endContent={<ChevronDown className="size-4 opacity-50" />}
         >

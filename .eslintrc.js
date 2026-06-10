@@ -6,8 +6,12 @@ module.exports = {
   ignorePatterns: [
     "**/node_modules/**",
     "**/.next/**",
+    "**/.next",
     "**/dist/**",
     "**/.turbo/**",
     "**/coverage/**",
+    "**/generated/**",
+    "**/_generated/**",
+    "**/convex/_generated/**",
   ],
 }

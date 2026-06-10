@@ -28,7 +28,7 @@ const CommandSearch = () => {
         ref={searchButtonRef}
         onClick={() => setOpen(true)}
         aria-label={t("search")}
-        className="w-10 text-muted-foreground text-xs lg:w-60"
+        className="w-10 text-xs text-muted-foreground lg:w-60"
         icon={<Search className="size-4" />}
         shortcut="⌘ K"
       >

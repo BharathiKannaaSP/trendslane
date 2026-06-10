@@ -1,7 +1,11 @@
 dist/
 node_modules/
 .next/
+**/.next
 .turbo/
 coverage/
 pnpm-lock.yaml
 .pnpm-store/
+next-env.d.ts
+"**/_generated/**",
+"**/generated/**",

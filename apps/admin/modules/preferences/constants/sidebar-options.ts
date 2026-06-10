@@ -1,4 +1,4 @@
-import { PanelLeft, PanelLeftClose } from "lucide-react";
+import { PanelLeft, PanelLeftClose } from "lucide-react"
 
 export const SIDEBAR_OPTIONS = [
   {
