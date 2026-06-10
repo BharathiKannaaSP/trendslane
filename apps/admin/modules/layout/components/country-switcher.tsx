@@ -2,8 +2,6 @@
 
 import React, { useMemo, useState } from "react"
 import Image from "next/image"
-
-import { Button } from "@workspace/ui/components/button"
 import {
   Popover,
   PopoverContent,
@@ -24,6 +22,7 @@ import { setCountryCookie } from "@/lib/country-client"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
+import { IconButton } from "@workspace/ui/components/icon-button"
 
 const countries = [
   {
@@ -86,26 +85,20 @@ export default function CountrySwitcher() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
+        <IconButton
+          variant="iconButton"
           role="combobox"
           aria-expanded={open}
           aria-label={t("selectCountry")}
-          className="h-8 justify-between"
+          className="w-9 lg:w-auto text-xs"
+          icon={<Globe className="size-4" />}
+          endContent={<ChevronDown className="size-4 opacity-50" />}
         >
-          <div className="flex items-center gap-2 text-xs">
-            <Globe className="size-4" />
-
-            <span className="hidden max-w-30 truncate lg:flex">
-              {selectedCountry?.name ?? t("selectCountry")}
-            </span>
-          </div>
-
-          <ChevronDown className="size-4 opacity-50" />
-        </Button>
+          {selectedCountry?.name ?? t("selectCountry")}
+        </IconButton>
       </PopoverTrigger>
 
-      <PopoverContent align="end" sideOffset={8} className="w-[320px] p-0">
+      <PopoverContent sideOffset={8} className="w-[320px] p-0">
         <Command>
           <CommandInput placeholder={t("searchCountry")} />
 

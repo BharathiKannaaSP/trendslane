@@ -1,5 +1,5 @@
 import PageHeader from "@/components/page-header"
-import LocalizationPreferences from "@/modules/preferences/components/localization-preferences"
+import LocalizationPreferences from "@/modules/preferences/components/page-components/localization/localization-preferences"
 import { getTranslations } from "next-intl/server"
 import React from "react"
 

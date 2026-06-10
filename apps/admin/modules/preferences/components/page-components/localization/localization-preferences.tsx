@@ -1,12 +1,12 @@
 import { Calendar, Clock3, Globe, Languages } from "lucide-react"
 import React from "react"
 import LanguageSwitcher from "./language-switcher"
-import TimezoneSwitcher from "./timezone-switcher"
 import { SettingsCard } from "@/components/settings/settings-card"
 import { SettingsCardHeader } from "@/components/settings/settings-card-header"
 import { SettingsCardBody } from "@/components/settings/settings-card-body"
 import { SettingsField } from "@/components/settings/settings-field"
 import { useTranslations } from "next-intl"
+import TimezoneSwitcher from "./timezone-switcher"
 
 const LocalizationPreferences = () => {
   const t = useTranslations("LocalizationPreferences")

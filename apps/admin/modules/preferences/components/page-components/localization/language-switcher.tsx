@@ -8,9 +8,9 @@ import {
   SelectValue,
 } from "@workspace/ui/components/select"
 import React from "react"
-import { LANGUAGES } from "../constants/languages"
 import { useLocale } from "next-intl"
 import { usePathname, useRouter } from "@/i18n/navigation"
+import { LANGUAGES } from "@/modules/preferences/constants/languages"
 
 const LanguageSwitcher = () => {
   const locale = useLocale()

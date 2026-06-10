@@ -1,0 +1,39 @@
+export const ACCENT_DOT_CLASS = {
+  default: "bg-foreground",
+
+  violet: "bg-violet-500",
+  blue: "bg-blue-500",
+  green: "bg-green-500",
+  orange: "bg-orange-500",
+  rose: "bg-rose-500",
+  cyan: "bg-cyan-500",
+
+  red: "bg-red-500",
+  yellow: "bg-yellow-500",
+  lime: "bg-lime-500",
+  emerald: "bg-emerald-500",
+  teal: "bg-teal-500",
+  sky: "bg-sky-500",
+  indigo: "bg-indigo-500",
+  pink: "bg-pink-500",
+} as const
+
+export const ACCENT_OPTIONS = [
+  { value: "default", className: "bg-foreground" },
+
+  { value: "violet", className: "bg-violet-500" },
+  { value: "blue", className: "bg-blue-500" },
+  { value: "green", className: "bg-green-500" },
+  { value: "orange", className: "bg-orange-500" },
+  { value: "rose", className: "bg-rose-500" },
+  { value: "cyan", className: "bg-cyan-500" },
+
+  { value: "red", className: "bg-red-500" },
+  { value: "yellow", className: "bg-yellow-500" },
+  { value: "lime", className: "bg-lime-500" },
+  { value: "emerald", className: "bg-emerald-500" },
+  { value: "teal", className: "bg-teal-500" },
+  { value: "sky", className: "bg-sky-500" },
+  { value: "indigo", className: "bg-indigo-500" },
+  { value: "pink", className: "bg-pink-500" },
+] as const

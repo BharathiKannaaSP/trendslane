@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select"
-import { TIMEZONES } from "../constants/time-zones"
+import { TIMEZONES } from "../../../constants/time-zones"
 
 const TimezoneSwitcher = () => {
   return (

@@ -1,7 +1,5 @@
 "use client"
 import React, { useRef } from "react"
-import { Button } from "@workspace/ui/components/button"
-import { Kbd } from "@workspace/ui/components/kbd"
 import { Search } from "lucide-react"
 import {
   Command,
@@ -13,6 +11,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@workspace/ui/components/command"
+import { IconButton } from "@workspace/ui/components/icon-button"
 import { useTranslations } from "next-intl"
 import { useCommandSearch } from "@/hooks/use-command-search"
 import { commandGroups } from "@/config/commands"
@@ -24,19 +23,17 @@ const CommandSearch = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <Button
+      <IconButton
+        variant="iconButton"
         ref={searchButtonRef}
         onClick={() => setOpen(true)}
-        variant="outline"
         aria-label={t("search")}
-        className="h-8 w-10 justify-between text-muted-foreground lg:w-60"
+        className="w-10 text-muted-foreground text-xs lg:w-60"
+        icon={<Search className="size-4" />}
+        shortcut="⌘ K"
       >
-        <div className="flex items-center gap-2 text-xs">
-          <Search className="h-4 w-4" />
-          <span className="hidden lg:flex">{t("searchAnything")}</span>
-        </div>
-        <Kbd className="hidden px-1.5 text-xs lg:flex">⌘ K</Kbd>
-      </Button>
+        {t("searchAnything")}
+      </IconButton>
 
       <CommandDialog
         open={open}
