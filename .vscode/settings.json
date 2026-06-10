@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["contenteditable", "lakeview", "oklch"]
+  "cSpell.words": ["contenteditable", "lakeview", "oklch"],
+  "prisma.pinToPrisma6": true
 }
