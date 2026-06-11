@@ -4,7 +4,7 @@
   "description": "Auth service",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "lint": "eslint",
