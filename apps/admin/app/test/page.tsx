@@ -1,7 +1,7 @@
 import React from "react"
 
-const DeployCheck2 = () => {
-  return <div>DeployCheck2</div>
+const DeployCheck = () => {
+  return <div>DeployCheck</div>
 }
 
-export default DeployCheck2
+export default DeployCheck
