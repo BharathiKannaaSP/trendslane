@@ -2,8 +2,8 @@
 
 import React from "react"
 import { Logo } from "@workspace/ui/components/logo"
-import LanguageSwitcher from "../preferences/components/page-components/localization/language-switcher"
-import { ThemeSelector } from "../preferences/components/header-appearance/selectors/theme-selector"
+import LanguageSwitcher from "../../preferences/components/page-components/localization/language-switcher"
+import { ThemeSelector } from "../../preferences/components/header-appearance/selectors/theme-selector"
 import { useAppearance } from "@/providers/appearance-provider"
 
 const AuthHeader = () => {

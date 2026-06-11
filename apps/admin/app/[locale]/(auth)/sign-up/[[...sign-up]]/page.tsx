@@ -1,4 +1,4 @@
-import { AuthLayout } from "@/modules/auth/auth-layout"
+import { AuthLayout } from "@/modules/auth/components/auth-page"
 import { SignUp } from "@clerk/nextjs"
 import { getTranslations } from "next-intl/server"
 

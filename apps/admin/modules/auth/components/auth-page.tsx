@@ -7,11 +7,11 @@ import { MorphingText } from "@workspace/ui/components/morphing-text"
 import { Button } from "@workspace/ui/components/button"
 import { Spinner } from "@workspace/ui/components/spinner"
 
-import { footerLinks } from "@/modules/auth/constants"
-import AuthHeader from "@/modules/auth/auth-header"
+import AuthHeader from "@/modules/auth/components/auth-header"
 import { cn } from "@workspace/ui/lib/utils"
 import { getDirection } from "@/i18n/config"
 import { getLocale, getTranslations } from "next-intl/server"
+import { footerLinks } from "../constants/auth-constants"
 
 interface AuthLayoutProps {
   children: ReactNode

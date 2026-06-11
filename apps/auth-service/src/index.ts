@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import { clerkMiddleware } from "@clerk/express"
 import clerkWebHookRoutes from "./modules/users/webhooks/clerk/clerk.routes"
+import userRoutes from "./modules/users/user.routes"
 import { getCurrentTimestamp } from "@workspace/shared"
 import { errorHandler } from "./errors/error-handler"
 
@@ -32,6 +33,9 @@ app.get("/api/v1/health", (_req, res) => {
     service: "Auth Service is running!",
   })
 })
+
+// User
+app.use("/api/v1/user", userRoutes)
 
 app.use(errorHandler)
 
