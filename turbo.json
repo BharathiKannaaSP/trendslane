@@ -10,7 +10,11 @@
     "ANALYZE",
     "CLERK_SECRET_KEY",
     "CONVEX_URL",
-    "CORS_ORIGIN_ADMIN"
+    "CORS_ORIGIN_ADMIN",
+    "AUTH_DATABASE_URL",
+    "UPLOADTHING_TOKEN",
+    "CONVEX_DEPLOYMENT",
+    "CONVEX_SITE_URL"
   ],
   "tasks": {
     "build": {
