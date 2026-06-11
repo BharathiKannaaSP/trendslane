@@ -1,6 +1,6 @@
 import { UserJSON } from "@clerk/express"
 import { prisma, SystemRole } from "@workspace/auth-db"
-import { ApiError } from "@workspace/shared"
+import { ApiError } from "../../../../../errors/api-error"
 
 export async function handleUserCreated(data: UserJSON) {
   const email = data.email_addresses[0]?.email_address

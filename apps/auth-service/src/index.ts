@@ -3,7 +3,8 @@ import dotenv from "dotenv"
 import cors from "cors"
 import { clerkMiddleware } from "@clerk/express"
 import clerkWebHookRoutes from "./modules/users/webhooks/clerk/clerk.routes"
-import { getCurrentTimestamp, errorHandler } from "@workspace/shared"
+import { getCurrentTimestamp } from "@workspace/shared"
+import { errorHandler } from "./errors/error-handler"
 
 dotenv.config()
 
