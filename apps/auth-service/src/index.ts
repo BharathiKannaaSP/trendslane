@@ -16,7 +16,7 @@ app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ limit: "10mb", extended: true }))
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: process.env.CORS_ORIGIN_ADMIN,
     credentials: true,
   })
 )
@@ -34,8 +34,10 @@ app.get("/api/v1/health", (_req, res) => {
 
 app.use(errorHandler)
 
-app.listen(process.env.AUTH_PORT, () => {
-  console.log("Auth Service is running on port " + process.env.AUTH_PORT)
+const PORT = process.env.PORT || 8000
+
+app.listen(PORT, () => {
+  console.log("Auth Service is running on port " + PORT)
 })
 
 export default app
