@@ -13,6 +13,7 @@ type ContextValue = {
   settings: AppearanceSettings
   update: (settings: AppearanceSettings) => void
   toggleMode: () => void
+  isHydrated: boolean
 }
 
 const AppearanceContext = createContext<ContextValue | null>(null)
@@ -26,21 +27,25 @@ export function AppearanceProvider({
 }) {
   const { setTheme, resolvedTheme } = useTheme()
 
-  const [settings, setSettings] = useState<AppearanceSettings>(() => {
-    if (typeof window === "undefined") {
-      return DEFAULT_APPEARANCE
-    }
+  const [settings, setSettings] =
+    useState<AppearanceSettings>(DEFAULT_APPEARANCE)
 
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
 
-      return saved
-        ? (JSON.parse(saved) as AppearanceSettings)
-        : DEFAULT_APPEARANCE
+      if (saved) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSettings(JSON.parse(saved))
+      }
     } catch {
-      return DEFAULT_APPEARANCE
+      // ignore
+    } finally {
+      setIsHydrated(true)
     }
-  })
+  }, [])
 
   function update(next: AppearanceSettings) {
     setSettings(next)
@@ -70,6 +75,7 @@ export function AppearanceProvider({
         settings,
         update,
         toggleMode,
+        isHydrated,
       }}
     >
       {children}

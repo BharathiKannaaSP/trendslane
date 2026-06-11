@@ -12,6 +12,11 @@ import CountryProviderServer from "@/providers/country-provider-server"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { notFound } from "next/navigation"
 import { AppearanceProvider } from "@/providers/appearance-provider"
+import { ClerkProvider } from "@clerk/nextjs"
+import NextTopLoader from "nextjs-toploader"
+import { shadcn } from "@clerk/themes"
+import { frFR, taIN } from "@clerk/localizations"
+import { mapClerkLocale } from "@workspace/shared"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -44,6 +49,7 @@ export default async function RootLayout({
     return notFound()
   }
 
+  const clerkLocale = mapClerkLocale(locale)
   setRequestLocale(locale)
 
   return (
@@ -60,13 +66,21 @@ export default async function RootLayout({
     >
       <body>
         <Suspense fallback={null}>
+          <NextTopLoader color="oklch(0.556 0 0)" />
           <NextIntlClientProvider>
             <DirectionProvider dir={getDirection(locale)}>
-              <CountryProviderServer>
-                <ThemeProvider>
-                  <AppearanceProvider>{children}</AppearanceProvider>
-                </ThemeProvider>
-              </CountryProviderServer>
+              <ClerkProvider
+                localization={clerkLocale}
+                appearance={{
+                  theme: shadcn,
+                }}
+              >
+                <CountryProviderServer>
+                  <ThemeProvider>
+                    <AppearanceProvider>{children}</AppearanceProvider>
+                  </ThemeProvider>
+                </CountryProviderServer>
+              </ClerkProvider>
             </DirectionProvider>
           </NextIntlClientProvider>
         </Suspense>

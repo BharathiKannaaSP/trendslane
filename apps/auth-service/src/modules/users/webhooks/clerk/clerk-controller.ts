@@ -2,6 +2,7 @@ import type { Request, Response } from "express"
 import { processClerkWebhook } from "./clerk.service"
 
 export async function clerkWebhookController(req: Request, res: Response) {
+  console.log('Entered controller webhook')
   try {
     await processClerkWebhook(req)
 

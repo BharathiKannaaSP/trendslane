@@ -1,4 +1,29 @@
 {
+  "Auth": {
+    "build": "Erstellen",
+    "morphingText": [
+      "Produkte",
+      "Kataloge",
+      "Kollektionen",
+      "Kampagnen",
+      "Erlebnisse",
+      "Märkte",
+      "Storefronts",
+      "Workflows",
+      "Betriebsabläufe",
+      "Commerce"
+    ],
+    "descriptions": {
+      "signIn": "Melden Sie sich an, um Produkte, Kataloge, Teams und globale Commerce-Abläufe über einen zentralen Workspace für moderne Einzelhandelsunternehmen zu verwalten.",
+      "signUp": "Erstellen Sie Ihren Trendslane-Workspace und beginnen Sie, Produkte, Kataloge, Teams und globale Commerce-Abläufe an einem Ort zu verwalten."
+    },
+    "footerLinks": {
+      "about": "Über uns",
+      "blog": "Blog",
+      "termsAndConditions": "Allgemeine Geschäftsbedingungen",
+      "privacyPolicies": "Datenschutzrichtlinien"
+    }
+  },
   "Navigation": {
     "platform": {
       "title": "Plattform",
@@ -142,7 +167,9 @@
         "theme": {
           "light": "Hell",
           "dark": "Dunkel",
-          "system": "System"
+          "system": "System",
+          "switchToLightMode": "Zum hellen Modus wechseln",
+          "switchToDarkMode": "Zum dunklen Modus wechseln"
         },
         "sidebar": {
           "default": "Standard",

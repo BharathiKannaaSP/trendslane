@@ -13,13 +13,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@clerk/localizations": "^4.8.0",
     "@prisma/client": "^6.19.3",
-    "@workspace/auth-db": "workspace:*",
     "@types/express": "^5.0.6",
+    "@workspace/auth-db": "workspace:*",
     "express": "^5.2.1",
     "zod": "^4.4.3"
   },
-   "devDependencies": {
+  "devDependencies": {
     "@types/node": "^25.2.3",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
@@ -28,7 +29,7 @@
     "typescript": "^6.0.3"
   },
   "exports": {
-   ".": {
+    ".": {
       "import": "./src/index.ts",
       "types": "./src/index.ts"
     }

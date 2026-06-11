@@ -1,4 +1,29 @@
 {
+  "Auth": {
+    "build": "Créez",
+    "morphingText": [
+      "produits",
+      "catalogues",
+      "collections",
+      "campagnes",
+      "expériences",
+      "marchés",
+      "boutiques",
+      "flux de travail",
+      "opérations",
+      "commerce"
+    ],
+    "descriptions": {
+      "signIn": "Connectez-vous pour gérer les produits, catalogues, équipes et opérations commerciales mondiales depuis un espace de travail unique conçu pour les entreprises de vente au détail modernes.",
+      "signUp": "Créez votre espace de travail Trendslane et commencez à gérer les produits, catalogues, équipes et opérations commerciales mondiales depuis un seul endroit."
+    },
+    "footerLinks": {
+      "about": "À propos",
+      "blog": "Blog",
+      "termsAndConditions": "Conditions générales",
+      "privacyPolicies": "Politiques de confidentialité"
+    }
+  },
   "Navigation": {
     "platform": {
       "title": "Plateforme",
@@ -142,7 +167,9 @@
         "theme": {
           "light": "Clair",
           "dark": "Sombre",
-          "system": "Système"
+          "system": "Système",
+          "switchToLightMode": "Passer au mode clair",
+          "switchToDarkMode": "Passer au mode sombre"
         },
         "sidebar": {
           "default": "Par défaut",

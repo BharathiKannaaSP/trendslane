@@ -1,4 +1,29 @@
 {
+  "Auth": {
+    "build": "Build",
+    "morphingText": [
+      "products",
+      "catalogs",
+      "collections",
+      "campaigns",
+      "experiences",
+      "markets",
+      "storefronts",
+      "workflows",
+      "operations",
+      "commerce"
+    ],
+    "descriptions": {
+      "signIn": "Sign in to manage products, catalogs, teams, and global commerce operations from a single workspace built for modern retail businesses.",
+      "signUp": "Create your Trendslane workspace and start managing products, catalogs, teams, and global commerce operations from one place."
+    },
+    "footerLinks": {
+      "about": "About",
+      "blog": "Blog",
+      "termsAndConditions": "Terms and Conditions",
+      "privacyPolicies": "Privacy Policies"
+    }
+  },
   "Navigation": {
     "platform": {
       "title": "Platform",
@@ -154,7 +179,9 @@
         "theme": {
           "light": "Light",
           "dark": "Dark",
-          "system": "System"
+          "system": "System",
+          "switchToLightMode": "Switch to light mode",
+          "switchToDarkMode": "Switch to dark mode"
         },
 
         "sidebar": {
