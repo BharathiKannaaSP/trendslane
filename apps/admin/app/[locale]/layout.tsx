@@ -15,7 +15,6 @@ import { AppearanceProvider } from "@/providers/appearance-provider"
 import { ClerkProvider } from "@clerk/nextjs"
 import NextTopLoader from "nextjs-toploader"
 import { shadcn } from "@clerk/themes"
-import { frFR, taIN } from "@clerk/localizations"
 import { mapClerkLocale } from "@workspace/shared"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })

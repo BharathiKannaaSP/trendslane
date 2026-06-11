@@ -78,7 +78,7 @@ export async function AuthLayout({ children, description }: AuthLayoutProps) {
         </div>
 
         {/* Auth Section - Only this side scrolls */}
-        <div className="pt-10 flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto pt-10">
           <div className="flex min-h-full justify-center px-6 py-8 lg:items-center">
             <Suspense fallback={<Spinner />}>{children}</Suspense>
           </div>

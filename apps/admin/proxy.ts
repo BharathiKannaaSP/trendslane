@@ -21,21 +21,16 @@ const isProtectedRoute = createRouteMatcher([
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth()
 
-  const locale =
-    req.nextUrl.pathname.split("/")[1] || routing.defaultLocale
+  const locale = req.nextUrl.pathname.split("/")[1] || routing.defaultLocale
 
   // Not signed in -> redirect to locale sign-in page
   if (!userId && isProtectedRoute(req)) {
-    return NextResponse.redirect(
-      new URL(`/${locale}/sign-in`, req.url)
-    )
+    return NextResponse.redirect(new URL(`/${locale}/sign-in`, req.url))
   }
 
   // Already signed in -> prevent access to auth pages
   if (userId && isAuthRoute(req)) {
-    return NextResponse.redirect(
-      new URL(`/${locale}`, req.url)
-    )
+    return NextResponse.redirect(new URL(`/${locale}`, req.url))
   }
 
   return intlMiddleware(req)
