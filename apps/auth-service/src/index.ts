@@ -28,7 +28,7 @@ app.get("/api/v1/health", (_req, res) => {
   res.status(200).json({
     status: "ok",
     timestamp,
-    service: "Auth Service is running!",
+    service: "Auth Service is running!!!",
   })
 })
 

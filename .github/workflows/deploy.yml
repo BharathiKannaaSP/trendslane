@@ -10,132 +10,38 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # 1. LINT
-  lint:
+  ci:
+    name: Lint • Typecheck • Build
     runs-on: ubuntu-latest
-
-    outputs:
-      changed: ${{ steps.changes.outputs.changed }}
-
-    steps:
-      - name: 🛎️ Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: ⚙️ Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: 🧩 Setup PNPM
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-
-      - name: 💾 Cache Turbo
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
-      - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
-
-      - name: 🔍 Detect Changed Apps
-        id: changes
-        run: |
-          echo "Checking changed apps..."
-
-          if [ "$(git rev-list --count HEAD)" -eq 1 ]; then
-            CHANGED=$(ls apps | xargs)
-          else
-            CHANGED=$(git diff --name-only HEAD~1 HEAD \
-              | grep '^apps/' \
-              | cut -d'/' -f2 \
-              | sort -u \
-              | xargs)
-          fi
-
-          if [ -z "$CHANGED" ]; then
-            CHANGED="none"
-          fi
-
-          echo "Changed apps: $CHANGED"
-          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
-
-      - name: 🧹 Run Lint
-        if: steps.changes.outputs.changed != 'none'
-        run: |
-          for app in ${{ steps.changes.outputs.changed }}; do
-            echo "Linting $app..."
-            pnpm turbo run lint --filter=$app
-          done
-
-  # 2. TYPECHECK
-  typecheck:
-    runs-on: ubuntu-latest
-    needs: lint
-
-    steps:
-      - name: 🛎️ Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: ⚙️ Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: 🧩 Setup PNPM
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-
-      - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
-
-      - name: 🔎 Run Typecheck
-        if: needs.lint.outputs.changed != 'none'
-        run: |
-          for app in ${{ needs.lint.outputs.changed }}; do
-            echo "Typechecking $app..."
-            pnpm turbo run typecheck --filter=$app
-          done
-
-  # =========================
-  # 3. BUILD
-  # =========================
-  build:
-    runs-on: ubuntu-latest
-
-    needs:
-      - lint
-      - typecheck
-
-    outputs:
-      changed: ${{ needs.lint.outputs.changed }}
 
     env:
-      DATABASE_URL: ${{ secrets.AUTH_SERVICE_DB }}
-      DIRECT_URL: ${{ secrets.AUTH_SERVICE_DIRECT_URL }}
+      AUTH_DATABASE_URL: ${{ secrets.AUTH_DATABASE_URL }}
 
     steps:
-      - name: 🛎️ Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: ⚙️ Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: 🧩 Setup PNPM
+      - name: Setup PNPM
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
 
-      - name: 💾 Cache Turbo
+      - name: Cache PNPM Store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Cache Turbo
         uses: actions/cache@v4
         with:
           path: .turbo
@@ -143,30 +49,25 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
 
-      - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: 🧬 Generate Prisma Client
-        run: pnpm --filter=auth-db run db:generate
+      - name: Generate Prisma Client
+        run: pnpm --filter=@workspace/auth-db run db:generate
 
-      - name: 🏗️ Build Changed Apps
-        if: needs.lint.outputs.changed != 'none'
-        run: |
-          for app in ${{ needs.lint.outputs.changed }}; do
-            echo "Building $app..."
-            pnpm turbo run build --filter=$app
-          done
+      - name: Run Lint
+        run: pnpm turbo run lint
 
-  # =========================
-  # 4. DEPLOY
-  # =========================
+      - name: Run Typecheck
+        run: pnpm turbo run typecheck
+
+      - name: Run Build
+        run: pnpm turbo run build
+
   deploy:
+    name: Deploy Applications
     runs-on: ubuntu-latest
-
-    needs:
-      - build
-
-    if: needs.build.outputs.changed != 'none'
+    needs: ci
 
     permissions:
       contents: read
@@ -181,48 +82,36 @@ jobs:
       RENDER_AUTH_SERVICE_ID: ${{ secrets.RENDER_AUTH_SERVICE_ID }}
 
     steps:
-      - name: 🛎️ Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: 🧩 Setup PNPM
+      - name: Setup PNPM
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
 
-      - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: 🚀 Deploy Changed Apps
+      - name: Deploy Admin to Vercel
         run: |
-          for app in ${{ needs.build.outputs.changed }}; do
+          cd apps/admin
 
-            if [ "$app" = "admin" ]; then
-              echo "🚀 Deploying Admin to Vercel"
+          VERCEL_ORG_ID=$VERCEL_ORG_ID \
+          VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID_ADMIN \
+          npx vercel deploy \
+            --prod \
+            --yes \
+            --token=$VERCEL_TOKEN
 
-              cd apps/admin
-
-              VERCEL_ORG_ID=$VERCEL_ORG_ID \
-              VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID_ADMIN \
-              npx vercel deploy \
-                --prod \
-                --yes \
-                --token=$VERCEL_TOKEN
-
-              cd ../..
-            fi
-
-            if [ "$app" = "auth-service" ]; then
-              echo "🚀 Deploying Auth Service to Render"
-
-              curl -X POST \
-                "https://api.render.com/v1/services/$RENDER_AUTH_SERVICE_ID/deploys" \
-                -H "Authorization: Bearer $RENDER_API_KEY" \
-                -H "Accept: application/json"
-            fi
-
-          done
+      - name: Deploy Auth Service to Render
+        run: |
+          curl -X POST \
+            "https://api.render.com/v1/services/$RENDER_AUTH_SERVICE_ID/deploys" \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Accept: application/json"
