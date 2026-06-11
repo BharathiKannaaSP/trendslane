@@ -15,6 +15,7 @@ export type MembershipStatus = "PENDING" | "APPROVED" | "REJECTED"
 
 export type OnboardingStatus =
   | "PENDING"
+  | "IN_PROGRESS"
   | "WAITING_APPROVAL"
   | "APPROVED"
   | "REJECTED"

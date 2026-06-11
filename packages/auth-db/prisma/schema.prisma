@@ -34,6 +34,7 @@ enum InvitationStatus {
 
 enum OnboardingStatus {
   PENDING
+  IN_PROGRESS
   WAITING_APPROVAL
   APPROVED
   REJECTED

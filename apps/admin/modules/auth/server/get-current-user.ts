@@ -4,7 +4,8 @@ export async function getCurrentUser() {
   try {
     const { user } = await authRepository.getCurrentUser()
     return user
-  } catch {
+  } catch (error) {
+    console.error("getCurrentUser failed", error)
     return null
   }
 }

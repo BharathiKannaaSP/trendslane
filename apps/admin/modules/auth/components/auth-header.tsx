@@ -26,7 +26,6 @@ const AuthHeader = () => {
             }
           />
         )}
-
         <LanguageSwitcher />
       </div>
     </div>

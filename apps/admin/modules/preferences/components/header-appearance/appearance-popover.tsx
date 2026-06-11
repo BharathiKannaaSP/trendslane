@@ -11,7 +11,7 @@ import { AppearanceForm } from "./appearance-form"
 import { useAppearance } from "@/providers/appearance-provider"
 
 export function AppearancePopover() {
-  const { settings, update } = useAppearance()
+  const { settings, update, isHydrated } = useAppearance()
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -22,7 +22,11 @@ export function AppearancePopover() {
 
       <PopoverContent align="end" className="w-120" sideOffset={8}>
         <div className="flex flex-col">
-          <AppearanceForm value={settings} onChange={update} />
+          <AppearanceForm
+            value={settings}
+            onChange={update}
+            isHydrated={isHydrated}
+          />
         </div>
       </PopoverContent>
     </Popover>

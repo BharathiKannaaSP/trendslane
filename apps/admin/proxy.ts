@@ -11,12 +11,7 @@ const isAuthRoute = createRouteMatcher([
   "/:locale/legal(.*)",
 ])
 
-const isProtectedRoute = createRouteMatcher([
-  "/:locale",
-  "/:locale/onboarding(.*)",
-  "/:locale/pending-approval(.*)",
-  "/:locale/create-organization(.*)",
-])
+const isProtectedRoute = createRouteMatcher(["/:locale"])
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth()

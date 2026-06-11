@@ -29,7 +29,7 @@ export async function serverApi<T>(
       "Authentication required. Please sign in to access this resource."
     )
   }
-
+  
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_AUTH_URL}${endpoint}`,
     {

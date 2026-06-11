@@ -53,7 +53,12 @@ export default async function ProfilePage() {
           <p>
             <strong>Onboarding:</strong> {user.onboardingStatus}
           </p>
-
+          <div>
+            <strong>User:</strong>
+            <pre className="mt-2 overflow-auto rounded-md bg-muted p-4 text-sm">
+              {JSON.stringify(user, null, 2)}
+            </pre>
+          </div>
           <div>
             <strong>Memberships:</strong>
             <pre className="mt-2 overflow-auto rounded-md bg-muted p-4 text-sm">

@@ -8,18 +8,21 @@ import { ScaleSelector } from "./selectors/scale-selector"
 import { PRESET_OPTIONS } from "../../constants/preset-options"
 import { AccentSelector } from "./selectors/accent-selector"
 import { ThemeSelector } from "./selectors/theme-selector"
-import { SidebarSelector } from "./selectors/sidebar-selector"
-import { Separator } from "@workspace/ui/components/separator"
 import { Button } from "@workspace/ui/components/button"
 import { useTranslations } from "next-intl"
 import { ScrollArea } from "@workspace/ui/components/scroll-area"
 
-interface Props {
+interface AppearanceFormProps {
   value: AppearanceSettings
   onChange: (value: AppearanceSettings) => void
+  isHydrated: boolean
 }
 
-export function AppearanceForm({ value, onChange }: Props) {
+export function AppearanceForm({
+  value,
+  onChange,
+  isHydrated,
+}: AppearanceFormProps) {
   const t = useTranslations("Preferences.Appearance")
   return (
     <>
@@ -86,18 +89,20 @@ export function AppearanceForm({ value, onChange }: Props) {
 
           <div className="space-y-2">
             <Label className="text-xs">{t("themeMode")}</Label>
-            <ThemeSelector
-              value={value.mode}
-              onChange={(mode) =>
-                onChange({
-                  ...value,
-                  mode,
-                })
-              }
-            />
+            {isHydrated && (
+              <ThemeSelector
+                value={value.mode}
+                onChange={(mode) =>
+                  onChange({
+                    ...value,
+                    mode,
+                  })
+                }
+              />
+            )}
           </div>
 
-          <div className="hidden space-y-2 md:block">
+          {/* <div className="hidden space-y-2 md:block">
             <Label className="text-xs">{t("sidebarMode")}</Label>
             <SidebarSelector
               value={value.sidebar}
@@ -108,10 +113,9 @@ export function AppearanceForm({ value, onChange }: Props) {
                 })
               }
             />
-          </div>
+          </div> */}
         </div>
       </ScrollArea>
-      <Separator />
       <div className="border-tpt-4 sticky bottom-0 mt-4">
         <Button className="w-full" onClick={() => onChange(DEFAULT_APPEARANCE)}>
           {t("reset")}

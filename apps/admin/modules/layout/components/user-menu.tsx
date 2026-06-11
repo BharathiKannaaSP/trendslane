@@ -24,8 +24,10 @@ import {
 } from "lucide-react"
 
 import { useTranslations } from "next-intl"
+import { useClerk } from "@clerk/nextjs"
 
 const UserMenu = () => {
+  const { signOut } = useClerk()
   const t = useTranslations("UserMenu")
   const menuItems = [
     {
@@ -90,9 +92,9 @@ const UserMenu = () => {
         })}
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">
+        <DropdownMenuItem variant="destructive" onClick={() => signOut()}>
           <LogOut className="size-4" />
-          <span>{t("logout")}</span>
+          <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -59,6 +59,7 @@ export function AppearanceProvider({
   }
 
   useEffect(() => {
+    if (!isHydrated) return
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
 
     setTheme(settings.mode)
@@ -67,7 +68,7 @@ export function AppearanceProvider({
       settings.mode === "system" ? (resolvedTheme ?? "light") : settings.mode
 
     applyAppearance(settings, activeTheme)
-  }, [settings, setTheme, resolvedTheme])
+  }, [settings, setTheme, resolvedTheme, isHydrated])
 
   return (
     <AppearanceContext.Provider
