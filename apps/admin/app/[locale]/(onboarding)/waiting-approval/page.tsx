@@ -5,11 +5,11 @@ import OnboardingStepper from "@/modules/onboarding/components/onboarding-steppe
 import OnboardingBasicInformationForm from "@/modules/onboarding/forms/onboarding-basic-information-form"
 import React from "react"
 
-const CreateOrganization = async () => {
+const RequestStatus = async () => {
   const user = await onboardingGate({
-    type: "ACCOUNT_SELECTION",
-    accountType: "ORG_ADMIN",
+    type: "REQUEST_STATUS",
   })
+
   return (
     <>
       <OnboardingHeader />
@@ -21,11 +21,11 @@ const CreateOrganization = async () => {
           />
         }
       >
-        NEEDS TO CHANGE FORM CREATE ORG
+        NEEDS TO CHANGE FORM WAITING APPROVAL
         <OnboardingBasicInformationForm />
       </OnboardingLayout>
     </>
   )
 }
 
-export default CreateOrganization
+export default RequestStatus

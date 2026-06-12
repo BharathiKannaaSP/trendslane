@@ -1,6 +1,12 @@
 import { UserJSON } from "@clerk/express"
-import { prisma, SystemRole } from "@workspace/auth-db"
+import {
+  OnboardingStatus,
+  OnboardingStep,
+  prisma,
+  SystemRole,
+} from "@workspace/auth-db"
 import { ApiError } from "../../../../../errors/api-error"
+import { getCurrentTimestamp } from "@workspace/shared"
 
 export async function handleUserCreated(data: UserJSON) {
   const email = data.email_addresses[0]?.email_address
@@ -33,8 +39,9 @@ export async function handleUserCreated(data: UserJSON) {
       lastName,
       imageUrl: data.image_url,
       systemRole: SystemRole.USER,
-      countryCode: "IN",
-      countryName: "India",
+      onboardingStatus: OnboardingStatus.PENDING,
+      onboardingStep: OnboardingStep.BASIC_INFORMATION,
+      onboardingStartedAt: getCurrentTimestamp(),
     },
   })
 }

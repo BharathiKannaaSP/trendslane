@@ -25,7 +25,7 @@ export async function onboardingGate(options: OnboardingGateOptions) {
   if (options.type === "ONBOARDING") {
     if (user.onboardingStatus === "IN_PROGRESS") {
       if (user.selectedAccountType === "ADMIN") {
-        redirect("/administrator-request")
+        redirect("/become-admin")
       }
 
       if (user.selectedAccountType === "ORG_ADMIN") {
@@ -38,7 +38,7 @@ export async function onboardingGate(options: OnboardingGateOptions) {
     }
 
     if (user.onboardingStatus === "WAITING_APPROVAL") {
-      redirect("/request-status")
+      redirect("/waiting-approval")
     }
 
     if (user.onboardingStatus === "REJECTED") {
@@ -56,7 +56,7 @@ export async function onboardingGate(options: OnboardingGateOptions) {
 
   if (options.type === "ACCOUNT_SELECTION") {
     if (user.onboardingStatus === "WAITING_APPROVAL") {
-      redirect("/request-status")
+      redirect("/waiting-approval")
     }
 
     if (user.onboardingStatus === "REJECTED") {

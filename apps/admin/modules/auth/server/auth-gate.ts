@@ -10,7 +10,7 @@ export async function authGate() {
 
   if (user.onboardingStatus === "IN_PROGRESS") {
     if (user.selectedAccountType === "ADMIN") {
-      redirect("/administrator-request")
+      redirect("/become-admin")
     }
 
     if (user.selectedAccountType === "ORG_ADMIN") {
@@ -20,10 +20,12 @@ export async function authGate() {
     if (user.selectedAccountType === "ORG_MEMBER") {
       redirect("/join-organization")
     }
+
+    redirect("/onboarding")
   }
 
   if (user.onboardingStatus === "WAITING_APPROVAL") {
-    redirect("/request-status")
+    redirect("/waiting-approval")
   }
 
   if (user.onboardingStatus === "REJECTED") {
