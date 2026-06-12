@@ -1,18 +1,63 @@
-import axios from "axios"
+"use client"
 
-const baseApi = axios.create({
-  withCredentials: true,
-})
+import { useAuth } from "@clerk/nextjs"
+import { ApiError } from "@workspace/shared"
 
-baseApi.interceptors.response.use(
-  (response) => response,
-  (error) => Promise.reject(error)
-)
+type RequestOptions = Omit<RequestInit, "headers"> & {
+  headers?: HeadersInit
+}
 
-export const authApi = baseApi.create({
-  baseURL: process.env.NEXT_PUBLIC_AUTH_URL,
-})
+export type ApiClient = <T>(
+  endpoint: string,
+  options?: RequestInit
+) => Promise<T>
 
-export const productApi = baseApi.create({
-  baseURL: process.env.NEXT_PUBLIC_PRODUCT_URL,
-})
+export function useApiClient(baseUrl: string) {
+  const { getToken } = useAuth()
+
+  return async function api<T>(
+    endpoint: string,
+    options: RequestOptions = {}
+  ): Promise<T> {
+    const token = await getToken()
+
+    if (!token) {
+      throw new ApiError(401, "Authentication required")
+    }
+
+    const response = await fetch(`${baseUrl}${endpoint}`, {
+      ...options,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    })
+
+    let body = null
+
+    try {
+      body = await response.json()
+    } catch {
+      // Invalid JSON
+    }
+
+    if (!response.ok) {
+      throw new ApiError(
+        response.status,
+        body?.message || "API request failed",
+        body
+      )
+    }
+
+    return body as T
+  }
+}
+
+export function useAuthApi() {
+  return useApiClient(process.env.NEXT_PUBLIC_AUTH_URL!)
+}
+
+export function useProductApi() {
+  return useApiClient(process.env.NEXT_PUBLIC_PRODUCT_URL!)
+}

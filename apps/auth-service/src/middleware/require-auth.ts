@@ -8,8 +8,6 @@ export const requireAuth = (
   next: NextFunction
 ) => {
   const { userId } = getAuth(req)
-  console.log("=== REQUIRE AUTH ===")
-  console.log("authorization:", req.headers.authorization)
 
   if (!userId) {
     throw new ApiError(
@@ -17,7 +15,6 @@ export const requireAuth = (
       "Authentication required. Please sign in to access this resource."
     )
   }
-  console.log(req, "REQQQQQQ")
   req.auth = {
     userId,
   }

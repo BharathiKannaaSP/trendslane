@@ -25,7 +25,6 @@ export default function ProfilePage() {
   }
 
   const { user } = data
-
   return (
     <div className="container mx-auto p-6">
       <Card className="max-w-3xl">
