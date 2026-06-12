@@ -16,6 +16,8 @@ import { ClerkProvider } from "@clerk/nextjs"
 import NextTopLoader from "nextjs-toploader"
 import { shadcn } from "@clerk/themes"
 import { mapClerkLocale } from "@workspace/shared"
+import { QueryProvider } from "@/providers/query-provider"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -74,11 +76,14 @@ export default async function RootLayout({
                   theme: shadcn,
                 }}
               >
-                <CountryProviderServer>
-                  <ThemeProvider>
-                    <AppearanceProvider>{children}</AppearanceProvider>
-                  </ThemeProvider>
-                </CountryProviderServer>
+                <QueryProvider>
+                  <CountryProviderServer>
+                    <ThemeProvider>
+                      <AppearanceProvider>{children}</AppearanceProvider>
+                    </ThemeProvider>
+                  </CountryProviderServer>
+                  <ReactQueryDevtools initialIsOpen={false} />
+                </QueryProvider>
               </ClerkProvider>
             </DirectionProvider>
           </NextIntlClientProvider>

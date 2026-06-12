@@ -2,9 +2,8 @@ import { redirect } from "next/navigation"
 import { requireAuth } from "./require-auth"
 
 export async function authGate() {
-  console.log("authGate start")
   const user = await requireAuth()
-  console.log("status", user.onboardingStatus)
+
   if (user.onboardingStatus === "PENDING") {
     redirect("/onboarding")
   }

@@ -17,6 +17,7 @@ type RequestOptions = Omit<RequestInit, "headers"> & {
 }
 
 export async function serverApi<T>(
+  baseUrl: string,
   endpoint: string,
   options: RequestOptions = {}
 ): Promise<T> {
@@ -24,30 +25,25 @@ export async function serverApi<T>(
   const token = await getToken()
 
   if (!token) {
-    throw new ApiError(
-      401,
-      "Authentication required. Please sign in to access this resource."
-    )
+    throw new ApiError(401, "Authentication required")
   }
-  
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_AUTH_URL}${endpoint}`,
-    {
-      ...options,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
-      cache: "no-store",
-    }
-  )
+
+  const response = await fetch(`${baseUrl}${endpoint}`, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    cache: "no-store",
+  })
+
   let body = null
 
   try {
     body = await response.json()
   } catch {
-    // Ignore invalid JSON
+    // Invalid JSON
   }
 
   if (response.status === 404) {
@@ -67,4 +63,15 @@ export async function serverApi<T>(
   }
 
   return body as T
+}
+
+export function authServerApi<T>(endpoint: string, options?: RequestOptions) {
+  return serverApi<T>(process.env.NEXT_PUBLIC_AUTH_URL!, endpoint, options)
+}
+
+export function productServerApi<T>(
+  endpoint: string,
+  options?: RequestOptions
+) {
+  return serverApi<T>(process.env.NEXT_PUBLIC_PRODUCT_URL!, endpoint, options)
 }

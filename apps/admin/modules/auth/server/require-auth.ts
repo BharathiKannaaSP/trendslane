@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
-import { getCurrentUser } from "./get-current-user"
+import { currentUser } from "./current-user"
 
 export async function requireAuth() {
-  const user = await getCurrentUser()
+  const user = await currentUser()
 
   if (!user) {
     redirect("/sign-in")

@@ -14,8 +14,10 @@
   "dependencies": {
     "@clerk/nextjs": "^7.5.0",
     "@clerk/themes": "^2.4.57",
-    "@workspace/ui": "workspace:*",
+    "@tanstack/react-query": "^5.101.0",
     "@workspace/shared": "workspace:*",
+    "@workspace/ui": "workspace:*",
+    "axios": "^1.17.0",
     "cookies-next": "^6.1.1",
     "lucide-react": "^1.17.0",
     "next": "16.2.6",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tanstack/react-query-devtools": "^5.101.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

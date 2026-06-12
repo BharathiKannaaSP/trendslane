@@ -7,7 +7,6 @@ const Rejected = async () => {
     type: "REJECTED",
   })
 
-  console.log("REJECTED PAGE RENDERED")
   return (
     <div>
       <OnboardingHeader />
