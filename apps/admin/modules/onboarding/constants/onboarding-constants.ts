@@ -1,29 +1,42 @@
+import { OnboardingStatus } from "@workspace/shared"
+import {
+  StepperStep,
+  StepperStepStatus,
+} from "@workspace/ui/components/wizard-stepper"
 import { OnboardingStep } from "@workspace/shared"
-
-export enum ONBOARDING_STEPPER_STATUS {
-  COMPLETED = "COMPLETED",
-  REJECTED = "REJECTED",
-  UPCOMING = "UPCOMING",
-  CURRENT = "CURRENT",
-}
 
 export const ONBOARDING_STEPS = [
   {
     id: OnboardingStep.BASIC_INFORMATION,
     title: "Basic Information",
     description: "Tell us your basic details",
-    order: 1,
   },
   {
     id: OnboardingStep.ADDITIONAL_DETAILS,
     title: "Choose Your Path",
     description: "Select how you want to use Trendslane",
-    order: 2,
   },
   {
-    id: OnboardingStep.ORGANIZATION_SELECTION,
-    title: "Role requirements",
+    id: OnboardingStep.ROLE_REQUIREMENTS,
+    title: "Role Requirements",
     description: "Provide details and submit your request",
-    order: 3,
   },
 ] as const
+
+export function getOnboardingSteps(
+  onboardingStatus: OnboardingStatus
+): StepperStep[] {
+  return ONBOARDING_STEPS.map((step, index) => ({
+    ...step,
+    status:
+      index === ONBOARDING_STEPS.length - 1
+        ? onboardingStatus === OnboardingStatus.WAITING_APPROVAL
+          ? StepperStepStatus.WAITING_APPROVAL
+          : onboardingStatus === OnboardingStatus.APPROVED
+            ? StepperStepStatus.SUCCESS
+            : onboardingStatus === OnboardingStatus.REJECTED
+              ? StepperStepStatus.REJECTED
+              : undefined
+        : undefined,
+  }))
+}

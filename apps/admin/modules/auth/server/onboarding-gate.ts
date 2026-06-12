@@ -7,6 +7,9 @@ type OnboardingGateOptions =
       type: "ONBOARDING"
     }
   | {
+      type: "ADDITIONAL_DETAILS"
+    }
+  | {
       type: "ACCOUNT_SELECTION"
       accountType: AccountType
     }
@@ -21,8 +24,14 @@ export async function onboardingGate(options: OnboardingGateOptions) {
   const user = await requireAuth()
 
   // ONBOARDING
-
   if (options.type === "ONBOARDING") {
+    if (user.onboardingStatus === "PENDING") {
+      if (user.onboardingStep === "ADDITIONAL_DETAILS") {
+        redirect("/onboarding-additional-details")
+      }
+
+      return user
+    }
     if (user.onboardingStatus === "IN_PROGRESS") {
       if (user.selectedAccountType === "ADMIN") {
         redirect("/become-admin")
@@ -52,8 +61,18 @@ export async function onboardingGate(options: OnboardingGateOptions) {
     return user
   }
 
-  // ACCOUNT SELECTION PAGES
+  if (options.type === "ADDITIONAL_DETAILS") {
+    if (
+      user.onboardingStatus !== "PENDING" ||
+      user.onboardingStep !== "ADDITIONAL_DETAILS"
+    ) {
+      redirect("/onboarding")
+    }
 
+    return user
+  }
+
+  // ACCOUNT SELECTION PAGES
   if (options.type === "ACCOUNT_SELECTION") {
     if (user.onboardingStatus === "WAITING_APPROVAL") {
       redirect("/waiting-approval")

@@ -13,6 +13,7 @@ export function mapCurrentUser(user: CurrentUser) {
       systemRole: user.systemRole,
       onboardingStatus: user.onboardingStatus,
       onboardingStep: user.onboardingStep,
+      onboardingStepNo: user.onboardingStepNo,
       selectedAccountType: user.selectedAccountType,
       countryName: user.countryName,
       countryCode: user.countryCode,

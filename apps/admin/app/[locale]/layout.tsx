@@ -79,7 +79,9 @@ export default async function RootLayout({
                 <QueryProvider>
                   <CountryProviderServer>
                     <ThemeProvider>
-                      <AppearanceProvider>{children}</AppearanceProvider>
+                      <AppearanceProvider>
+                        <main className="min-h-screen w-full overflow-x-hidden">{children}</main>
+                      </AppearanceProvider>
                     </ThemeProvider>
                   </CountryProviderServer>
                   <ReactQueryDevtools initialIsOpen={false} />

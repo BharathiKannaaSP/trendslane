@@ -12,7 +12,7 @@ export default function VerifyingPage() {
     if (!isLoaded) return
 
     if (isSignedIn) {
-      router.replace("/en")
+      router.replace("/")
     }
   }, [isLoaded, isSignedIn, router])
 

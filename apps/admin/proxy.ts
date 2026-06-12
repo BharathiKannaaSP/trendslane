@@ -5,7 +5,7 @@ import { NextResponse } from "next/server"
 
 const intlMiddleware = createMiddleware(routing)
 
-const isAuthRoute = createRouteMatcher([
+const isPublicRoute = createRouteMatcher([
   "/:locale/sign-in(.*)",
   "/:locale/sign-up(.*)",
   "/:locale/legal(.*)",
@@ -24,7 +24,7 @@ export default clerkMiddleware(async (auth, req) => {
   }
 
   // Already signed in -> prevent access to auth pages
-  if (userId && isAuthRoute(req)) {
+  if (userId && isPublicRoute(req)) {
     return NextResponse.redirect(new URL(`/${locale}`, req.url))
   }
 

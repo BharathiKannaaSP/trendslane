@@ -1,29 +1,14 @@
-import { onboardingGate } from "@/modules/auth/server/onboarding-gate"
-import { OnboardingHeader } from "@/modules/onboarding/components/onboarding-header"
-import OnboardingLayout from "@/modules/onboarding/components/onboarding-layout"
-import OnboardingStepper from "@/modules/onboarding/components/onboarding-stepper"
-import OnboardingBasicInformationForm from "@/modules/onboarding/forms/onboarding-basic-information-form"
 import React from "react"
+import { onboardingGate } from "@/modules/auth/server/onboarding-gate"
 
 const Rejected = async () => {
-  const user = await onboardingGate({
+  await onboardingGate({
     type: "REJECTED",
   })
 
   return (
     <>
-      <OnboardingHeader />
-      <OnboardingLayout
-        stepper={
-          <OnboardingStepper
-            onboardingStatus={user.onboardingStatus}
-            onboardingStep={user.onboardingStep}
-          />
-        }
-      >
-        NEEDS TO CHANGE FORM REJECTED ORG
-        <OnboardingBasicInformationForm />
-      </OnboardingLayout>
+      NEEDS TO CHANGE FORM REJECTED ORG
     </>
   )
 }

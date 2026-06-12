@@ -12,14 +12,16 @@ const OnboardingLayout = ({
   sidebar,
 }: OnboardingLayoutProps) => {
   return (
-    <div className="mx-auto max-w-450 px-6 py-8">
-      <div className="grid gap-8 lg:grid-cols-[240px_1fr_320px]">
+    <div className="w-full px-4 py-6 md:px-6 md:py-8">
+      <div className="flex w-full flex-col gap-8 xl:flex-row">
         {/* Stepper */}
         <aside>{stepper}</aside>
+
         {/* Forms */}
-        <main>{children}</main>
-        {/* Onboarding Sidebar */}
-        <aside>{sidebar}</aside>
+        <main className="w-full flex-1">{children}</main>
+
+        {/* Sidebar */}
+        {sidebar && <aside>{sidebar}</aside>}
       </div>
     </div>
   )
