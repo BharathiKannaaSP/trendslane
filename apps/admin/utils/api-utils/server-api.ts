@@ -21,12 +21,22 @@ export async function serverApi<T>(
   endpoint: string,
   options: RequestOptions = {}
 ): Promise<T> {
-  const { getToken } = await auth()
+  const { getToken, userId } = await auth()
   const token = await getToken()
 
   if (!token) {
     throw new ApiError(401, "Authentication required")
   }
+
+  console.log("=== SERVER API ===")
+  console.log("userId:", userId)
+  console.log("token exists:", !!token)
+  console.log("endpoint:", endpoint)
+
+  console.log(
+    "Authorization header:",
+    token ? `Bearer ${token.substring(0, 20)}...` : "NONE"
+  )
 
   const response = await fetch(`${baseUrl}${endpoint}`, {
     ...options,
