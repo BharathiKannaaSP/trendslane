@@ -1,18 +1,13 @@
-import { onboardingGate } from "@/modules/auth/server/onboarding-gate"
-import { OnboardingHeader } from "@/modules/onboarding/components/onboarding-header"
 import React from "react"
+import { onboardingGate } from "@/modules/auth/server/onboarding-gate"
+import OnboardBasicInfoCard from "@/modules/onboarding/components/onboarding-basic-info/onboarding-basic-card"
 
 const OnboardingPage = async () => {
-  await onboardingGate({
+  const user = await onboardingGate({
     type: "ONBOARDING",
   })
 
-  return (
-    <>
-      <OnboardingHeader />
-      <div>Hello</div>
-    </>
-  )
+  return <OnboardBasicInfoCard user={user} />
 }
 
 export default OnboardingPage

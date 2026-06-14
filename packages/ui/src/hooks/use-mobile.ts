@@ -1,20 +1,46 @@
 import * as React from "react"
 
-const MOBILE_BREAKPOINT = 768
+const BREAKPOINTS = {
+  mobile: 768,
+  tablet: 1024,
+} as const
 
-export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
+export function useDevice() {
+  const [width, setWidth] = React.useState<number | undefined>(undefined)
 
   React.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
-    const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    const updateWidth = () => {
+      setWidth(window.innerWidth)
     }
-    mql.addEventListener("change", onChange)
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    return () => mql.removeEventListener("change", onChange)
+
+    updateWidth()
+
+    window.addEventListener("resize", updateWidth)
+
+    return () => {
+      window.removeEventListener("resize", updateWidth)
+    }
   }, [])
 
-  return !!isMobile
+  const currentWidth = width ?? 0
+
+  return {
+    width: currentWidth,
+    isMobile: currentWidth < BREAKPOINTS.mobile,
+    isTablet:
+      currentWidth >= BREAKPOINTS.mobile && currentWidth < BREAKPOINTS.tablet,
+    isDesktop: currentWidth >= BREAKPOINTS.tablet,
+  }
+}
+
+export function useIsMobile() {
+  return useDevice().isMobile
+}
+
+export function useIsTablet() {
+  return useDevice().isTablet
+}
+
+export function useIsDesktop() {
+  return useDevice().isDesktop
 }

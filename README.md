@@ -296,7 +296,7 @@ status = PENDING
 User is redirected to:
 
 ```text
-/request-status
+/waiting-approval
 ```
 
 ## Step 4
@@ -368,7 +368,7 @@ status = PENDING
 User is redirected to:
 
 ```text
-/request-status
+/waiting-approval
 ```
 
 ## Step 5
@@ -429,7 +429,7 @@ status = PENDING
 User is redirected to:
 
 ```text
-/request-status
+/waiting-approval
 ```
 
 ## Step 5
@@ -534,12 +534,11 @@ These states should be used throughout onboarding and approval workflows.
 
 This architecture provides a secure, scalable, and approval-driven access control system for the Trendslane platform.
 
-
 Backend /auth/me
 Frontend AuthProvider
 AuthGate
 /onboarding
-/request-status
+/waiting-approval
 Admin Request APIs
 Organization Request APIs
 Dashboard route protection

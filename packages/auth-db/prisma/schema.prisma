@@ -1,3 +1,4 @@
+// GENERATOR & DATASOURCE
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -7,9 +8,17 @@ datasource db {
   provider = "postgresql"
   url      = env("AUTH_DATABASE_URL")
 }
+
+// RBAC ENUMS
 enum SystemRole {
   ADMIN
   USER
+}
+
+enum AccountType {
+  ADMIN
+  ORG_ADMIN
+  ORG_MEMBER
 }
 
 enum OrganizationRole {
@@ -17,12 +26,42 @@ enum OrganizationRole {
   ORG_MEMBER
 }
 
+
+// ONBOARDING ENUMS
+enum OnboardingStatus {
+  PENDING
+  IN_PROGRESS
+  WAITING_APPROVAL
+  APPROVED
+  REJECTED
+}
+
+enum OnboardingStep {
+  BASIC_INFORMATION
+  ADDITIONAL_DETAILS
+  ROLE_REQUIREMENTS
+  COMPLETED
+}
+
+enum OnboardingPath {
+  JOIN_ORGANIZATION
+  CREATE_ORGANIZATION
+  BECOME_ADMIN
+}
+
+// ORGANIZATION ENUMS
 enum OrganizationStatus {
   PENDING
   ACTIVE
   REJECTED
   SUSPENDED
   NEEDS_ADDITIONAL_INFO
+}
+
+enum MembershipStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 enum InvitationStatus {
@@ -32,26 +71,7 @@ enum InvitationStatus {
   CANCELLED
 }
 
-enum OnboardingStatus {
-  PENDING
-  IN_PROGRESS
-  WAITING_APPROVAL
-  APPROVED
-  REJECTED
-}
-
-enum AccountType {
-  ADMIN
-  ORG_ADMIN
-  ORG_MEMBER
-}
-
-enum MembershipStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
+// ADMIN REQUEST ENUMS
 enum AdminRequestStatus {
   PENDING
   APPROVED
@@ -59,170 +79,130 @@ enum AdminRequestStatus {
 }
 
 model User {
+  // IDENTITY
   id String @id @default(cuid())
-
-  // External Auth Identity
   clerkUserId String @unique
-
-  email    String @unique
+  email String @unique
   username String @unique
-
   firstName String
-  lastName  String
-
+  lastName String
   imageUrl String?
 
-  // RBAC
+  // ACCESS CONTROL
   systemRole SystemRole @default(USER)
 
-  // Onboarding
+  // ONBOARDING
   onboardingStatus OnboardingStatus @default(PENDING)
+  onboardingStep OnboardingStep @default(BASIC_INFORMATION)
+  onboardingStepNo Int @default(1)
+  onboardingPath OnboardingPath?
   selectedAccountType AccountType?
+  onboardingStartedAt DateTime?
   onboardingCompletedAt DateTime?
   onboardingRejectionReason String?
 
-  // Country
+  // BIO COUNTRY
   countryName String?
   countryCode String?
 
-  // Status
+  // ACCOUNT STATUS
   isActive Boolean @default(true)
   lastLoginAt DateTime?
   clerkSyncedAt DateTime?
 
+  // AUDIT
   createdByClerkUserId String?
-  createdBy  User? @relation("CreatedByUser", fields: [createdByClerkUserId], references: [clerkUserId])
-  createdAt DateTime @default(now())
+  createdBy User? @relation("CreatedByUser", fields: [createdByClerkUserId], references: [clerkUserId])
   createdUsers User[] @relation("CreatedByUser")
-
-  deletedByClerkUserId String?
-  deletedBy User? @relation("DeletedByUser", fields: [deletedByClerkUserId], references: [clerkUserId])
-  deletedAt DateTime?
-  deletedUsers User[] @relation("DeletedByUser")
+  createdAt DateTime @default(now())
 
   updatedByClerkUserId String?
   updatedBy User? @relation("UpdatedByUser", fields: [updatedByClerkUserId], references: [clerkUserId])
-  updatedAt DateTime @updatedAt
   updatedUsers User[] @relation("UpdatedByUser")
+  updatedAt DateTime @updatedAt
 
-  // Country Audit Relations
+  deletedByClerkUserId String?
+  deletedBy User? @relation("DeletedByUser", fields: [deletedByClerkUserId], references: [clerkUserId])
+  deletedUsers User[] @relation("DeletedByUser")
+  deletedAt DateTime?
+
+  // RELATIONS
   createdCountries Country[] @relation("CreatedCountries")
   updatedCountries Country[] @relation("UpdatedCountries")
   deletedCountries Country[] @relation("DeletedCountries")
 
-  // Organization Audit Relations
   createdOrganizations Organization[] @relation("CreatedOrganizations")
   approvedOrganizations Organization[] @relation("ApprovedOrganizations")
+  updatedOrganizations Organization[] @relation("UpdatedOrganizations")
+  deletedOrganizations Organization[] @relation("DeletedOrganizations")
 
-  // Memberships
   memberships OrganizationMember[]
+  approvedMemberships OrganizationMember[] @relation("ApprovedMemberships")
 
-  // Admin Requests
-  adminRequests AdminRequest[]
-
-  // Invitation Audit Relations
   sentInvitations OrganizationInvitation[] @relation("SentInvitations")
   acceptedInvitations OrganizationInvitation[] @relation("AcceptedInvitations")
 
+  adminRequests AdminRequest[]
+  reviewedAdminRequests AdminRequest[] @relation("ReviewedAdminRequests")
+
+  // INDEXES
   @@index([clerkUserId])
   @@index([email])
   @@index([username])
   @@index([systemRole])
   @@index([onboardingStatus])
+  @@index([onboardingStep])
   @@index([countryCode])
   @@index([isActive])
-}
 
-model Country {
-  // Core
-  id String @id @default(cuid())
-  code String @unique
-  name String @unique
-  slug String @unique
-  timezone String
-  defaultLanguage String @default("en")
-  supportedLanguages String[]
-  currencyCode String
-  currencySymbol String
-  currencyName String
-  phoneCode String
-  notes String?
-  isActive Boolean @default(true)
-
-  // Created Audit
-  createdByClerkUserId String
-  createdBy User @relation("CreatedCountries", fields: [createdByClerkUserId], references: [clerkUserId])
-  createdAt DateTime @default(now())
-
-  // Updated Audit
-  updatedByClerkUserId String?
-  updatedBy User? @relation("UpdatedCountries", fields: [updatedByClerkUserId], references: [clerkUserId])
-  updatedAt DateTime @updatedAt
-
-  // Deleted Audit
-  deletedByClerkUserId String?
-  deletedBy User? @relation("DeletedCountries", fields: [deletedByClerkUserId], references: [clerkUserId])
-  deletedAt DateTime?
-
-  // Organizations
-  organizations Organization[]
-
-  @@index([isActive, name])
 }
 
 model Organization {
+  // IDENTITY
   id String @id @default(cuid())
-
-  // Clerk Organization
   clerkOrganizationId String? @unique
-
-  // Core
   name String
-
   slug String
-
   description String?
-
   logoUrl String?
 
+  // STATUS
   status OrganizationStatus @default(PENDING)
-
   isActive Boolean @default(true)
-
   rejectionReason String?
-
   suspendedReason String?
 
-  // Country
+  // COUNTRY
   countryId String
-
   country Country @relation(fields: [countryId], references: [id])
 
-  // Created Audit
+  // CREATED BY
   createdByClerkUserId String
+  createdBy User @relation("CreatedOrganizations", fields: [createdByClerkUserId], references: [clerkUserId])
 
-  createdBy User @relation("CreatedOrganizations", fields: [createdByClerkUserId],references: [clerkUserId])
-
-  // Approval Audit
+  // APPROVAL
   approvedByClerkUserId String?
-
-  approvedBy User? @relation("ApprovedOrganizations",fields: [approvedByClerkUserId],references: [clerkUserId])
-
+  approvedBy User? @relation("ApprovedOrganizations", fields: [approvedByClerkUserId], references: [clerkUserId])
   approvedAt DateTime?
 
-  // Soft Delete
+  // UPDATED BY
+  updatedByClerkUserId String?
+  updatedBy User? @relation("UpdatedOrganizations", fields: [updatedByClerkUserId], references: [clerkUserId])
+
+  // DELETED BY
+  deletedByClerkUserId String?
+  deletedBy User? @relation("DeletedOrganizations", fields: [deletedByClerkUserId], references: [clerkUserId])
   deletedAt DateTime?
 
-  // Timestamps
+  // TIMESTAMPS
   createdAt DateTime @default(now())
-
   updatedAt DateTime @updatedAt
 
-  // Relations
+  // RELATIONS
   members OrganizationMember[]
-
   invitations OrganizationInvitation[]
 
+  // CONSTRAINTS
   @@unique([countryId, slug])
 
   @@index([countryId])
@@ -230,6 +210,8 @@ model Organization {
   @@index([isActive])
   @@index([createdByClerkUserId])
   @@index([approvedByClerkUserId])
+  @@index([updatedByClerkUserId])
+  @@index([deletedByClerkUserId])
   @@index([deletedAt])
 }
 
@@ -251,8 +233,10 @@ model OrganizationMember {
   status MembershipStatus @default(PENDING)
 
   rejectionReason String?
-  approvedByClerkUserId String?
-  approvedAt DateTime?
+
+approvedByClerkUserId String?
+approvedBy User? @relation("ApprovedMemberships", fields: [approvedByClerkUserId], references: [clerkUserId])
+approvedAt DateTime?
 
   // Status
   isActive Boolean @default(true)
@@ -271,7 +255,6 @@ model OrganizationMember {
 
 model OrganizationInvitation {
   id String @id @default(cuid())
-
   email String
 
   // Organization
@@ -286,7 +269,6 @@ model OrganizationInvitation {
 
   // Accepted By Audit
   acceptedByClerkUserId String?
-
   acceptedBy User? @relation("AcceptedInvitations", fields: [acceptedByClerkUserId], references: [clerkUserId])
 
   // Invitation
@@ -311,10 +293,57 @@ model AdminRequest {
   status AdminRequestStatus @default(PENDING)
   reason String?
   reviewedByClerkUserId String?
+  reviewedBy User? @relation("ReviewedAdminRequests", fields: [reviewedByClerkUserId], references: [clerkUserId])
   reviewedAt DateTime?
   rejectionReason String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@index([userId])
   @@index([status])
+}
+
+
+model Country {
+  // IDENTITY
+  id String @id @default(cuid())
+  code String @unique
+  name String @unique
+  slug String @unique
+
+  // LOCALIZATION
+  timezone String
+  defaultLanguage String @default("en")
+  supportedLanguages String[]
+
+  // CURRENCY
+  currencyCode String
+  currencySymbol String
+  currencyName String
+
+  // CONTACT
+  phoneCode String
+
+  // STATUS
+  notes String?
+  isActive Boolean @default(true)
+
+  // Created Audit
+  createdByClerkUserId String
+  createdBy User @relation("CreatedCountries", fields: [createdByClerkUserId], references: [clerkUserId])
+  createdAt DateTime @default(now())
+
+  // Updated Audit
+  updatedByClerkUserId String?
+  updatedBy User? @relation("UpdatedCountries", fields: [updatedByClerkUserId], references: [clerkUserId])
+  updatedAt DateTime @updatedAt
+
+  // Deleted Audit
+  deletedByClerkUserId String?
+  deletedBy User? @relation("DeletedCountries", fields: [deletedByClerkUserId], references: [clerkUserId])
+  deletedAt DateTime?
+
+  // Organizations
+  organizations Organization[]
+
+  @@index([isActive, name])
 }

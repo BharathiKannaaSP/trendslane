@@ -18,6 +18,7 @@ import { shadcn } from "@clerk/themes"
 import { mapClerkLocale } from "@workspace/shared"
 import { QueryProvider } from "@/providers/query-provider"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { Toaster } from "@workspace/ui/components/sonner"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -79,7 +80,11 @@ export default async function RootLayout({
                 <QueryProvider>
                   <CountryProviderServer>
                     <ThemeProvider>
-                      <AppearanceProvider>{children}</AppearanceProvider>
+                      <AppearanceProvider>
+                        <main className="min-h-screen w-full overflow-x-hidden">
+                          {children}
+                        </main>
+                      </AppearanceProvider>
                     </ThemeProvider>
                   </CountryProviderServer>
                   <ReactQueryDevtools initialIsOpen={false} />
@@ -87,6 +92,7 @@ export default async function RootLayout({
               </ClerkProvider>
             </DirectionProvider>
           </NextIntlClientProvider>
+          <Toaster position="top-right" />
         </Suspense>
       </body>
     </html>

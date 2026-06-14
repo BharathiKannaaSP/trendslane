@@ -1,6 +1,10 @@
 import { ApiError } from "../../errors/api-error"
 import { mapCurrentUser } from "./user.mapper"
-import { getUserByClerkIdRepository } from "./user.repository"
+import {
+  getUserByClerkIdRepository,
+  updateOnboardingRepository,
+} from "./user.repository"
+import { UpdateOnboardingInput } from "./user.types"
 
 export async function getCurrentUserService(clerkUserId?: string) {
   if (!clerkUserId) {
@@ -14,4 +18,15 @@ export async function getCurrentUserService(clerkUserId?: string) {
   }
 
   return mapCurrentUser(user)
+}
+
+export async function updateOnboardingService(
+  clerkUserId: string,
+  input: UpdateOnboardingInput
+) {
+  if (!clerkUserId) {
+    throw new ApiError(401, "Clerk UserID is missing")
+  }
+
+  return updateOnboardingRepository(clerkUserId, input)
 }

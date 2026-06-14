@@ -1,4 +1,4 @@
-// packages/shared/src/types/auth/current-user.dto.ts
+import { OnboardingStatus, OnboardingStep } from "../onboarding"
 
 export type SystemRole = "ADMIN" | "USER"
 
@@ -12,13 +12,6 @@ export type OrganizationStatus =
   | "NEEDS_ADDITIONAL_INFO"
 
 export type MembershipStatus = "PENDING" | "APPROVED" | "REJECTED"
-
-export type OnboardingStatus =
-  | "PENDING"
-  | "IN_PROGRESS"
-  | "WAITING_APPROVAL"
-  | "APPROVED"
-  | "REJECTED"
 
 export type AccountType = "ADMIN" | "ORG_ADMIN" | "ORG_MEMBER"
 
@@ -53,6 +46,8 @@ export interface CurrentUserDto {
   imageUrl: string | null
   systemRole: SystemRole
   onboardingStatus: OnboardingStatus
+  onboardingStep: OnboardingStep
+  onboardingStepNo: number
   selectedAccountType: AccountType | null
   countryCode: string | null
   countryName: string | null

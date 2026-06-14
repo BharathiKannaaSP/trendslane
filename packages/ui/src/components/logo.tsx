@@ -4,7 +4,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <>
       <svg
-        className={cn("h-3! w-max!", className)}
+        className={cn("h-3! w-20!", className)}
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
       >
