@@ -15,13 +15,11 @@ const OnboardingLayout = ({
     <div className="w-full px-4 py-6 md:px-6 md:py-8">
       <div className="flex w-full flex-col gap-8 xl:flex-row">
         {/* Stepper */}
-        <aside>{stepper}</aside>
-
+        <aside className="xl:flex-1">{stepper}</aside>
         {/* Forms */}
-        <main className="w-full flex-1">{children}</main>
-
-        {/* Sidebar */}
-        {sidebar && <aside>{sidebar}</aside>}
+        <main className="w-full min-w-0 xl:flex-2">{children}</main>
+        {/* Onboarding Sidebar */}
+        {sidebar && <aside className="xl:flex-1">{sidebar}</aside>}
       </div>
     </div>
   )

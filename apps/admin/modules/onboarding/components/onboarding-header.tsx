@@ -10,7 +10,7 @@ export function OnboardingHeader() {
   const { settings, update, isHydrated } = useAppearance()
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between bg-background px-4 shadow-md">
+    <header className="flex h-16 shrink-0 items-center justify-between border-b bg-background px-4">
       <div className="shrink-0">
         <Logo />
       </div>

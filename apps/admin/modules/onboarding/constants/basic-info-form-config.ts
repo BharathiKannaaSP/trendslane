@@ -1,6 +1,9 @@
-import { EntityFormConfig } from "@/components/forms/form-types";
+import { EntityFormConfig } from "@/components/forms/form-types"
+import { CurrentUserDto } from "@workspace/shared"
 
-export const getBasicInfoFormConfig = (): EntityFormConfig => ({
+export const getBasicInfoFormConfig = (
+  user?: CurrentUserDto
+): EntityFormConfig => ({
   title: "Basic Information",
   description: "Tell us about yourself.",
   submitLabel: "Continue",
@@ -9,14 +12,7 @@ export const getBasicInfoFormConfig = (): EntityFormConfig => ({
     {
       title: "Profile Information",
       description: "Basic account information.",
-      fields: [
-        "firstName",
-        "lastName",
-        "username",
-        "email",
-        "password",
-        "confirmPassword",
-      ],
+      fields: ["firstName", "lastName", "username", "email"],
       isLastField: true,
     },
   ],
@@ -43,21 +39,10 @@ export const getBasicInfoFormConfig = (): EntityFormConfig => ({
     {
       name: "email",
       label: "Email Address",
-      type: "text", // <- verify supported type
+      type: "text",
       disabled: true,
       required: true,
-    },
-    {
-      name: "password",
-      label: "Password",
-      type: "password", // <- verify supported type
-      required: true,
-    },
-    {
-      name: "confirmPassword",
-      label: "Confirm Password",
-      type: "password", // <- verify supported type
-      required: true,
+      placeholder: user?.email,
     },
   ],
 

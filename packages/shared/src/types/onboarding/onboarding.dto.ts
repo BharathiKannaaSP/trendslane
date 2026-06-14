@@ -1,4 +1,4 @@
-import { AccountType } from "../auth"
+import z from "zod"
 
 export enum OnboardingStatus {
   PENDING = "PENDING",
@@ -15,8 +15,10 @@ export enum OnboardingStep {
   COMPLETED = "COMPLETED",
 }
 
-export interface OnboardingProgressDto {
-  onboardingStatus: OnboardingStatus
-  onboardingStep: OnboardingStep
-  selectedAccountType: AccountType | null
-}
+export const updateOnboardingSchema = z.object({
+  onboardingStep: z.nativeEnum(OnboardingStep),
+  onboardingStatus: z.nativeEnum(OnboardingStatus),
+  onboardingStepNo: z.number().int().min(1).max(4),
+})
+
+export type UpdateOnboardingInput = z.infer<typeof updateOnboardingSchema>

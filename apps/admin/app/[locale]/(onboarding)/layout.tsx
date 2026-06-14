@@ -19,6 +19,7 @@ export default async function OnboardingLayoutAppearance({
             currentStepNo={user.onboardingStepNo}
           />
         }
+        sidebar={<div className="">Sidebar</div>}
       >
         {children}
       </OnboardingLayout>
