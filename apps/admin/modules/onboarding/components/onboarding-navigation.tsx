@@ -1,5 +1,5 @@
 import { Button } from "@workspace/ui/components/button"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react"
 import React from "react"
 
 type OnboardingNavigationProps = {
@@ -32,12 +32,13 @@ const OnboardingNavigation = ({
   isNextDisabled = false,
 }: OnboardingNavigationProps) => {
   return (
-    <div className="flex items-center justify-between border-t pt-6">
+    <div className="flex w-full items-center justify-between">
       <div>
         {showPrevious ? (
           <Button
             type="button"
             variant="outline"
+            className="w-40"
             onClick={onPrevious}
             disabled={isPreviousDisabled || isPreviousLoading}
           >
@@ -54,10 +55,17 @@ const OnboardingNavigation = ({
           <Button
             type="button"
             onClick={onNext}
+            className="w-40"
             disabled={isNextDisabled || isNextLoading}
           >
-            {nextLabel}
-            <ArrowRight className="size-4" />
+            {isNextLoading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <>
+                {nextLabel}
+                <ArrowRight className="size-4" />
+              </>
+            )}
           </Button>
         )}
       </div>

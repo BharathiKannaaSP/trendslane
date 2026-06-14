@@ -1,3 +1,4 @@
+"use client"
 import { OnboardingStatus } from "@workspace/shared"
 import { Stepper } from "@workspace/ui/components/wizard-stepper"
 import { getOnboardingSteps } from "../constants/onboarding-constants"

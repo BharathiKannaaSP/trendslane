@@ -3,7 +3,6 @@ import { useAuthApi } from "@/utils/api-utils/client-api"
 import { authRepositoryClient } from "./auth.repository.client"
 import { OnboardingStatus, OnboardingStep } from "@workspace/shared"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 export function useCurrentUser() {
   const api = useAuthApi()
@@ -14,10 +13,9 @@ export function useCurrentUser() {
   })
 }
 
-export function useOnboardingUpdate(nextRoute: string) {
+export function useOnboardingUpdate() {
   const api = useAuthApi()
   const queryClient = useQueryClient()
-  const router = useRouter()
 
   return useMutation({
     mutationFn: (data: {
@@ -26,10 +24,9 @@ export function useOnboardingUpdate(nextRoute: string) {
       onboardingStepNo: number
     }) => authRepositoryClient.updateOnboarding(api, data),
 
-    onSuccess: (user) => {
+    onSuccess: async (user) => {
       queryClient.setQueryData(["me"], user)
       toast.success("Progress saved")
-      router.push(nextRoute)
     },
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

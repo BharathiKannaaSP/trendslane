@@ -1,35 +1,29 @@
 "use client"
-import {
-  useCurrentUser,
-  useOnboardingUpdate,
-} from "@/modules/users/api/auth.repository.hooks"
-import { Button } from "@workspace/ui/components/button"
+import { useOnboardingUpdate } from "@/modules/users/api/auth.repository.hooks"
 import {
   Card,
-  CardAction,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card"
 import { InfoField } from "@workspace/ui/components/info-field"
-import { Spinner } from "@workspace/ui/components/spinner"
 import { Badge } from "@workspace/ui/components/badge"
-import { BadgeCheck, Loader2, Mail, Pencil, User } from "lucide-react"
+import { BadgeCheck, Mail, User } from "lucide-react"
 import Image from "next/image"
-import React from "react"
-import { OnboardingStatus, OnboardingStep } from "@workspace/shared"
+import React, { useTransition } from "react"
+import {
+  CurrentUserDto,
+  OnboardingStatus,
+  OnboardingStep,
+} from "@workspace/shared"
+import OnboardingNavigation from "../onboarding-navigation"
+import { useRouter } from "next/navigation"
 
-const OnboardBasicInfoCard = () => {
-  const { data: user, isLoading, isError } = useCurrentUser()
-  const onboardingUpdate = useOnboardingUpdate("/onboarding-additional-details")
-
-  if (isLoading) {
-    return <Spinner />
-  }
-  if (isError) {
-    return "No data found"
-  }
+const OnboardBasicInfoCard = ({ user }: { user: CurrentUserDto }) => {
+  const onboardingUpdate = useOnboardingUpdate()
+  const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   const handleNext = async () => {
     await onboardingUpdate.mutateAsync({
@@ -37,9 +31,12 @@ const OnboardBasicInfoCard = () => {
       onboardingStatus: OnboardingStatus.PENDING,
       onboardingStepNo: 2,
     })
+    startTransition(() => {
+      router.push("/onboarding-additional-details")
+      router.refresh()
+    })
   }
 
-  const currentUser = user?.user
   return (
     <div>
       <Card>
@@ -47,10 +44,10 @@ const OnboardBasicInfoCard = () => {
           <CardTitle>
             <div className="flex items-center gap-3">
               <div className="hidden size-10 items-center justify-center rounded-full bg-primary/10 text-primary md:flex">
-                {currentUser?.imageUrl ? (
+                {user.imageUrl ? (
                   <Image
-                    src={currentUser.imageUrl}
-                    alt={currentUser.username}
+                    src={user.imageUrl}
+                    alt={user.username}
                     width={20}
                     className="size-10 rounded-full object-cover"
                     height={20}
@@ -71,58 +68,52 @@ const OnboardBasicInfoCard = () => {
             </div>
           </CardTitle>
 
-          <CardAction>
-            <Button variant="link">
+          {/* <CardAction>
+            <Button variant="link" onClick={() => router.push("/profile")}>
               <Pencil />
             </Button>
-          </CardAction>
+          </CardAction> */}
         </CardHeader>
         <CardContent className="space-y-8">
           <div className="grid gap-6 md:grid-cols-2">
             <InfoField
               label="First Name"
               icon={<User className="size-4" />}
-              value={currentUser?.firstName}
+              value={user.firstName}
             />
 
             <InfoField
               label="Last Name"
               icon={<User className="size-4" />}
-              value={currentUser?.lastName}
+              value={user.lastName}
             />
           </div>
 
           <InfoField
             label="Username"
             icon={<span className="text-lg">@</span>}
-            value={currentUser?.username}
+            value={user.username}
           />
 
           <InfoField
             label="Email Address"
             icon={<Mail className="size-4" />}
-            value={currentUser?.email}
+            value={user.email}
             endContent={
-              <Badge variant="success">
+              <Badge variant="success" className="hidden md:flex">
                 <BadgeCheck data-icon="inline-start" />
                 Verified
               </Badge>
             }
           />
         </CardContent>
-        <CardFooter className="flex items-center justify-between gap-2">
-          <div></div>
-          <Button
-            onClick={handleNext}
-            disabled={onboardingUpdate.isPending}
-            className="w-24"
-          >
-            {onboardingUpdate.isPending ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              "Continue"
-            )}
-          </Button>
+        <CardFooter>
+          <OnboardingNavigation
+            showPrevious={false}
+            onNext={handleNext}
+            isNextLoading={onboardingUpdate.isPending || isPending}
+            isNextDisabled={onboardingUpdate.isPending || isPending}
+          />
         </CardFooter>
       </Card>
     </div>

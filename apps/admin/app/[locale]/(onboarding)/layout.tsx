@@ -9,6 +9,7 @@ export default async function OnboardingLayoutAppearance({
   children: React.ReactNode
 }) {
   const { user } = await authRepositoryServer.getCurrentUser()
+
   return (
     <div>
       <OnboardingHeader />
