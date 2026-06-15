@@ -5,21 +5,23 @@ export const additionalDetailsSchema = z.object({
 
   countryCode: z.string().min(1, "Country is required"),
 
+  phoneNumber: z
+    .string()
+    .trim()
+    .min(1, "Phone number is required")
+    .max(20, "Phone number must be less than 20 characters"),
+
   address: z
     .string()
-    .max(255, "Address must be less than 255 characters")
-    .optional()
-    .or(z.literal("")),
-
-  themePreference: z.enum(["LIGHT", "DARK", "SYSTEM"]),
+    .trim()
+    .min(1, "Address is required")
+    .max(255, "Address must be less than 255 characters"),
 
   bio: z
     .string()
-    .max(160, "Bio must be less than 160 characters")
-    .optional()
-    .or(z.literal("")),
-
-  phoneNumber: z.string().max(20).optional().or(z.literal("")),
+    .trim()
+    .min(1, "Bio is required")
+    .max(160, "Bio must be less than 160 characters"),
 
   timezone: z.string().min(1, "Timezone is required"),
 
@@ -36,7 +38,7 @@ export const additionalDetailsDefaultValues: AdditionalDetailsFormValues = {
   selectedAccountType: "ORG_MEMBER",
   countryCode: "IN",
   address: "",
-  themePreference: "SYSTEM",
+  // themePreference: "SYSTEM",
   bio: "",
   phoneNumber: "",
   timezone: "Asia/Kolkata",

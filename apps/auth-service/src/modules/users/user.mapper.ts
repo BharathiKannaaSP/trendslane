@@ -21,6 +21,9 @@ export function mapCurrentUser(user: CurrentUser) {
       lastLoginAt: user.lastLoginAt,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+
+      // Preferences
+      preferences: user.preferences ?? null,
     },
 
     memberships: user.memberships.map((membership) => ({

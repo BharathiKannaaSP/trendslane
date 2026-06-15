@@ -94,6 +94,7 @@ enum ThemeRadius {
 enum ThemeScale {
   COMPACT
   COMFORTABLE
+  SPACIOUS
 }
 
 

@@ -15,6 +15,10 @@ export type MembershipStatus = "PENDING" | "APPROVED" | "REJECTED"
 
 export type AccountType = "ADMIN" | "ORG_ADMIN" | "ORG_MEMBER"
 
+export type ThemeMode = "SYSTEM" | "LIGHT" | "DARK"
+export type ThemeScale = "COMPACT" | "COMFORTABLE" | "SPACIOUS"
+export type ThemeRadius = "SM" | "MD " | "LG"
+
 export interface CurrentUserOrganization {
   id: string
   name: string
@@ -36,6 +40,21 @@ export interface CurrentUserMembership {
   organization: CurrentUserOrganization
 }
 
+export interface UserPreferences {
+  id: string
+  userId: string
+  themeMode: ThemeMode
+  themeAccent: string
+  themePreset: string
+  themeSidebar: string
+  themeRadius: ThemeRadius
+  themeScale: ThemeScale
+  themeAccentCustomized: boolean
+  themeVersion: number
+  createdAt: Date
+  updatedAt: Date
+}
+
 export interface CurrentUserDto {
   id: string
   clerkUserId: string
@@ -51,11 +70,18 @@ export interface CurrentUserDto {
   selectedAccountType: AccountType | null
   countryCode: string | null
   countryName: string | null
+  phoneNumber: string | null
+  address: string | null
+  bio: string | null
+  timezone: string | null
+  language: string | null
+  referralCode: string | null
   isActive: boolean
   lastLoginAt: string | null
   createdAt: string
   updatedAt: string
   memberships: CurrentUserMembership[]
+  userPreferences: UserPreferences
 }
 
 export interface CurrentUserResponse {
