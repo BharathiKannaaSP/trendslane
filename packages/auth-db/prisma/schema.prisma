@@ -78,6 +78,25 @@ enum AdminRequestStatus {
   REJECTED
 }
 
+// USER PREFERENCES
+enum ThemeMode {
+  LIGHT
+  DARK
+  SYSTEM
+}
+
+enum ThemeRadius {
+  SM
+  MD
+  LG
+}
+
+enum ThemeScale {
+  COMPACT
+  COMFORTABLE
+}
+
+
 model User {
   // IDENTITY
   id String @id @default(cuid())
@@ -104,6 +123,17 @@ model User {
   // BIO COUNTRY
   countryName String?
   countryCode String?
+
+  // PROFILE
+  phoneNumber String?
+  address String? @db.Text
+  bio String? @db.Text
+  timezone String?
+  language String?
+  referralCode String?
+
+  // Preferences
+  preferences UserPreferences?
 
   // ACCOUNT STATUS
   isActive Boolean @default(true)
@@ -154,7 +184,31 @@ model User {
   @@index([onboardingStep])
   @@index([countryCode])
   @@index([isActive])
+}
 
+model UserPreferences {
+  id String @id @default(cuid())
+
+  userId String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // THEME
+  themeMode ThemeMode @default(SYSTEM)
+
+  themeAccent String @default("default")
+  themePreset String @default("default")
+  themeSidebar String @default("default")
+
+  themeRadius ThemeRadius @default(MD)
+  themeScale ThemeScale @default(COMFORTABLE)
+
+  themeAccentCustomized Boolean @default(false)
+  themeVersion Int @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }
 
 model Organization {

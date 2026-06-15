@@ -5,10 +5,8 @@ import { cn } from "@workspace/ui/lib/utils"
 import { Metadata } from "next"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
-import { Suspense } from "react"
 import { routing } from "@/i18n/routing"
 import { getDirection } from "@/i18n/config"
-import CountryProviderServer from "@/providers/country-provider-server"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { notFound } from "next/navigation"
 import { AppearanceProvider } from "@/providers/appearance-provider"
@@ -67,33 +65,31 @@ export default async function RootLayout({
       )}
     >
       <body>
-        <Suspense fallback={null}>
-          <NextTopLoader color="oklch(0.556 0 0)" />
-          <NextIntlClientProvider>
-            <DirectionProvider dir={getDirection(locale)}>
-              <ClerkProvider
-                localization={clerkLocale}
-                appearance={{
-                  theme: shadcn,
-                }}
-              >
-                <QueryProvider>
-                  <CountryProviderServer>
-                    <ThemeProvider>
-                      <AppearanceProvider>
-                        <main className="min-h-screen w-full overflow-x-hidden">
-                          {children}
-                        </main>
-                      </AppearanceProvider>
-                    </ThemeProvider>
-                  </CountryProviderServer>
-                  <ReactQueryDevtools initialIsOpen={false} />
-                </QueryProvider>
-              </ClerkProvider>
-            </DirectionProvider>
-          </NextIntlClientProvider>
-          <Toaster position="top-right" />
-        </Suspense>
+        {/* <Suspense fallback={null}> */}
+        <NextTopLoader color="oklch(0.556 0 0)" />
+        <NextIntlClientProvider>
+          <DirectionProvider dir={getDirection(locale)}>
+            <ClerkProvider
+              localization={clerkLocale}
+              appearance={{
+                theme: shadcn,
+              }}
+            >
+              <QueryProvider>
+                <ThemeProvider>
+                  <AppearanceProvider>
+                    <main className="min-h-screen w-full overflow-x-hidden">
+                      {children}
+                    </main>
+                  </AppearanceProvider>
+                </ThemeProvider>
+                <ReactQueryDevtools initialIsOpen={false} />
+              </QueryProvider>
+            </ClerkProvider>
+          </DirectionProvider>
+        </NextIntlClientProvider>
+        <Toaster position="top-right" />
+        {/* </Suspense> */}
       </body>
     </html>
   )
