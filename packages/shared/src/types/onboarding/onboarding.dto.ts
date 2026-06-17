@@ -1,4 +1,5 @@
 import z from "zod"
+import { additionalDetailsSchema } from "./onboarding-additional-details-schema"
 
 export enum OnboardingStatus {
   PENDING = "PENDING",
@@ -22,3 +23,6 @@ export const updateOnboardingSchema = z.object({
 })
 
 export type UpdateOnboardingInput = z.infer<typeof updateOnboardingSchema>
+export type UpdateAdditionalDetailsSchema = z.infer<
+  typeof additionalDetailsSchema
+>

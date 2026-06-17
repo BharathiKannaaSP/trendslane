@@ -15,6 +15,7 @@ export default async function SignUpPage({
       <SignUp
         routing="path"
         path={`/${locale}/sign-up`}
+        forceRedirectUrl={`/${locale}/verifying`}
         signInUrl={`/${locale}/sign-in`}
       />
     </AuthLayout>

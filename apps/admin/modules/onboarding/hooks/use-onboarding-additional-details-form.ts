@@ -17,13 +17,17 @@ import {
 } from "@workspace/shared"
 
 import { useRouter } from "next/navigation"
-import { useOnboardingUpdate } from "@/modules/users/api/auth.repository.hooks"
+import {
+  useCurrentUserUpdate,
+  useOnboardingUpdate,
+} from "@/modules/users/api/auth.repository.hooks"
 import { EntityFormAction } from "@/components/forms/entity-form"
 import { getAdditionalDetailsFormConfig } from "../constants/onboarding-additional-detail-form-config"
 
 export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
   const router = useRouter()
   const onboardingUpdate = useOnboardingUpdate()
+  const updateCurrentUser = useCurrentUserUpdate()
 
   const [isPending, startTransition] = useTransition()
   const [direction, setDirection] = useState<"next" | "previous" | null>(null)
@@ -120,6 +124,10 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     }
 
     setDirection("next")
+
+    await updateCurrentUser.mutateAsync({
+      ...values,
+    })
 
     await onboardingUpdate.mutateAsync({
       onboardingStep: OnboardingStep.ROLE_REQUIREMENTS,

@@ -18,6 +18,7 @@ import { mapClerkLocale } from "@workspace/shared"
 import { QueryProvider } from "@/providers/query-provider"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { Toaster } from "@workspace/ui/components/sonner"
+import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -68,29 +69,30 @@ export default async function RootLayout({
       <body>
         {/* <Suspense fallback={null}> */}
         <NextTopLoader color="oklch(0.556 0 0)" />
-        <NextIntlClientProvider>
-          <DirectionProvider dir={getDirection(locale)}>
-            <ClerkProvider
-              localization={clerkLocale}
-              appearance={{
-                theme: shadcn,
-              }}
-            >
-              <QueryProvider>
-                <ThemeProvider>
-                  <AppearanceProvider>
-                    <main className="min-h-screen w-full overflow-x-hidden">
-                      {children}
-                    </main>
-                  </AppearanceProvider>
-                </ThemeProvider>
-                <ReactQueryDevtools initialIsOpen={false} />
-              </QueryProvider>
-            </ClerkProvider>
-          </DirectionProvider>
-        </NextIntlClientProvider>
+        <Suspense>
+          <NextIntlClientProvider>
+            <DirectionProvider dir={getDirection(locale)}>
+              <ClerkProvider
+                localization={clerkLocale}
+                appearance={{
+                  theme: shadcn,
+                }}
+              >
+                <QueryProvider>
+                  <ThemeProvider>
+                    <AppearanceProvider>
+                      <main className="min-h-screen w-full overflow-x-hidden">
+                        {children}
+                      </main>
+                    </AppearanceProvider>
+                  </ThemeProvider>
+                  <ReactQueryDevtools initialIsOpen={false} />
+                </QueryProvider>
+              </ClerkProvider>
+            </DirectionProvider>
+          </NextIntlClientProvider>
+        </Suspense>
         <Toaster position="top-right" />
-        {/* </Suspense> */}
       </body>
     </html>
   )

@@ -3,6 +3,7 @@
 import { useAuth } from "@clerk/nextjs"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { Spinner } from "@workspace/ui/components/spinner"
 
 export default function VerifyingPage() {
   const { isLoaded, isSignedIn } = useAuth()
@@ -18,6 +19,7 @@ export default function VerifyingPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
+      <Spinner />
       <p>Verifying account...</p>
     </div>
   )
