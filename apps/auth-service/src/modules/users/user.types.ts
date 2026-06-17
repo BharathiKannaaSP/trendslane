@@ -11,6 +11,7 @@ export const currentUserInclude = Prisma.validator<Prisma.UserDefaultArgs>()({
   },
 })
 
+
 export type CurrentUser = Prisma.UserGetPayload<typeof currentUserInclude>
 
 export type UpdateOnboardingInput = {

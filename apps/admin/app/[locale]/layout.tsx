@@ -1,5 +1,6 @@
 import { Geist_Mono, Inter } from "next/font/google"
 import "@workspace/ui/globals.css"
+import "react-phone-number-input/style.css"
 import { DirectionProvider } from "@workspace/ui/components/direction"
 import { cn } from "@workspace/ui/lib/utils"
 import { Metadata } from "next"

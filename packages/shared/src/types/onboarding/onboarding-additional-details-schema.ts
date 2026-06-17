@@ -5,11 +5,7 @@ export const additionalDetailsSchema = z.object({
 
   countryCode: z.string().min(1, "Country is required"),
 
-  phoneNumber: z
-    .string()
-    .trim()
-    .min(1, "Phone number is required")
-    .max(20, "Phone number must be less than 20 characters"),
+  phoneNumber: z.string().trim().min(1, "Phone number is required"),
 
   address: z
     .string()
@@ -35,10 +31,9 @@ export type AdditionalDetailsFormValues = z.infer<
 >
 
 export const additionalDetailsDefaultValues: AdditionalDetailsFormValues = {
-  selectedAccountType: "ORG_MEMBER",
+  selectedAccountType: "ADMIN",
   countryCode: "IN",
   address: "",
-  // themePreference: "SYSTEM",
   bio: "",
   phoneNumber: "",
   timezone: "Asia/Kolkata",

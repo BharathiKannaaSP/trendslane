@@ -18,6 +18,7 @@
     "@types/express": "^5.0.6",
     "@workspace/auth-db": "workspace:*",
     "express": "^5.2.1",
+    "react-phone-number-input": "^3.4.17",
     "zod": "^3.25.76"
   },
   "devDependencies": {

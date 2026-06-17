@@ -1,52 +1,59 @@
 import { EntityFormConfig } from "@/components/forms/form-types"
 import { countries } from "@workspace/shared"
+import { Bolt, Building2, UsersRound } from "lucide-react"
 
 export const getAdditionalDetailsFormConfig = (): EntityFormConfig => ({
-  title: "Welcome to Trenslane!",
-  description: "Complete your onboarding profile.",
+  title: "Welcome to Trendslane!",
+  description:
+    "Let's set up your account. Please provide a few additional details to get started.",
 
   sections: [
     {
-      title: "Account Information",
-      description: "Choose your account type and country.",
-      fields: ["selectedAccountType", "countryCode"],
+      title: "Account Type / Role",
+      description: "Choose how you'll use Trendslane.",
+      fields: ["selectedAccountType"],
+      isLastField: true,
     },
     {
-      title: "Preferences",
-      description: "Configure localization preferences.",
-      fields: ["timezone", "language"],
-    },
-    {
-      title: "Contact Information",
-      description: "Provide your contact details.",
-      fields: ["phoneNumber", "address"],
-    },
-    {
-      title: "Profile",
-      description: "Tell us a little about yourself.",
-      fields: ["bio", "referralCode"],
+      title: "Additional Details",
+      description: "Help us personalize your experience.",
+      fields: [
+        "countryCode",
+        "address",
+        "bio",
+        "phoneNumber",
+        "timezone",
+        "language",
+        "referralCode",
+      ],
       isLastField: true,
     },
   ],
-
   fields: [
     {
       name: "selectedAccountType",
-      label: "Account Type",
-      type: "select",
-      required: true,
+      label: "",
+      type: "radio-group",
+      defaultValue: "ADMIN",
+      colSpan: 2,
       options: [
         {
-          label: "Administrator",
+          label: "Admin",
           value: "ADMIN",
+          description: "Full access to all features and settings.",
+          icon: Bolt,
         },
         {
           label: "Organization Admin",
           value: "ORG_ADMIN",
+          description: "Manage your organization, members and settings.",
+          icon: Building2,
         },
         {
           label: "Organization Member",
           value: "ORG_MEMBER",
+          description: "Collaborate and access assigned resources.",
+          icon: UsersRound,
         },
       ],
     },
@@ -97,7 +104,7 @@ export const getAdditionalDetailsFormConfig = (): EntityFormConfig => ({
     {
       name: "phoneNumber",
       label: "Phone Number",
-      type: "text",
+      type: "phone-number-select",
       placeholder: "Enter your phone number",
       required: true,
     },
@@ -105,7 +112,7 @@ export const getAdditionalDetailsFormConfig = (): EntityFormConfig => ({
     {
       name: "address",
       label: "Address",
-      type: "textarea",
+      type: "text",
       placeholder: "Enter your address",
       required: true,
     },

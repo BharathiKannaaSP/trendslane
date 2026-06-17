@@ -1,7 +1,6 @@
 import React from "react"
 import * as z from "zod"
 import { Controller, Path, UseFormReturn } from "react-hook-form"
-
 import { Button } from "@workspace/ui/components/button"
 import {
   Card,
@@ -12,10 +11,10 @@ import {
 } from "@workspace/ui/components/card"
 import { FieldGroup } from "@workspace/ui/components/field"
 import { cn } from "@workspace/ui/lib/utils"
-
 import { RenderField } from "./render-field"
 import { EntityFormConfig } from "./form-types"
 import { Spinner } from "@workspace/ui/components/spinner"
+import { Country } from "react-phone-number-input"
 
 export type EntityFormAction = {
   key: string
@@ -40,6 +39,7 @@ interface EntityFormProps<T extends z.ZodTypeAny> {
   onSubmit: (values: z.infer<T>) => Promise<void>
   isSubmitting?: boolean
   actions?: EntityFormAction[]
+  countryCode?: Country
 }
 
 export function EntityForm<T extends z.ZodTypeAny>({
@@ -47,6 +47,7 @@ export function EntityForm<T extends z.ZodTypeAny>({
   config,
   onSubmit,
   actions = [],
+  countryCode,
 }: EntityFormProps<T>) {
   type FormValues = z.infer<T>
 
@@ -121,6 +122,7 @@ export function EntityForm<T extends z.ZodTypeAny>({
                           fieldConfig={fieldConfig}
                           field={field}
                           error={fieldState.error}
+                          countryCode={countryCode}
                         />
                       )}
                     />
@@ -142,7 +144,6 @@ export function EntityForm<T extends z.ZodTypeAny>({
               .map((action) => (
                 <Button
                   key={action.key}
-                  className="w-40"
                   type={action.type ?? "button"}
                   variant={action.variant ?? "default"}
                   disabled={action.disabled || action.loading}
@@ -163,7 +164,6 @@ export function EntityForm<T extends z.ZodTypeAny>({
               .filter((action) => action.key !== "previous")
               .map((action) => (
                 <Button
-                  className="w-40"
                   key={action.key}
                   type={action.type ?? "button"}
                   variant={action.variant ?? "default"}

@@ -7,6 +7,8 @@ const OnboardingAdditionalDetailsPage = async () => {
     type: "ADDITIONAL_DETAILS",
   })
 
+  console.log(user, "from")
+
   return <OnboardingAdditionalDetails user={user} />
 }
 

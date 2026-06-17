@@ -9,6 +9,7 @@ export async function getUserByClerkIdRepository(clerkUserId: string) {
     ...currentUserInclude,
   })
 
+  console.log(user, "from db")
   return user
 }
 
