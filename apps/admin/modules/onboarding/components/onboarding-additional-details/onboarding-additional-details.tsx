@@ -1,64 +1,19 @@
 "use client"
-import { useOnboardingUpdate } from "@/modules/users/api/auth.repository.hooks"
-import {
-  CurrentUserDto,
-  OnboardingStatus,
-  OnboardingStep,
-} from "@workspace/shared"
-import React, { useTransition } from "react"
-import OnboardingNavigation from "../onboarding-navigation"
-import { useRouter } from "next/navigation"
+
+import { EntityForm } from "@/components/forms/entity-form"
+import { useOnboardingAdditionalDetails } from "../../hooks/use-onboarding-additional-details-form"
+import { CurrentUserDto } from "@workspace/shared"
 
 const OnboardingAdditionalDetails = ({ user }: { user: CurrentUserDto }) => {
-  const onboardingUpdate = useOnboardingUpdate()
-  const [isPending, startTransition] = useTransition()
-  const router = useRouter()
-  const [direction, setDirection] = React.useState<"next" | "previous" | null>(
-    null
-  )
-
-  const handleNext = async () => {
-    setDirection("next")
-
-    await onboardingUpdate.mutateAsync({
-      onboardingStep: OnboardingStep.ROLE_REQUIREMENTS,
-      onboardingStatus: OnboardingStatus.IN_PROGRESS,
-      onboardingStepNo: 3,
-    })
-
-    startTransition(() => {
-      router.push("/become-admin")
-      router.refresh()
-    })
-  }
-
-  const handlePrevious = async () => {
-    setDirection("previous")
-
-    await onboardingUpdate.mutateAsync({
-      onboardingStep: OnboardingStep.BASIC_INFORMATION,
-      onboardingStatus: OnboardingStatus.PENDING,
-      onboardingStepNo: 1,
-    })
-
-    startTransition(() => {
-      router.push("/onboarding")
-      router.refresh()
-    })
-  }
-
+  const { form, config, actions, onSubmit, countryCode } =
+    useOnboardingAdditionalDetails(user)
   return (
-    <OnboardingNavigation
-      onNext={handleNext}
-      onPrevious={handlePrevious}
-      isNextLoading={
-        direction === "next" && (onboardingUpdate.isPending || isPending)
-      }
-      isPreviousLoading={
-        direction === "previous" && (onboardingUpdate.isPending || isPending)
-      }
-      isNextDisabled={onboardingUpdate.isPending || isPending}
-      isPreviousDisabled={onboardingUpdate.isPending || isPending}
+    <EntityForm
+      form={form}
+      config={config}
+      onSubmit={onSubmit}
+      actions={actions}
+      countryCode={countryCode}
     />
   )
 }

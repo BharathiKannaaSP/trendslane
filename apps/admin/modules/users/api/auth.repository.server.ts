@@ -5,6 +5,7 @@ export const authRepositoryServer = {
   async getCurrentUser() {
     const response =
       await authServerApi<ApiResponse<CurrentUserResponse>>("/user/me")
+
     return response.data
   },
 }

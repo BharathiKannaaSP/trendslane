@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react"
+
 export type FieldType =
   | "text"
   | "textarea"
@@ -6,10 +8,14 @@ export type FieldType =
   | "multiselect"
   | "email"
   | "password"
+  | "radio-group"
+  | "phone-number-select"
 
 export interface SelectOption {
   label: string
   value: string
+  description?: string
+  icon?: LucideIcon
 }
 
 export interface OptionGroup {

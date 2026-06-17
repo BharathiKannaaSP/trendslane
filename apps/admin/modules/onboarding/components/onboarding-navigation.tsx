@@ -38,7 +38,6 @@ const OnboardingNavigation = ({
           <Button
             type="button"
             variant="outline"
-            className="w-40"
             onClick={onPrevious}
             disabled={isPreviousDisabled || isPreviousLoading}
           >
@@ -55,7 +54,6 @@ const OnboardingNavigation = ({
           <Button
             type="button"
             onClick={onNext}
-            className="w-40"
             disabled={isNextDisabled || isNextLoading}
           >
             {isNextLoading ? (

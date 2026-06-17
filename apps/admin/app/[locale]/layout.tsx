@@ -1,14 +1,13 @@
 import { Geist_Mono, Inter } from "next/font/google"
 import "@workspace/ui/globals.css"
+import "react-phone-number-input/style.css"
 import { DirectionProvider } from "@workspace/ui/components/direction"
 import { cn } from "@workspace/ui/lib/utils"
 import { Metadata } from "next"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
-import { Suspense } from "react"
 import { routing } from "@/i18n/routing"
 import { getDirection } from "@/i18n/config"
-import CountryProviderServer from "@/providers/country-provider-server"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { notFound } from "next/navigation"
 import { AppearanceProvider } from "@/providers/appearance-provider"
@@ -19,6 +18,7 @@ import { mapClerkLocale } from "@workspace/shared"
 import { QueryProvider } from "@/providers/query-provider"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { Toaster } from "@workspace/ui/components/sonner"
+import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -67,8 +67,9 @@ export default async function RootLayout({
       )}
     >
       <body>
-        <Suspense fallback={null}>
-          <NextTopLoader color="oklch(0.556 0 0)" />
+        {/* <Suspense fallback={null}> */}
+        <NextTopLoader color="oklch(0.556 0 0)" />
+        <Suspense>
           <NextIntlClientProvider>
             <DirectionProvider dir={getDirection(locale)}>
               <ClerkProvider
@@ -78,22 +79,20 @@ export default async function RootLayout({
                 }}
               >
                 <QueryProvider>
-                  <CountryProviderServer>
-                    <ThemeProvider>
-                      <AppearanceProvider>
-                        <main className="min-h-screen w-full overflow-x-hidden">
-                          {children}
-                        </main>
-                      </AppearanceProvider>
-                    </ThemeProvider>
-                  </CountryProviderServer>
+                  <ThemeProvider>
+                    <AppearanceProvider>
+                      <main className="min-h-screen w-full overflow-x-hidden">
+                        {children}
+                      </main>
+                    </AppearanceProvider>
+                  </ThemeProvider>
                   <ReactQueryDevtools initialIsOpen={false} />
                 </QueryProvider>
               </ClerkProvider>
             </DirectionProvider>
           </NextIntlClientProvider>
-          <Toaster position="top-right" />
         </Suspense>
+        <Toaster position="top-right" />
       </body>
     </html>
   )

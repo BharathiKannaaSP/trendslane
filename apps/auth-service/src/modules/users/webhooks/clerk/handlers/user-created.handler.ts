@@ -6,14 +6,12 @@ import {
   SystemRole,
 } from "@workspace/auth-db"
 import { ApiError } from "../../../../../errors/api-error"
-import { getCurrentTimestamp } from "@workspace/shared"
 
 export async function handleUserCreated(data: UserJSON) {
   const email = data.email_addresses[0]?.email_address
   const username = data.username
   const firstName = data.first_name
   const lastName = data.last_name
-
   if (!username) {
     throw new ApiError(404, `User ${data.id} does not have an username`)
   }
@@ -41,7 +39,8 @@ export async function handleUserCreated(data: UserJSON) {
       systemRole: SystemRole.USER,
       onboardingStatus: OnboardingStatus.PENDING,
       onboardingStep: OnboardingStep.BASIC_INFORMATION,
-      onboardingStartedAt: getCurrentTimestamp(),
+      onboardingStartedAt: new Date(),
+      createdByClerkUserId: data.id,
     },
   })
 }

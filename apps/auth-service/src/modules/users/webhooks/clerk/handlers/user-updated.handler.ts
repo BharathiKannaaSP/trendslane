@@ -7,6 +7,9 @@ export async function handleUserUpdated(data: UserJSON) {
     where: {
       clerkUserId: data.id,
     },
-    data: mapClerkUserUpdate(data),
+    data: {
+      updatedByClerkUserId: data.id,
+      ...mapClerkUserUpdate(data),
+    },
   })
 }

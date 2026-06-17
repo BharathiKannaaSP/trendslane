@@ -1,19 +1,46 @@
 import { prisma } from "@workspace/auth-db"
-import { currentUserInclude, UpdateOnboardingInput } from "./user.types"
+import {
+  currentUserInclude,
+  UpdateCurrentUserInput,
+  UpdateOnboardingInput,
+} from "./user.types"
+import { countries } from "@workspace/shared"
 
 export async function getUserByClerkIdRepository(clerkUserId: string) {
-  const start = performance.now()
-
   const user = await prisma.user.findUnique({
     where: {
       clerkUserId,
     },
     ...currentUserInclude,
   })
-
-  console.log("prisma findUnique", Math.round(performance.now() - start), "ms")
-
   return user
+}
+
+export async function updateCurrentUserRepository(
+  clerkUserId: string,
+  data: UpdateCurrentUserInput
+) {
+  const findCountryName = countries.find(
+    (country) => country.code === data.countryCode
+  )
+  const countryName = findCountryName?.name
+
+  return prisma.user.update({
+    where: {
+      clerkUserId,
+    },
+    data: {
+      selectedAccountType: data.selectedAccountType,
+      countryCode: data.countryCode,
+      countryName,
+      address: data.address,
+      bio: data.bio,
+      phoneNumber: data.phoneNumber,
+      timezone: data.timezone,
+      language: data.language,
+      referralCode: data.referralCode,
+    },
+  })
 }
 
 export async function updateOnboardingRepository(

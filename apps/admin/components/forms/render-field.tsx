@@ -2,9 +2,11 @@
 import { ControllerRenderProps } from "react-hook-form"
 import {
   Field,
+  FieldContent,
   FieldDescription,
   FieldError,
   FieldLabel,
+  FieldTitle,
 } from "@workspace/ui/components/field"
 import { Input } from "@workspace/ui/components/input"
 import {
@@ -16,11 +18,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select"
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@workspace/ui/components/radio-group"
 import { Switch } from "@workspace/ui/components/switch"
 import { Textarea } from "@workspace/ui/components/textarea"
 import { cn } from "@workspace/ui/lib/utils"
 import { MultiSelectField } from "./multi-select"
 import { FieldConfig } from "./form-types"
+import PhoneInputInput, { Country } from "react-phone-number-input/input"
 
 interface RenderFieldProps {
   fieldConfig: FieldConfig
@@ -28,9 +35,15 @@ interface RenderFieldProps {
   field: ControllerRenderProps<any>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any
+  countryCode?: string
 }
 
-export function RenderField({ fieldConfig, field, error }: RenderFieldProps) {
+export function RenderField({
+  fieldConfig,
+  field,
+  error,
+  countryCode,
+}: RenderFieldProps) {
   if (fieldConfig.type === "switch") {
     return (
       <Field
@@ -141,6 +154,69 @@ export function RenderField({ fieldConfig, field, error }: RenderFieldProps) {
       {/* MULTISELECT */}
       {fieldConfig.type === "multiselect" && (
         <MultiSelectField field={field} fieldConfig={fieldConfig} />
+      )}
+
+      {/* // Radio Group */}
+      {fieldConfig.type === "radio-group" && (
+        <RadioGroup
+          value={field.value}
+          onValueChange={field.onChange}
+          disabled={fieldConfig.disabled}
+          className="flex w-full flex-col gap-3 lg:flex-row"
+        >
+          {fieldConfig.options?.map((option) => {
+            if (
+              typeof option === "object" &&
+              option !== null &&
+              "value" in option
+            ) {
+              const id = `${fieldConfig.name}-${option.value}`
+              const Icon = option.icon
+
+              return (
+                <FieldLabel key={option.value} htmlFor={id}>
+                  <Field
+                    orientation="horizontal"
+                    className="h-30 cursor-pointer rounded-lg border p-4 transition-colors hover:bg-muted/50"
+                  >
+                    <FieldContent>
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-col gap-2">
+                          {Icon && <Icon />}
+                          <FieldTitle>{option.label}</FieldTitle>
+                          <FieldDescription className="text-xs">
+                            {option.description}
+                          </FieldDescription>
+                        </div>
+                        <div className="self-start">
+                          <RadioGroupItem id={id} value={option.value} />
+                        </div>
+                      </div>
+                    </FieldContent>
+                  </Field>
+                </FieldLabel>
+              )
+            }
+
+            return null
+          })}
+        </RadioGroup>
+      )}
+
+      {/* PHONE NUMBER */}
+      {fieldConfig.type === "phone-number-select" && (
+        <PhoneInputInput
+          international
+          withCountryCallingCode
+          value={field.value}
+          country={countryCode as Country}
+          onChange={field.onChange}
+          disabled={fieldConfig.disabled}
+          placeholder={fieldConfig.placeholder}
+          className={cn(
+            "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40"
+          )}
+        />
       )}
 
       {fieldConfig.description && (

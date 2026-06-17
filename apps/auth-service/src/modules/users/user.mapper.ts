@@ -17,10 +17,19 @@ export function mapCurrentUser(user: CurrentUser) {
       selectedAccountType: user.selectedAccountType,
       countryName: user.countryName,
       countryCode: user.countryCode,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
+      bio: user.bio,
+      timezone: user.timezone,
+      language: user.language,
+      referralCode: user.referralCode,
       isActive: user.isActive,
       lastLoginAt: user.lastLoginAt,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+
+      // Preferences
+      preferences: user.preferences ?? null,
     },
 
     memberships: user.memberships.map((membership) => ({
