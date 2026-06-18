@@ -17,10 +17,7 @@ interface AppearanceFormProps {
   onChange: (value: AppearanceSettings) => void
 }
 
-export function AppearanceForm({
-  value,
-  onChange,
-}: AppearanceFormProps) {
+export function AppearanceForm({ value, onChange }: AppearanceFormProps) {
   const t = useTranslations("Preferences.Appearance")
   return (
     <>

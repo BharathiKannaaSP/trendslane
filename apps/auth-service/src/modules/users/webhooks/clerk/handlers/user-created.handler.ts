@@ -53,5 +53,5 @@ export async function handleUserCreated(data: UserJSON) {
     },
   })
 
-  console.log(user, 'Webhook user')
+  console.log(user, "Webhook user")
 }

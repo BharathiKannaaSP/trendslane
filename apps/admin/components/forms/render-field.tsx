@@ -103,7 +103,6 @@ export function RenderField({
       {/* SELECT */}
       {fieldConfig.type === "select" && (
         <Select
-          key={field.value ?? "empty"}
           disabled={fieldConfig.disabled}
           value={field.value || ""}
           onValueChange={field.onChange}
@@ -208,9 +207,9 @@ export function RenderField({
         <PhoneInputInput
           international
           withCountryCallingCode
-          value={field.value}
           country={countryCode as Country}
-          onChange={field.onChange}
+          value={field.value ?? ""}
+          onChange={(value) => field.onChange(value ?? "")}
           disabled={fieldConfig.disabled}
           placeholder={fieldConfig.placeholder}
           className={cn(

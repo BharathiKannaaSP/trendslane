@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client"
 
 import { useEffect, useState } from "react"
@@ -12,11 +13,11 @@ import {
 import { Button } from "@workspace/ui/components/button"
 
 import { THEME_OPTIONS } from "@/modules/preferences/constants/theme-options"
+import { useAppearance } from "@/providers/appearance-provider"
 import {
-  getAppearanceCookie,
-  setClientCookie,
-} from "@/lib/cookies-utils/client"
-import { useUpdateCurrentUserThemePreferences } from "@/modules/users/api/auth.repository.hooks"
+  useCurrentUser,
+  useUpdateCurrentUserThemePreferences,
+} from "@/modules/users/api/auth.repository.hooks"
 
 interface ThemeSelectorProps {
   variant?: "default" | "icon"
@@ -26,41 +27,30 @@ export function ThemeSelector({ variant = "default" }: ThemeSelectorProps) {
   const t = useTranslations("Preferences.Appearance.appearanceOptions.theme")
 
   const [mounted, setMounted] = useState(false)
-
   const { theme, setTheme, resolvedTheme } = useTheme()
-
+  const { settings, update } = useAppearance()
+  const { data: user } = useCurrentUser()
   const updateThemePreferences = useUpdateCurrentUserThemePreferences()
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
   }, [])
 
   const handleThemeChange = (value: "light" | "dark" | "system") => {
-    // Update next-themes
     setTheme(value)
 
     const themeMode =
       value === "dark" ? "DARK" : value === "light" ? "LIGHT" : "SYSTEM"
 
-    // Update cookie
-    try {
-      const appearance = getAppearanceCookie()
-      setClientCookie(
-        "appearance",
-        JSON.stringify({
-          ...appearance,
-          themeMode,
-        })
-      )
-    } catch (err) {
-      console.error(err)
-    }
-
-    // Update DB
-    updateThemePreferences.mutate({
+    update({
+      ...settings,
       themeMode,
     })
+    if (user) {
+      updateThemePreferences.mutate({
+        themeMode,
+      })
+    }
   }
 
   if (!mounted) {
@@ -88,7 +78,7 @@ export function ThemeSelector({ variant = "default" }: ThemeSelectorProps) {
       type="single"
       variant="outline"
       spacing={0}
-      value={theme}
+      value={theme ?? "system"}
       onValueChange={(value) => {
         if (value) {
           handleThemeChange(value as "light" | "dark" | "system")

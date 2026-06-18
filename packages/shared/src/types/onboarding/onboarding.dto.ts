@@ -22,4 +22,3 @@ export const updateOnboardingSchema = z.object({
 })
 
 export type UpdateOnboardingInput = z.infer<typeof updateOnboardingSchema>
-

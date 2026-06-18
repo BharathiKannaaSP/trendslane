@@ -88,8 +88,6 @@ export interface CurrentUserResponse {
   user: CurrentUserDto
 }
 
-
-
 export type UpdateCurrentUserInput = {
   selectedAccountType?: AccountType
   countryCode?: string

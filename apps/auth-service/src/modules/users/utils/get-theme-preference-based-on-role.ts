@@ -21,7 +21,7 @@ export function getThemePreferences(
     case "ORG_ADMIN":
       return {
         accentColor: "green",
-        themePreset: "forest-whisper",
+        themePreset: "default",
       }
 
     case "ORG_MEMBER":

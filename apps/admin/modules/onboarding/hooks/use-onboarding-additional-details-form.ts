@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from "react"
+import { useEffect, useRef, useState, useTransition } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -30,7 +30,7 @@ import {
 } from "@/lib/cookies-utils/client"
 import { useRouter } from "@/i18n/navigation"
 
-export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
+export const useOnboardingAdditionalDetailsForm = (user?: CurrentUserDto) => {
   const router = useRouter()
   const onboardingUpdate = useOnboardingUpdate()
   const updateCurrentUser = useCurrentUserUpdate()
@@ -60,6 +60,8 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     (country) => country.code === countryCode
   )
 
+  const previousCountryCodeRef = useRef<string>("")
+
   const getUserFormValues = (
     currentUser: CurrentUserDto
   ): AdditionalDetailsFormValues => ({
@@ -77,35 +79,46 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     if (!user) return
 
     form.reset(getUserFormValues(user))
+
+    previousCountryCodeRef.current = user.countryCode ?? "IN"
   }, [user, form])
 
-  const [previousCountryCode, setPreviousCountryCode] = useState<string>()
-
   useEffect(() => {
-    if (!selectedCountry) return
+    if (!countryCode) return
 
-    form.setValue("timezone", selectedCountry.timezone, {
-      shouldValidate: true,
-    })
+    const country = countries.find((c) => c.code === countryCode)
 
-    form.setValue(
-      "language",
-      form.getValues("language") || getLocaleFromCookie(),
-      {
-        shouldValidate: true,
-      }
-    )
+    if (!country) return
 
-    if (previousCountryCode && previousCountryCode !== selectedCountry.code) {
-      form.setValue("phoneNumber", selectedCountry.phoneCode, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
+    const currentTimezone = form.getValues("timezone")
+
+    if (currentTimezone !== country.timezone) {
+      form.setValue("timezone", country.timezone)
     }
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setPreviousCountryCode(selectedCountry.code)
-  }, [selectedCountry, form, previousCountryCode])
+    const currentLanguage = form.getValues("language")
+
+    if (!currentLanguage) {
+      form.setValue("language", getLocaleFromCookie())
+    }
+
+    if (
+      previousCountryCodeRef.current &&
+      previousCountryCodeRef.current !== countryCode
+    ) {
+      const currentPhone = form.getValues("phoneNumber")
+
+      if (currentPhone !== country.phoneCode) {
+        form.reset({
+          ...form.getValues(),
+          countryCode,
+          phoneNumber: country.phoneCode,
+        })
+      }
+    }
+
+    previousCountryCodeRef.current = countryCode
+  }, [countryCode, form])
 
   const config = getAdditionalDetailsFormConfig()
 
@@ -197,7 +210,6 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
 
     form.reset({
       ...getUserFormValues(user),
-      selectedAccountType: user.selectedAccountType ?? "ADMIN",
       phoneNumber: user.phoneNumber?.replace(/\s+/g, "") ?? "",
     })
   }

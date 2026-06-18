@@ -65,7 +65,6 @@ export function useUpdateCurrentUserThemePreferences() {
       authRepositoryClient.updateCurrentUserThemePreferences(api, data),
     onSuccess: async (preferences) => {
       queryClient.setQueryData(["theme-preferences"], preferences)
-      toast.success("Theme updated successfully")
     },
 
     onError: () => {

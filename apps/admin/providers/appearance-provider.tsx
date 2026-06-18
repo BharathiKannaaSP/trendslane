@@ -30,14 +30,14 @@ export function AppearanceProvider({
     if (!settings.themeMode) return
 
     applyAppearance(settings, settings.themeMode)
-  }, [settings, settings.themeMode])
+  }, [settings])
 
-  function update(next: AppearanceSettings) {
+  const update = (next: AppearanceSettings) => {
     setSettings(next)
     setAppearanceCookie(next)
 
-    if (settings.themeMode) {
-      applyAppearance(next, settings.themeMode)
+    if (next.themeMode) {
+      applyAppearance(next, next.themeMode)
     }
   }
 
@@ -46,7 +46,6 @@ export function AppearanceProvider({
       settings,
       update,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [settings]
   )
 

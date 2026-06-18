@@ -1,7 +1,4 @@
-import {
-  AccentColor,
-  ThemePreset,
-} from "../components/header-appearance/appearance-types"
+import { AccentColor, ThemePreset } from "@workspace/shared"
 
 export const PRESET_OPTIONS: {
   value: ThemePreset
