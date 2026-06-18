@@ -1,5 +1,4 @@
-import { ThemeRadius, ThemeScale } from "@workspace/auth-db"
-import { ThemeMode, ThemePreset, AccentColor } from "../theme"
+import { ThemeMode, ThemePreset, AccentColor, Scale, Radius } from "../theme"
 import { OnboardingStatus, OnboardingStep } from "../onboarding/onboarding.dto"
 
 export type SystemRole = "ADMIN" | "USER"
@@ -45,8 +44,8 @@ export interface UserThemePreferences {
   themeAccent: AccentColor
   themePreset: ThemePreset
   themeSidebar: string
-  themeRadius: ThemeRadius
-  themeScale: ThemeScale
+  themeRadius: Radius
+  themeScale: Scale
   themeAccentCustomized: boolean
   themeVersion: number
   createdAt: Date
