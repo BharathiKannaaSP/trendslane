@@ -1,4 +1,4 @@
-import { ThemePreset } from "../components/header-appearance/appearance-types"
+import { ThemePreset } from "@workspace/shared"
 
 export type PresetColors = {
   background: string

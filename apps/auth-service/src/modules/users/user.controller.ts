@@ -2,7 +2,12 @@
 
 import { Request, Response } from "express"
 import { asyncHandler } from "../../handler/async-handler"
-import { getCurrentUserService, updateCurrentUserService, updateOnboardingService } from "./user.service"
+import {
+  getCurrentUserService,
+  updateCurrentUserLanguageService,
+  updateCurrentUserService,
+  updateOnboardingService,
+} from "./user.service"
 import { apiResponse } from "../../handler/api-response"
 
 export const getCurrentUserController = asyncHandler(
@@ -28,6 +33,20 @@ export const updateCurrentUserController = asyncHandler(
     return apiResponse({
       res,
       message: "Current user updated successfully",
+      data,
+    })
+  }
+)
+
+export const  updateCurrentUserLanguageController= asyncHandler(
+  async (req: Request, res: Response) => {
+    const clerkUserId = req.auth.userId
+    console.log('entered contolrrer', req.body)
+    const data = await updateCurrentUserLanguageService(clerkUserId, req.body.language)
+
+    return apiResponse({
+      res,
+      message: "Current user language updated successfully",
       data,
     })
   }

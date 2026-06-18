@@ -1,4 +1,4 @@
-import { AppearanceSettings, DEFAULT_APPEARANCE } from "../appearance-types"
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
 
 const STORAGE_KEY = "appearance"
 

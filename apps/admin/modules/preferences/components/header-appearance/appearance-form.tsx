@@ -1,7 +1,6 @@
 "use client"
 
 import { RadiusSelector } from "./selectors/radius-selector"
-import { AppearanceSettings, DEFAULT_APPEARANCE } from "./appearance-types"
 import { Label } from "@workspace/ui/components/label"
 import { PresetSelector } from "./selectors/preset-selector"
 import { ScaleSelector } from "./selectors/scale-selector"
@@ -11,6 +10,7 @@ import { ThemeSelector } from "./selectors/theme-selector"
 import { Button } from "@workspace/ui/components/button"
 import { useTranslations } from "next-intl"
 import { ScrollArea } from "@workspace/ui/components/scroll-area"
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
 
 interface AppearanceFormProps {
   value: AppearanceSettings

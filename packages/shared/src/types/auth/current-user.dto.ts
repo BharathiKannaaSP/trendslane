@@ -1,4 +1,6 @@
-import { OnboardingStatus, OnboardingStep } from "../onboarding"
+import { ThemeRadius, ThemeScale } from "@workspace/auth-db"
+import { ThemeMode, ThemePreset, AccentColor } from "../theme"
+import { OnboardingStatus, OnboardingStep } from "../onboarding/onboarding.dto"
 
 export type SystemRole = "ADMIN" | "USER"
 
@@ -14,10 +16,6 @@ export type OrganizationStatus =
 export type MembershipStatus = "PENDING" | "APPROVED" | "REJECTED"
 
 export type AccountType = "ADMIN" | "ORG_ADMIN" | "ORG_MEMBER"
-
-export type ThemeMode = "SYSTEM" | "LIGHT" | "DARK"
-export type ThemeScale = "COMPACT" | "COMFORTABLE" | "SPACIOUS"
-export type ThemeRadius = "SM" | "MD " | "LG"
 
 export interface CurrentUserOrganization {
   id: string
@@ -44,8 +42,8 @@ export interface UserPreferences {
   id: string
   userId: string
   themeMode: ThemeMode
-  themeAccent: string
-  themePreset: string
+  themeAccent: AccentColor
+  themePreset: ThemePreset
   themeSidebar: string
   themeRadius: ThemeRadius
   themeScale: ThemeScale
@@ -81,9 +79,20 @@ export interface CurrentUserDto {
   createdAt: string
   updatedAt: string
   memberships: CurrentUserMembership[]
-  userPreferences: UserPreferences
+  preferences: UserPreferences
 }
 
 export interface CurrentUserResponse {
   user: CurrentUserDto
+}
+
+export type UpdateCurrentUserInput = {
+  selectedAccountType?: AccountType
+  countryCode?: string
+  address?: string
+  bio?: string
+  phoneNumber?: string
+  timezone?: string
+  language?: string
+  referralCode?: string
 }

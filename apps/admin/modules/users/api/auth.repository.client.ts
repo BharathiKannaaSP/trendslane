@@ -1,8 +1,8 @@
 import { ApiClient } from "@/utils/api-utils/client-api"
 import {
-  additionalDetailsSchema,
   ApiResponse,
   CurrentUserResponse,
+  updateAdditionalDetailsSchema,
   UpdateAdditionalDetailsSchema,
   UpdateOnboardingInput,
   updateOnboardingSchema,
@@ -18,9 +18,24 @@ export const authRepositoryClient = {
     api: ApiClient,
     payload: UpdateAdditionalDetailsSchema
   ) {
-    const validatedPayload = additionalDetailsSchema.parse(payload)
+    const validatedPayload = updateAdditionalDetailsSchema.parse(payload)
     const response = await api<ApiResponse<CurrentUserResponse>>(
       "/user/me/updateCurrentUser",
+      {
+        method: "PATCH",
+        body: JSON.stringify(validatedPayload),
+      }
+    )
+    return response.data
+  },
+
+  async updateCurrentUserLanguage(
+    api: ApiClient,
+    payload: UpdateAdditionalDetailsSchema
+  ) {
+    const validatedPayload = updateAdditionalDetailsSchema.parse(payload)
+    const response = await api<ApiResponse<CurrentUserResponse>>(
+      "/user/me/updateCurrentUserLanguage",
       {
         method: "PATCH",
         body: JSON.stringify(validatedPayload),

@@ -16,13 +16,14 @@ import {
   OnboardingStep,
 } from "@workspace/shared"
 
-import { useRouter } from "next/navigation"
 import {
   useCurrentUserUpdate,
   useOnboardingUpdate,
 } from "@/modules/users/api/auth.repository.hooks"
 import { EntityFormAction } from "@/components/forms/entity-form"
 import { getAdditionalDetailsFormConfig } from "../constants/onboarding-additional-detail-form-config"
+import { getLocaleFromCookie } from "@/lib/cookies-utils/client"
+import { useRouter } from "@/i18n/navigation"
 
 export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
   const router = useRouter()
@@ -34,7 +35,10 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
 
   const form = useForm<AdditionalDetailsFormValues>({
     resolver: zodResolver(additionalDetailsSchema),
-    defaultValues: additionalDetailsDefaultValues,
+    defaultValues: {
+      ...additionalDetailsDefaultValues,
+      language: getLocaleFromCookie(),
+    },
   })
 
   const countryCode = useWatch({
@@ -57,7 +61,7 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     selectedAccountType: currentUser.selectedAccountType ?? "ADMIN",
     countryCode: currentUser.countryCode ?? "IN",
     timezone: currentUser.timezone ?? "Asia/Kolkata",
-    language: currentUser.language ?? "en",
+    language: currentUser.language ?? getLocaleFromCookie(),
     address: currentUser.address ?? "",
     bio: currentUser.bio ?? "",
     phoneNumber: currentUser.phoneNumber ?? "",
@@ -79,9 +83,13 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
       shouldValidate: true,
     })
 
-    form.setValue("language", selectedCountry.defaultLanguage, {
-      shouldValidate: true,
-    })
+    form.setValue(
+      "language",
+      form.getValues("language") || getLocaleFromCookie(),
+      {
+        shouldValidate: true,
+      }
+    )
 
     if (previousCountryCode && previousCountryCode !== selectedCountry.code) {
       form.setValue("phoneNumber", selectedCountry.phoneCode, {
@@ -136,19 +144,26 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     })
 
     startTransition(() => {
-      switch (selectedAccountType) {
-        case "ADMIN":
-          router.push("/become-admin")
-          break
+      let nextRoute = "/become-admin"
 
+      switch (selectedAccountType) {
         case "ORG_ADMIN":
-          router.push("/create-organization")
+          nextRoute = "/create-organization"
           break
 
         case "ORG_MEMBER":
-          router.push("/join-organization")
+          nextRoute = "/join-organization"
+          break
+
+        case "ADMIN":
+        default:
+          nextRoute = "/become-admin"
           break
       }
+
+      router.replace(nextRoute, {
+        locale: values.language,
+      })
 
       router.refresh()
     })
@@ -170,7 +185,7 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
   const footerActions: EntityFormAction[] = [
     {
       key: "previous",
-      label: "Previous",
+      label: "Back",
       variant: "outline",
       loading:
         direction === "previous" && (onboardingUpdate.isPending || isPending),

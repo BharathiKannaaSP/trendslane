@@ -5,6 +5,7 @@ import {
   UpdateOnboardingInput,
 } from "./user.types"
 import { countries } from "@workspace/shared"
+import { getThemePreferences } from "./utils/get-theme-preference-based-on-role"
 
 export async function getUserByClerkIdRepository(clerkUserId: string) {
   const user = await prisma.user.findUnique({
@@ -16,6 +17,16 @@ export async function getUserByClerkIdRepository(clerkUserId: string) {
   return user
 }
 
+export async function updateUserLanguageRepository(
+  clerkUserId: string,
+  language: string
+) {
+  return prisma.user.update({
+    where: { clerkUserId },
+    data: { language },
+  })
+}
+
 export async function updateCurrentUserRepository(
   clerkUserId: string,
   data: UpdateCurrentUserInput
@@ -24,6 +35,8 @@ export async function updateCurrentUserRepository(
     (country) => country.code === data.countryCode
   )
   const countryName = findCountryName?.name
+
+  const themePreferences = getThemePreferences(data.selectedAccountType)
 
   return prisma.user.update({
     where: {
@@ -39,6 +52,18 @@ export async function updateCurrentUserRepository(
       timezone: data.timezone,
       language: data.language,
       referralCode: data.referralCode,
+      preferences: {
+        upsert: {
+          create: {
+            themeAccent: themePreferences.accentColor,
+            themePreset: themePreferences.themePreset,
+          },
+          update: {
+            themeAccent: themePreferences.accentColor,
+            themePreset: themePreferences.themePreset,
+          },
+        },
+      },
     },
   })
 }

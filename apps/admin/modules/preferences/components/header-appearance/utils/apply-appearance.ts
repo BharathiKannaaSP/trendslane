@@ -1,10 +1,9 @@
 import { ACCENTS } from "@/modules/preferences/constants/theme-accents"
-import { AppearanceSettings, ThemePreset } from "../appearance-types"
 import { PRESETS } from "@/modules/preferences/constants/theme-presets"
+import { AppearanceSettings, ThemePreset } from "@workspace/shared"
 
 export function applyAppearance(settings: AppearanceSettings, theme?: string) {
   const root = document.documentElement
-
   root.style.setProperty("--radius", getRadius(settings.radius))
   root.style.setProperty("--font-size-base", getScale(settings.scale))
   applyPreset(settings.preset, theme === "dark")

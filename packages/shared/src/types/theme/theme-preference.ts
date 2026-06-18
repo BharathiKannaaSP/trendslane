@@ -31,14 +31,13 @@ export type Scale = "compact" | "comfortable" | "spacious"
 export type SidebarMode = "default" | "icon"
 
 export interface AppearanceSettings {
-  version: 1
+  version: number
   mode: ThemeMode
   preset: ThemePreset
   accent: AccentColor
   accentCustomized: boolean
   radius: Radius
   scale: Scale
-  sidebar: SidebarMode
 }
 
 export const DEFAULT_APPEARANCE: AppearanceSettings = {
@@ -49,5 +48,4 @@ export const DEFAULT_APPEARANCE: AppearanceSettings = {
   accentCustomized: false,
   radius: "md",
   scale: "comfortable",
-  sidebar: "default",
 }

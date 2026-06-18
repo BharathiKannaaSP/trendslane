@@ -18,7 +18,7 @@ import {
 import { Separator } from "@workspace/ui/components/separator"
 import { Check, ChevronDown, ChevronRight, Globe, Settings } from "lucide-react"
 import { useCountry } from "@/providers/country-provider"
-import { setCountryCookie } from "@/lib/country-cookies-utils/country-client"
+import { setCountryCookie } from "@/lib/cookies-utils/client"
 import { useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 import Link from "next/link"

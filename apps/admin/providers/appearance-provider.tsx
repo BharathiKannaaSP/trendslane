@@ -1,24 +1,22 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useTheme } from "next-themes"
 
-import {
-  AppearanceSettings,
-  DEFAULT_APPEARANCE,
-} from "@/modules/preferences/components/header-appearance/appearance-types"
 import { applyAppearance } from "@/modules/preferences/components/header-appearance/utils/apply-appearance"
+import { useCurrentUser } from "@/modules/users/api/auth.repository.hooks"
+
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
 
 type ContextValue = {
-  settings: AppearanceSettings
+  settings: AppearanceSettings | null
   update: (settings: AppearanceSettings) => void
   toggleMode: () => void
   isHydrated: boolean
 }
 
 const AppearanceContext = createContext<ContextValue | null>(null)
-
-const STORAGE_KEY = "appearance"
 
 export function AppearanceProvider({
   children,
@@ -27,58 +25,80 @@ export function AppearanceProvider({
 }) {
   const { setTheme, resolvedTheme } = useTheme()
 
-  const [settings, setSettings] =
-    useState<AppearanceSettings>(DEFAULT_APPEARANCE)
+  const { data: user, isLoading } = useCurrentUser()
 
+  const [settings, setSettings] = useState<AppearanceSettings | null>(null)
   const [isHydrated, setIsHydrated] = useState(false)
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+  const userPreferences = useMemo<AppearanceSettings>(() => {
+    const preferences = user?.user?.preferences
 
-      if (saved) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setSettings(JSON.parse(saved))
-      }
-    } catch {
-      // ignore
-    } finally {
-      setIsHydrated(true)
+    if (!preferences) {
+      return DEFAULT_APPEARANCE
     }
-  }, [])
+
+    return {
+      version: preferences.themeVersion,
+      mode: preferences.themeMode.toLowerCase() as AppearanceSettings["mode"],
+      preset: preferences.themePreset,
+      accent: preferences.themeAccent,
+      accentCustomized: preferences.themeAccentCustomized,
+      radius:
+        preferences.themeRadius.toLowerCase() as AppearanceSettings["radius"],
+      scale:
+        preferences.themeScale.toLowerCase() as AppearanceSettings["scale"],
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (isLoading) return
+
+    setSettings(userPreferences)
+    setIsHydrated(true)
+  }, [isLoading, userPreferences])
+
+  useEffect(() => {
+    if (!settings) return
+
+    setTheme(settings.mode)
+  }, [settings?.mode, setTheme, settings])
+
+  useEffect(() => {
+    if (!settings) return
+
+    const activeTheme =
+      settings.mode === "system" ? (resolvedTheme ?? "light") : settings.mode
+
+    applyAppearance(settings, activeTheme)
+  }, [settings, resolvedTheme])
 
   function update(next: AppearanceSettings) {
     setSettings(next)
   }
 
   function toggleMode() {
-    setSettings((prev) => ({
-      ...prev,
-      mode: prev.mode === "dark" ? "light" : "dark",
-    }))
+    setSettings((prev) => {
+      if (!prev) return DEFAULT_APPEARANCE
+
+      return {
+        ...prev,
+        mode: prev.mode === "dark" ? "light" : "dark",
+      }
+    })
   }
 
-  useEffect(() => {
-    if (!isHydrated) return
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
-
-    setTheme(settings.mode)
-
-    const activeTheme =
-      settings.mode === "system" ? (resolvedTheme ?? "light") : settings.mode
-
-    applyAppearance(settings, activeTheme)
-  }, [settings, setTheme, resolvedTheme, isHydrated])
+  const value = useMemo(
+    () => ({
+      settings,
+      update,
+      toggleMode,
+      isHydrated,
+    }),
+    [settings, isHydrated]
+  )
 
   return (
-    <AppearanceContext.Provider
-      value={{
-        settings,
-        update,
-        toggleMode,
-        isHydrated,
-      }}
-    >
+    <AppearanceContext.Provider value={value}>
       {children}
     </AppearanceContext.Provider>
   )
