@@ -1,19 +1,19 @@
-import { Scale } from "../components/header-appearance/appearance-types"
+import { Scale } from "@workspace/shared"
 
 export const SCALE_OPTIONS: {
   value: Scale
   label: string
 }[] = [
   {
-    value: "compact",
+    value: "COMPACT",
     label: "Compact",
   },
   {
-    value: "comfortable",
+    value: "COMFORTABLE",
     label: "Comfortable",
   },
   {
-    value: "spacious",
+    value: "SPACIOUS",
     label: "Spacious",
   },
 ]

@@ -6,9 +6,8 @@ import {
 } from "@workspace/ui/components/toggle-group"
 
 import { cn } from "@workspace/ui/lib/utils"
-
-import type { AccentColor } from "../appearance-types"
 import { ACCENT_OPTIONS } from "@/modules/preferences/constants/accent-options"
+import { AccentColor } from "@workspace/shared"
 
 interface AccentSelectorProps {
   value: AccentColor

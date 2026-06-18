@@ -25,7 +25,7 @@ export default clerkMiddleware(async (auth, req) => {
 
   // Already signed in -> prevent access to auth pages
   if (userId && isPublicRoute(req)) {
-    return NextResponse.redirect(new URL(`/${locale}`, req.url))
+    return NextResponse.redirect(new URL(`/${locale}/verifying`, req.url))
   }
 
   return intlMiddleware(req)

@@ -40,3 +40,9 @@ export const additionalDetailsDefaultValues: AdditionalDetailsFormValues = {
   language: "en",
   referralCode: "",
 }
+
+export const updateAdditionalDetailsSchema = additionalDetailsSchema.partial()
+
+export type UpdateAdditionalDetailsSchema = z.infer<
+  typeof updateAdditionalDetailsSchema
+>

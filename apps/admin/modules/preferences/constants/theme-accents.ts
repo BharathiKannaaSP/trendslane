@@ -1,4 +1,4 @@
-import { AccentColor } from "../components/header-appearance/appearance-types"
+import { AccentColor } from "@workspace/shared"
 
 export type AccentPalette = {
   primary: string

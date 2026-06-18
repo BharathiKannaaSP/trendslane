@@ -1,27 +1,19 @@
-import { Radius } from "../components/header-appearance/appearance-types"
+import { Radius } from "@workspace/shared"
 
 export const RADIUS_OPTIONS: {
   value: Radius
   label: string
 }[] = [
   {
-    value: "none",
-    label: "None",
+    value: "SM",
+    label: "Small",
   },
   {
-    value: "xs",
-    label: "XS",
+    value: "MD",
+    label: "Medium",
   },
   {
-    value: "md",
-    label: "MD",
-  },
-  {
-    value: "lg",
-    label: "LG",
-  },
-  {
-    value: "xl",
-    label: "XL",
+    value: "LG",
+    label: "Large",
   },
 ]

@@ -3,7 +3,10 @@ import {
   currentUserInclude,
   UpdateCurrentUserInput,
   UpdateOnboardingInput,
+  UpdateUserThemePreferencesInput,
 } from "./user.types"
+import { getThemePreferences } from "./utils/get-theme-preference-based-on-role"
+import { ApiError } from "../../errors/api-error"
 import { countries } from "@workspace/shared"
 
 export async function getUserByClerkIdRepository(clerkUserId: string) {
@@ -16,6 +19,33 @@ export async function getUserByClerkIdRepository(clerkUserId: string) {
   return user
 }
 
+export async function updateUserThemePreferencesRepository(
+  clerkUserId: string,
+  data: UpdateUserThemePreferencesInput
+) {
+  const user = await prisma.user.findUnique({
+    where: { clerkUserId },
+    select: { id: true },
+  })
+
+  if (!user) {
+    throw new ApiError(404, "User not found")
+  }
+
+  return prisma.userThemePreferences.upsert({
+    where: {
+      userId: user.id,
+    },
+    create: {
+      userId: user.id,
+      ...data,
+    },
+    update: {
+      ...data,
+    },
+  })
+}
+
 export async function updateCurrentUserRepository(
   clerkUserId: string,
   data: UpdateCurrentUserInput
@@ -24,6 +54,8 @@ export async function updateCurrentUserRepository(
     (country) => country.code === data.countryCode
   )
   const countryName = findCountryName?.name
+
+  const themePreferences = getThemePreferences(data.selectedAccountType)
 
   return prisma.user.update({
     where: {
@@ -39,6 +71,21 @@ export async function updateCurrentUserRepository(
       timezone: data.timezone,
       language: data.language,
       referralCode: data.referralCode,
+      userThemePreferences: {
+        upsert: {
+          create: {
+            themeAccent: themePreferences.accentColor,
+            themePreset: themePreferences.themePreset,
+          },
+          update: {
+            themeAccent: themePreferences.accentColor,
+            themePreset: themePreferences.themePreset,
+          },
+        },
+      },
+    },
+    include: {
+      userThemePreferences: true,
     },
   })
 }

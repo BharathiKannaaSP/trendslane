@@ -6,11 +6,7 @@ const Rejected = async () => {
     type: "REJECTED",
   })
 
-  return (
-    <>
-      NEEDS TO CHANGE FORM REJECTED ORG
-    </>
-  )
+  return <>NEEDS TO CHANGE FORM REJECTED ORG</>
 }
 
 export default Rejected

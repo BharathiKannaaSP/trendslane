@@ -4,6 +4,7 @@ import {
   OnboardingStep,
   prisma,
   SystemRole,
+  ThemeMode,
 } from "@workspace/auth-db"
 import { ApiError } from "../../../../../errors/api-error"
 
@@ -28,7 +29,7 @@ export async function handleUserCreated(data: UserJSON) {
     throw new ApiError(400, `User ${data.id} does not have an email address`)
   }
 
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       clerkUserId: data.id,
       email,
@@ -41,6 +42,16 @@ export async function handleUserCreated(data: UserJSON) {
       onboardingStep: OnboardingStep.BASIC_INFORMATION,
       onboardingStartedAt: new Date(),
       createdByClerkUserId: data.id,
+      userThemePreferences: {
+        create: {
+          themeMode: ThemeMode.SYSTEM,
+        },
+      },
+    },
+    include: {
+      userThemePreferences: true,
     },
   })
+
+  console.log(user, "Webhook user")
 }

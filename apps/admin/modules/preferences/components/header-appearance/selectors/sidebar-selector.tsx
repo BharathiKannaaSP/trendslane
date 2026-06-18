@@ -2,9 +2,9 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
-import { SidebarMode } from "../appearance-types"
 import { SIDEBAR_OPTIONS } from "@/modules/preferences/constants/sidebar-options"
 import { useTranslations } from "next-intl"
+import { SidebarMode } from "@workspace/shared"
 
 interface SidebarSelectorProps {
   value: SidebarMode

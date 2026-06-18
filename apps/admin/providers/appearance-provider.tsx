@@ -1,84 +1,56 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
-import {
-  AppearanceSettings,
-  DEFAULT_APPEARANCE,
-} from "@/modules/preferences/components/header-appearance/appearance-types"
 import { applyAppearance } from "@/modules/preferences/components/header-appearance/utils/apply-appearance"
+
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
+import {
+  getAppearanceCookie,
+  setAppearanceCookie,
+} from "@/lib/cookies-utils/client"
 
 type ContextValue = {
   settings: AppearanceSettings
   update: (settings: AppearanceSettings) => void
-  toggleMode: () => void
-  isHydrated: boolean
 }
 
 const AppearanceContext = createContext<ContextValue | null>(null)
-
-const STORAGE_KEY = "appearance"
 
 export function AppearanceProvider({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { setTheme, resolvedTheme } = useTheme()
-
-  const [settings, setSettings] =
-    useState<AppearanceSettings>(DEFAULT_APPEARANCE)
-
-  const [isHydrated, setIsHydrated] = useState(false)
+  const [settings, setSettings] = useState<AppearanceSettings>(
+    () => getAppearanceCookie() ?? DEFAULT_APPEARANCE
+  )
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+    if (!settings.themeMode) return
 
-      if (saved) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setSettings(JSON.parse(saved))
-      }
-    } catch {
-      // ignore
-    } finally {
-      setIsHydrated(true)
-    }
-  }, [])
+    applyAppearance(settings, settings.themeMode)
+  }, [settings])
 
-  function update(next: AppearanceSettings) {
+  const update = (next: AppearanceSettings) => {
     setSettings(next)
+    setAppearanceCookie(next)
+
+    if (next.themeMode) {
+      applyAppearance(next, next.themeMode)
+    }
   }
 
-  function toggleMode() {
-    setSettings((prev) => ({
-      ...prev,
-      mode: prev.mode === "dark" ? "light" : "dark",
-    }))
-  }
-
-  useEffect(() => {
-    if (!isHydrated) return
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
-
-    setTheme(settings.mode)
-
-    const activeTheme =
-      settings.mode === "system" ? (resolvedTheme ?? "light") : settings.mode
-
-    applyAppearance(settings, activeTheme)
-  }, [settings, setTheme, resolvedTheme, isHydrated])
+  const value = useMemo(
+    () => ({
+      settings,
+      update,
+    }),
+    [settings]
+  )
 
   return (
-    <AppearanceContext.Provider
-      value={{
-        settings,
-        update,
-        toggleMode,
-        isHydrated,
-      }}
-    >
+    <AppearanceContext.Provider value={value}>
       {children}
     </AppearanceContext.Provider>
   )

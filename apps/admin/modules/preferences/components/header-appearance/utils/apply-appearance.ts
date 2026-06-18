@@ -1,14 +1,13 @@
 import { ACCENTS } from "@/modules/preferences/constants/theme-accents"
-import { AppearanceSettings, ThemePreset } from "../appearance-types"
 import { PRESETS } from "@/modules/preferences/constants/theme-presets"
+import { AppearanceSettings, ThemePreset } from "@workspace/shared"
 
 export function applyAppearance(settings: AppearanceSettings, theme?: string) {
   const root = document.documentElement
-
   root.style.setProperty("--radius", getRadius(settings.radius))
   root.style.setProperty("--font-size-base", getScale(settings.scale))
-  applyPreset(settings.preset, theme === "dark")
-  applyAccent(settings.accent, theme === "dark")
+  applyPreset(settings.preset, theme === "DARK")
+  applyAccent(settings.accent, theme === "DARK")
 }
 
 function getRadius(radius: string) {
@@ -54,7 +53,8 @@ export function applyAccent(
   isDark: boolean
 ) {
   const root = document.documentElement
-  const colors = ACCENTS[accent][isDark ? "dark" : "light"]
+  const resolvedAccent = accent ?? "default"
+  const colors = ACCENTS[resolvedAccent][isDark ? "dark" : "light"]
 
   root.style.setProperty("--primary", colors.primary)
   root.style.setProperty("--primary-foreground", colors.primaryForeground)
@@ -68,8 +68,8 @@ export function applyAccent(
 
 export function applyPreset(preset: ThemePreset, isDark: boolean) {
   const root = document.documentElement
-  const theme = PRESETS[preset][isDark ? "dark" : "light"]
-
+  const presetResolved = preset ?? "default"
+  const theme = PRESETS[presetResolved][isDark ? "dark" : "light"]
   Object.entries({
     "--background": theme.background,
     "--card": theme.card,

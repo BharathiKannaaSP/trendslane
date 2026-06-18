@@ -1,7 +1,6 @@
 "use client"
 
 import { RadiusSelector } from "./selectors/radius-selector"
-import { AppearanceSettings, DEFAULT_APPEARANCE } from "./appearance-types"
 import { Label } from "@workspace/ui/components/label"
 import { PresetSelector } from "./selectors/preset-selector"
 import { ScaleSelector } from "./selectors/scale-selector"
@@ -11,18 +10,14 @@ import { ThemeSelector } from "./selectors/theme-selector"
 import { Button } from "@workspace/ui/components/button"
 import { useTranslations } from "next-intl"
 import { ScrollArea } from "@workspace/ui/components/scroll-area"
+import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
 
 interface AppearanceFormProps {
   value: AppearanceSettings
   onChange: (value: AppearanceSettings) => void
-  isHydrated: boolean
 }
 
-export function AppearanceForm({
-  value,
-  onChange,
-  isHydrated,
-}: AppearanceFormProps) {
+export function AppearanceForm({ value, onChange }: AppearanceFormProps) {
   const t = useTranslations("Preferences.Appearance")
   return (
     <>
@@ -89,17 +84,7 @@ export function AppearanceForm({
 
           <div className="space-y-2">
             <Label className="text-xs">{t("themeMode")}</Label>
-            {isHydrated && (
-              <ThemeSelector
-                value={value.mode}
-                onChange={(mode) =>
-                  onChange({
-                    ...value,
-                    mode,
-                  })
-                }
-              />
-            )}
+            <ThemeSelector />
           </div>
 
           {/* <div className="hidden space-y-2 md:block">

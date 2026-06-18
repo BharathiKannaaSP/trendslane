@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from "react"
+import { useEffect, useRef, useState, useTransition } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -12,19 +12,25 @@ import {
   additionalDetailsSchema,
   countries,
   CurrentUserDto,
+  DEFAULT_APPEARANCE,
   OnboardingStatus,
   OnboardingStep,
+  UserThemePreferences,
 } from "@workspace/shared"
 
-import { useRouter } from "next/navigation"
 import {
   useCurrentUserUpdate,
   useOnboardingUpdate,
 } from "@/modules/users/api/auth.repository.hooks"
 import { EntityFormAction } from "@/components/forms/entity-form"
 import { getAdditionalDetailsFormConfig } from "../constants/onboarding-additional-detail-form-config"
+import {
+  getLocaleFromCookie,
+  setAppearanceCookie,
+} from "@/lib/cookies-utils/client"
+import { useRouter } from "@/i18n/navigation"
 
-export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
+export const useOnboardingAdditionalDetailsForm = (user?: CurrentUserDto) => {
   const router = useRouter()
   const onboardingUpdate = useOnboardingUpdate()
   const updateCurrentUser = useCurrentUserUpdate()
@@ -34,7 +40,10 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
 
   const form = useForm<AdditionalDetailsFormValues>({
     resolver: zodResolver(additionalDetailsSchema),
-    defaultValues: additionalDetailsDefaultValues,
+    defaultValues: {
+      ...additionalDetailsDefaultValues,
+      language: getLocaleFromCookie(),
+    },
   })
 
   const countryCode = useWatch({
@@ -51,13 +60,15 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     (country) => country.code === countryCode
   )
 
+  const previousCountryCodeRef = useRef<string>("")
+
   const getUserFormValues = (
     currentUser: CurrentUserDto
   ): AdditionalDetailsFormValues => ({
     selectedAccountType: currentUser.selectedAccountType ?? "ADMIN",
     countryCode: currentUser.countryCode ?? "IN",
     timezone: currentUser.timezone ?? "Asia/Kolkata",
-    language: currentUser.language ?? "en",
+    language: currentUser.language ?? getLocaleFromCookie(),
     address: currentUser.address ?? "",
     bio: currentUser.bio ?? "",
     phoneNumber: currentUser.phoneNumber ?? "",
@@ -68,31 +79,46 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     if (!user) return
 
     form.reset(getUserFormValues(user))
+
+    previousCountryCodeRef.current = user.countryCode ?? "IN"
   }, [user, form])
 
-  const [previousCountryCode, setPreviousCountryCode] = useState<string>()
-
   useEffect(() => {
-    if (!selectedCountry) return
+    if (!countryCode) return
 
-    form.setValue("timezone", selectedCountry.timezone, {
-      shouldValidate: true,
-    })
+    const country = countries.find((c) => c.code === countryCode)
 
-    form.setValue("language", selectedCountry.defaultLanguage, {
-      shouldValidate: true,
-    })
+    if (!country) return
 
-    if (previousCountryCode && previousCountryCode !== selectedCountry.code) {
-      form.setValue("phoneNumber", selectedCountry.phoneCode, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
+    const currentTimezone = form.getValues("timezone")
+
+    if (currentTimezone !== country.timezone) {
+      form.setValue("timezone", country.timezone)
     }
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setPreviousCountryCode(selectedCountry.code)
-  }, [selectedCountry, form, previousCountryCode])
+    const currentLanguage = form.getValues("language")
+
+    if (!currentLanguage) {
+      form.setValue("language", getLocaleFromCookie())
+    }
+
+    if (
+      previousCountryCodeRef.current &&
+      previousCountryCodeRef.current !== countryCode
+    ) {
+      const currentPhone = form.getValues("phoneNumber")
+
+      if (currentPhone !== country.phoneCode) {
+        form.reset({
+          ...form.getValues(),
+          countryCode,
+          phoneNumber: country.phoneCode,
+        })
+      }
+    }
+
+    previousCountryCodeRef.current = countryCode
+  }, [countryCode, form])
 
   const config = getAdditionalDetailsFormConfig()
 
@@ -125,9 +151,24 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
 
     setDirection("next")
 
-    await updateCurrentUser.mutateAsync({
+    const response = await updateCurrentUser.mutateAsync({
       ...values,
     })
+
+    const preferences: UserThemePreferences =
+      response.userThemePreferences ?? DEFAULT_APPEARANCE
+
+    if (preferences) {
+      setAppearanceCookie({
+        version: preferences.themeVersion,
+        themeMode: preferences.themeMode,
+        preset: preferences.themePreset,
+        accent: preferences.themeAccent,
+        accentCustomized: preferences.themeAccentCustomized,
+        radius: preferences.themeRadius,
+        scale: preferences.themeScale,
+      })
+    }
 
     await onboardingUpdate.mutateAsync({
       onboardingStep: OnboardingStep.ROLE_REQUIREMENTS,
@@ -136,19 +177,26 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
     })
 
     startTransition(() => {
-      switch (selectedAccountType) {
-        case "ADMIN":
-          router.push("/become-admin")
-          break
+      let nextRoute = "/become-admin"
 
+      switch (selectedAccountType) {
         case "ORG_ADMIN":
-          router.push("/create-organization")
+          nextRoute = "/create-organization"
           break
 
         case "ORG_MEMBER":
-          router.push("/join-organization")
+          nextRoute = "/join-organization"
+          break
+
+        case "ADMIN":
+        default:
+          nextRoute = "/become-admin"
           break
       }
+
+      router.replace(nextRoute, {
+        locale: values.language,
+      })
 
       router.refresh()
     })
@@ -162,7 +210,6 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
 
     form.reset({
       ...getUserFormValues(user),
-      selectedAccountType: user.selectedAccountType ?? "ADMIN",
       phoneNumber: user.phoneNumber?.replace(/\s+/g, "") ?? "",
     })
   }
@@ -170,7 +217,7 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
   const footerActions: EntityFormAction[] = [
     {
       key: "previous",
-      label: "Previous",
+      label: "Back",
       variant: "outline",
       loading:
         direction === "previous" && (onboardingUpdate.isPending || isPending),
