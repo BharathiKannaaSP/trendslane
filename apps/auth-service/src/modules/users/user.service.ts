@@ -4,9 +4,13 @@ import {
   getUserByClerkIdRepository,
   updateCurrentUserRepository,
   updateOnboardingRepository,
-  updateUserLanguageRepository,
+  updateUserThemePreferencesRepository,
 } from "./user.repository"
-import { UpdateCurrentUserInput, UpdateOnboardingInput } from "./user.types"
+import {
+  UpdateCurrentUserInput,
+  UpdateOnboardingInput,
+  UpdateUserThemePreferencesInput,
+} from "./user.types"
 
 export async function getCurrentUserService(clerkUserId?: string) {
   if (!clerkUserId) {
@@ -33,15 +37,15 @@ export async function updateCurrentUserService(
   return updateCurrentUserRepository(clerkUserId, input)
 }
 
-export async function updateCurrentUserLanguageService(
+export async function updateCurrentUserThemePreferencesService(
   clerkUserId: string,
-  input: string
+  input: UpdateUserThemePreferencesInput
 ) {
   if (!clerkUserId) {
     throw new ApiError(401, "Clerk UserID is missing")
   }
-  console.log("enter srv", input)
-  return updateUserLanguageRepository(clerkUserId, input)
+
+  return updateUserThemePreferencesRepository(clerkUserId, input)
 }
 
 export async function updateOnboardingService(

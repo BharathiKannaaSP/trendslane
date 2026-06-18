@@ -38,7 +38,7 @@ export interface CurrentUserMembership {
   organization: CurrentUserOrganization
 }
 
-export interface UserPreferences {
+export interface UserThemePreferences {
   id: string
   userId: string
   themeMode: ThemeMode
@@ -52,6 +52,8 @@ export interface UserPreferences {
   createdAt: Date
   updatedAt: Date
 }
+
+export type UpdateUserThemePreferences = Partial<UserThemePreferences>
 
 export interface CurrentUserDto {
   id: string
@@ -79,12 +81,14 @@ export interface CurrentUserDto {
   createdAt: string
   updatedAt: string
   memberships: CurrentUserMembership[]
-  preferences: UserPreferences
+  userThemePreferences: UserThemePreferences
 }
 
 export interface CurrentUserResponse {
   user: CurrentUserDto
 }
+
+
 
 export type UpdateCurrentUserInput = {
   selectedAccountType?: AccountType

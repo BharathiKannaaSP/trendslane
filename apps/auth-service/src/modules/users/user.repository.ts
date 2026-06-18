@@ -3,9 +3,11 @@ import {
   currentUserInclude,
   UpdateCurrentUserInput,
   UpdateOnboardingInput,
+  UpdateUserThemePreferencesInput,
 } from "./user.types"
-import { countries } from "@workspace/shared"
 import { getThemePreferences } from "./utils/get-theme-preference-based-on-role"
+import { ApiError } from "../../errors/api-error"
+import { countries } from "@workspace/shared"
 
 export async function getUserByClerkIdRepository(clerkUserId: string) {
   const user = await prisma.user.findUnique({
@@ -17,13 +19,30 @@ export async function getUserByClerkIdRepository(clerkUserId: string) {
   return user
 }
 
-export async function updateUserLanguageRepository(
+export async function updateUserThemePreferencesRepository(
   clerkUserId: string,
-  language: string
+  data: UpdateUserThemePreferencesInput
 ) {
-  return prisma.user.update({
+  const user = await prisma.user.findUnique({
     where: { clerkUserId },
-    data: { language },
+    select: { id: true },
+  })
+
+  if (!user) {
+    throw new ApiError(404, "User not found")
+  }
+
+  return prisma.userThemePreferences.upsert({
+    where: {
+      userId: user.id,
+    },
+    create: {
+      userId: user.id,
+      ...data,
+    },
+    update: {
+      ...data,
+    },
   })
 }
 
@@ -52,7 +71,7 @@ export async function updateCurrentUserRepository(
       timezone: data.timezone,
       language: data.language,
       referralCode: data.referralCode,
-      preferences: {
+      userThemePreferences: {
         upsert: {
           create: {
             themeAccent: themePreferences.accentColor,
@@ -64,6 +83,9 @@ export async function updateCurrentUserRepository(
           },
         },
       },
+    },
+    include: {
+      userThemePreferences: true,
     },
   })
 }

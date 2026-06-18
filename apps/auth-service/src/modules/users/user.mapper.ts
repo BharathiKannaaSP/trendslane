@@ -29,7 +29,7 @@ export function mapCurrentUser(user: CurrentUser) {
       updatedAt: user.updatedAt,
 
       // Preferences
-      preferences: user.preferences ?? null,
+      userThemePreferences: user.userThemePreferences ?? null,
     },
 
     memberships: user.memberships.map((membership) => ({

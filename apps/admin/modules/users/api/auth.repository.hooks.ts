@@ -5,6 +5,7 @@ import {
   OnboardingStatus,
   OnboardingStep,
   UpdateCurrentUserInput,
+  UpdateUserThemePreferences,
 } from "@workspace/shared"
 import { toast } from "sonner"
 
@@ -47,29 +48,28 @@ export function useCurrentUserUpdate() {
       authRepositoryClient.updateCurrentUser(api, data),
     onSuccess: async (user) => {
       queryClient.setQueryData(["me"], user)
-      toast.success("User updated")
+      toast.success("User updated successfully")
     },
-
     onError: () => {
       toast.error("Failed to update user")
     },
   })
 }
 
-export function useCurrentUserLanguageUpdate() {
+export function useUpdateCurrentUserThemePreferences() {
   const api = useAuthApi()
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (data: UpdateCurrentUserInput) =>
-      authRepositoryClient.updateCurrentUserLanguage(api, data),
-    onSuccess: async (user) => {
-      queryClient.setQueryData(["me"], user)
-      toast.success("User language updated")
+    mutationFn: (data: UpdateUserThemePreferences) =>
+      authRepositoryClient.updateCurrentUserThemePreferences(api, data),
+    onSuccess: async (preferences) => {
+      queryClient.setQueryData(["theme-preferences"], preferences)
+      toast.success("Theme updated successfully")
     },
 
     onError: () => {
-      toast.error("Failed to update language")
+      toast.error("Failed to update theme preferences")
     },
   })
 }

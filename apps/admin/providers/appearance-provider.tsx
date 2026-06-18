@@ -1,19 +1,18 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
-import { useTheme } from "next-themes"
 
 import { applyAppearance } from "@/modules/preferences/components/header-appearance/utils/apply-appearance"
-import { useCurrentUser } from "@/modules/users/api/auth.repository.hooks"
 
 import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
+import {
+  getAppearanceCookie,
+  setAppearanceCookie,
+} from "@/lib/cookies-utils/client"
 
 type ContextValue = {
-  settings: AppearanceSettings | null
+  settings: AppearanceSettings
   update: (settings: AppearanceSettings) => void
-  toggleMode: () => void
-  isHydrated: boolean
 }
 
 const AppearanceContext = createContext<ContextValue | null>(null)
@@ -23,78 +22,32 @@ export function AppearanceProvider({
 }: {
   children: React.ReactNode
 }) {
-  const { setTheme, resolvedTheme } = useTheme()
-
-  const { data: user, isLoading } = useCurrentUser()
-
-  const [settings, setSettings] = useState<AppearanceSettings | null>(null)
-  const [isHydrated, setIsHydrated] = useState(false)
-
-  const userPreferences = useMemo<AppearanceSettings>(() => {
-    const preferences = user?.user?.preferences
-
-    if (!preferences) {
-      return DEFAULT_APPEARANCE
-    }
-
-    return {
-      version: preferences.themeVersion,
-      mode: preferences.themeMode.toLowerCase() as AppearanceSettings["mode"],
-      preset: preferences.themePreset,
-      accent: preferences.themeAccent,
-      accentCustomized: preferences.themeAccentCustomized,
-      radius:
-        preferences.themeRadius.toLowerCase() as AppearanceSettings["radius"],
-      scale:
-        preferences.themeScale.toLowerCase() as AppearanceSettings["scale"],
-    }
-  }, [user])
+  const [settings, setSettings] = useState<AppearanceSettings>(
+    () => getAppearanceCookie() ?? DEFAULT_APPEARANCE
+  )
 
   useEffect(() => {
-    if (isLoading) return
+    if (!settings.themeMode) return
 
-    setSettings(userPreferences)
-    setIsHydrated(true)
-  }, [isLoading, userPreferences])
-
-  useEffect(() => {
-    if (!settings) return
-
-    setTheme(settings.mode)
-  }, [settings?.mode, setTheme, settings])
-
-  useEffect(() => {
-    if (!settings) return
-
-    const activeTheme =
-      settings.mode === "system" ? (resolvedTheme ?? "light") : settings.mode
-
-    applyAppearance(settings, activeTheme)
-  }, [settings, resolvedTheme])
+    applyAppearance(settings, settings.themeMode)
+  }, [settings, settings.themeMode])
 
   function update(next: AppearanceSettings) {
     setSettings(next)
-  }
+    setAppearanceCookie(next)
 
-  function toggleMode() {
-    setSettings((prev) => {
-      if (!prev) return DEFAULT_APPEARANCE
-
-      return {
-        ...prev,
-        mode: prev.mode === "dark" ? "light" : "dark",
-      }
-    })
+    if (settings.themeMode) {
+      applyAppearance(next, settings.themeMode)
+    }
   }
 
   const value = useMemo(
     () => ({
       settings,
       update,
-      toggleMode,
-      isHydrated,
     }),
-    [settings, isHydrated]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [settings]
   )
 
   return (

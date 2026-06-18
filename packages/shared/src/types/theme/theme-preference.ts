@@ -1,4 +1,4 @@
-export type ThemeMode = "light" | "dark" | "system"
+export type ThemeMode = "LIGHT" | "DARK" | "SYSTEM"
 
 export type ThemePreset =
   | "default"
@@ -24,28 +24,27 @@ export type AccentColor =
   | "indigo"
   | "pink"
 
-export type Radius = "none" | "xs" | "md" | "lg" | "xl"
+export type Radius = "SM" | "MD" | "LG"
 
-export type Scale = "compact" | "comfortable" | "spacious"
+export type Scale = "COMPACT" | "COMFORTABLE" | "SPACIOUS"
 
-export type SidebarMode = "default" | "icon"
+export type SidebarMode = "DEFAULT" | "ICON"
 
 export interface AppearanceSettings {
   version: number
-  mode: ThemeMode
+  themeMode: ThemeMode
   preset: ThemePreset
   accent: AccentColor
   accentCustomized: boolean
   radius: Radius
   scale: Scale
 }
-
 export const DEFAULT_APPEARANCE: AppearanceSettings = {
   version: 1,
-  mode: "system",
+  themeMode: "SYSTEM",
   preset: "default",
   accent: "default",
   accentCustomized: false,
-  radius: "md",
-  scale: "comfortable",
+  radius: "MD",
+  scale: "COMFORTABLE",
 }

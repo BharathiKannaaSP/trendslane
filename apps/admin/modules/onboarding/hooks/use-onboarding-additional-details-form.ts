@@ -12,8 +12,10 @@ import {
   additionalDetailsSchema,
   countries,
   CurrentUserDto,
+  DEFAULT_APPEARANCE,
   OnboardingStatus,
   OnboardingStep,
+  UserThemePreferences,
 } from "@workspace/shared"
 
 import {
@@ -22,7 +24,10 @@ import {
 } from "@/modules/users/api/auth.repository.hooks"
 import { EntityFormAction } from "@/components/forms/entity-form"
 import { getAdditionalDetailsFormConfig } from "../constants/onboarding-additional-detail-form-config"
-import { getLocaleFromCookie } from "@/lib/cookies-utils/client"
+import {
+  getLocaleFromCookie,
+  setAppearanceCookie,
+} from "@/lib/cookies-utils/client"
 import { useRouter } from "@/i18n/navigation"
 
 export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
@@ -133,9 +138,24 @@ export const useOnboardingAdditionalDetails = (user?: CurrentUserDto) => {
 
     setDirection("next")
 
-    await updateCurrentUser.mutateAsync({
+    const response = await updateCurrentUser.mutateAsync({
       ...values,
     })
+
+    const preferences: UserThemePreferences =
+      response.userThemePreferences ?? DEFAULT_APPEARANCE
+
+    if (preferences) {
+      setAppearanceCookie({
+        version: preferences.themeVersion,
+        themeMode: preferences.themeMode,
+        preset: preferences.themePreset,
+        accent: preferences.themeAccent,
+        accentCustomized: preferences.themeAccentCustomized,
+        radius: preferences.themeRadius,
+        scale: preferences.themeScale,
+      })
+    }
 
     await onboardingUpdate.mutateAsync({
       onboardingStep: OnboardingStep.ROLE_REQUIREMENTS,

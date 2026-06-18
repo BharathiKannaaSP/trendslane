@@ -1,11 +1,14 @@
 import { ApiClient } from "@/utils/api-utils/client-api"
 import {
   ApiResponse,
+  CurrentUserDto,
   CurrentUserResponse,
   updateAdditionalDetailsSchema,
   UpdateAdditionalDetailsSchema,
   UpdateOnboardingInput,
   updateOnboardingSchema,
+  UpdateUserThemePreferences,
+  UserThemePreferences,
 } from "@workspace/shared"
 
 export const authRepositoryClient = {
@@ -19,7 +22,7 @@ export const authRepositoryClient = {
     payload: UpdateAdditionalDetailsSchema
   ) {
     const validatedPayload = updateAdditionalDetailsSchema.parse(payload)
-    const response = await api<ApiResponse<CurrentUserResponse>>(
+    const response = await api<ApiResponse<CurrentUserDto>>(
       "/user/me/updateCurrentUser",
       {
         method: "PATCH",
@@ -29,16 +32,15 @@ export const authRepositoryClient = {
     return response.data
   },
 
-  async updateCurrentUserLanguage(
+  async updateCurrentUserThemePreferences(
     api: ApiClient,
-    payload: UpdateAdditionalDetailsSchema
+    payload: UpdateUserThemePreferences
   ) {
-    const validatedPayload = updateAdditionalDetailsSchema.parse(payload)
-    const response = await api<ApiResponse<CurrentUserResponse>>(
-      "/user/me/updateCurrentUserLanguage",
+    const response = await api<ApiResponse<UserThemePreferences>>(
+      "/user/me/theme-preferences",
       {
         method: "PATCH",
-        body: JSON.stringify(validatedPayload),
+        body: JSON.stringify(payload),
       }
     )
     return response.data

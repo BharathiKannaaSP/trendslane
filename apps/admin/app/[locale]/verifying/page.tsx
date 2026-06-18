@@ -3,21 +3,31 @@
 import { useAuth } from "@clerk/nextjs"
 import { useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
+
 import { Spinner } from "@workspace/ui/components/spinner"
-import { getLocaleFromCookie } from "@/lib/cookies-utils/client"
+
+import {
+  getLocaleFromCookie,
+  setClientCookie,
+} from "@/lib/cookies-utils/client"
+
 import {
   useCurrentUser,
-  useCurrentUserLanguageUpdate,
+  useCurrentUserUpdate,
+  useUpdateCurrentUserThemePreferences,
 } from "@/modules/users/api/auth.repository.hooks"
 
+import { ThemeMode } from "@workspace/shared"
+
 export default function VerifyingPage() {
-  const { isLoaded, isSignedIn } = useAuth()
   const router = useRouter()
+  const hasVerified = useRef(false)
+
+  const { isLoaded, isSignedIn } = useAuth()
 
   const { data: currentUser, isLoading: isUserLoading } = useCurrentUser()
-  const updateCurrentUser = useCurrentUserLanguageUpdate()
-
-  const hasVerified = useRef(false)
+  const updateCurrentUser = useCurrentUserUpdate()
+  const updateUserThemePreferences = useUpdateCurrentUserThemePreferences()
 
   useEffect(() => {
     if (
@@ -32,19 +42,27 @@ export default function VerifyingPage() {
 
     hasVerified.current = true
 
+    const user = currentUser.user
+
     async function verify() {
       try {
         const locale = getLocaleFromCookie()
+        const themeMode = localStorage
+          .getItem("theme")
+          ?.toUpperCase() as ThemeMode
 
-        const appearance = currentUser?.user?.preferences
-
-        if (appearance) {
-          document.cookie = `appearance=${encodeURIComponent(
-            JSON.stringify(appearance)
-          )}; path=/; max-age=31536000`
+        // Sync theme mode
+        const themePreferences = user.userThemePreferences
+        if (themeMode && themePreferences.themeMode !== themeMode) {
+          await updateUserThemePreferences.mutateAsync({
+            themeMode,
+          })
+          // Store latest appearance in cookie
+          setClientCookie("appearance", JSON.stringify(themePreferences))
         }
 
-        if (currentUser?.user?.language !== locale) {
+        // Sync language
+        if (user.language !== locale) {
           await updateCurrentUser.mutateAsync({
             language: locale,
           })
@@ -52,7 +70,7 @@ export default function VerifyingPage() {
 
         router.replace("/")
       } catch (error) {
-        console.error(error)
+        console.error("Verification failed:", error)
         router.replace("/")
       }
     }
@@ -63,8 +81,9 @@ export default function VerifyingPage() {
     isSignedIn,
     isUserLoading,
     currentUser,
-    router,
     updateCurrentUser,
+    updateUserThemePreferences,
+    router,
   ])
 
   return (

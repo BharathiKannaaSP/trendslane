@@ -133,8 +133,8 @@ model User {
   language String?
   referralCode String?
 
-  // Preferences
-  preferences UserPreferences?
+  //Theme Preferences
+  userThemePreferences UserThemePreferences?
 
   // ACCOUNT STATUS
   isActive Boolean @default(true)
@@ -187,7 +187,7 @@ model User {
   @@index([isActive])
 }
 
-model UserPreferences {
+model UserThemePreferences {
   id String @id @default(cuid())
 
   userId String @unique
@@ -195,7 +195,6 @@ model UserPreferences {
 
   // THEME
   themeMode ThemeMode @default(SYSTEM)
-
   themeAccent String @default("default")
   themePreset String @default("default")
   themeSidebar String @default("default")

@@ -15,13 +15,11 @@ import { AppearanceSettings, DEFAULT_APPEARANCE } from "@workspace/shared"
 interface AppearanceFormProps {
   value: AppearanceSettings
   onChange: (value: AppearanceSettings) => void
-  isHydrated: boolean
 }
 
 export function AppearanceForm({
   value,
   onChange,
-  isHydrated,
 }: AppearanceFormProps) {
   const t = useTranslations("Preferences.Appearance")
   return (
@@ -89,17 +87,7 @@ export function AppearanceForm({
 
           <div className="space-y-2">
             <Label className="text-xs">{t("themeMode")}</Label>
-            {isHydrated && (
-              <ThemeSelector
-                value={value.mode}
-                onChange={(mode) =>
-                  onChange({
-                    ...value,
-                    mode,
-                  })
-                }
-              />
-            )}
+            <ThemeSelector />
           </div>
 
           {/* <div className="hidden space-y-2 md:block">
